@@ -1,0 +1,540 @@
+---
+title: "Simple Random Sampling"
+format: 
+  html
+execute:
+  echo: true
+---
+
+Survei adalah **menduga** parameter populasi berdasarsarkan informasi sampel. Faktor apa saja yang memengaruhi jumlah informasi di sampel?
+
+1.  Ukuran sampel
+2.  Keragaman di sampel - dapat dikontrol dengan rancangan percontohan yang baik. Paling sederhana: **simple random sampling**
+
+## Simple Random Sampling
+
+Dua poin penting:
+
+1.  Semua elemen memiliki **peluang sama** untuk dipilih.
+2.  Pemilihan elemen **saling bebas**. Artinya, ada atau tidaknya elemen di sampel tidak memengaruhi probabilitas elemen lain dipilih.
+
+### Exercise: apakah ini sampel acak sederhana?
+
+Do these methods produce a simple random sample of students from a class of 30 students?
+
+1.  Select the first six students on the class roll sheet (*absensi*).
+2.  Pick a digit at random and select those students whose phone numbers end in that digit.
+3.  If the classroom has six rows of chairs with five seats in each row, choose a row at random and select all students in that row.
+4.  If the class consists of 15 boys and 15 girls, assign the boys the numbers from 1 to 15, and the girls the numbers from 16 to 30. Then use a random digit table to select six numbers from 1 to 30. Select the students assigned those numbers in your sample.
+5.  If the class consists of 15 boys and 15 girls, assign the boys the numbers from 1 to 15, and the girls the numbers from 16 to 30. Then use a random digit table to select three numbers from 1 to 15 and three numbers from 16 to 30. Select the students assigned those numbers in your sample.
+6. Randomly choose a letter from the English alphabet and select for the sample those students whose last names begin with that letter. If no last name begins with that letter, randomly choose another letter from the alphabet.
+
+Kunci dari jawaban tersebut adalah:
+
+1.  Select the first six students on the class roll sheet (*absensi*) - **peluang tak sama**. Enam orang pertama pasti terpilih, orang lainnya tidak mungkin terpilih.
+2.  Pick a digit at random and select those students whose phone numbers end in that digit - **sampel acak sederhana**. Alokasi nomor telpon cukup acak dan pemilihan juga acak.
+3.  If the classroom has six rows of chairs with five seats in each row, choose a row at random and select all students in that row - **tidak saling bebas**. Jika elemen di baris tersebut terpilih, pasti elemen lain juga terpilih. Lalu, elemen di baris lain pasti tidak terpilih.
+4.  If the class consists of 15 boys and 15 girls, assign the boys the numbers from 1 to 15, and the girls the numbers from 16 to 30. Then use a random digit table to select six numbers from 1 to 30. Select the students assigned those numbers in your sample - **sampel acak sederhana**.
+5.  If the class consists of 15 boys and 15 girls, assign the boys the numbers from 1 to 15, and the girls the numbers from 16 to 30. Then use a random digit table to select three numbers from 1 to 15 and three numbers from 16 to 30. Select the students assigned those numbers in your sample - **tidak saling bebas**. Jika 3 laki-laki dipilih, pasti tidak mungkin laki-laki lain dipilih.
+6. Randomly choose a letter from the English alphabet and select for the sample those students whose last names begin with that letter. If no last name begins with that letter, randomly choose another letter from the alphabet. **Apakah nama-nama yang diawali alfabet tertentu lebih mungkin daripada alfabet lain?**. Selain itu, mungkin tidak saling bebas karena jika nama akhir yang banyak dimiliki orang terpilih; orang dengan nama lain tak mungkin terpilih.
+
+### Contoh - Rating TV
+
+-   Apakah Anda memiliki acara televisi favorit?
+-   Apakah acara favorit Anda pernah mengalami berhenti tayang (*cancellation*)?
+-   Bagaimana stasiun televisi menentukan acara mana yang diberhentikan?
+
+Nielsen Ratings - ambil 5000 rumah tangga di AS; tidak boleh ada relawan. Dipasang meter elektronik yang mengetahui acara yang sedang ditonton.
+
+### Cara Mengambil Sampel Acak Sederhana
+
+Cara salah:
+
+-   Haphazard: sesuai keinginan peneliti
+-   Representative: ambil sampel yang dianggap mewakili populasi
+
+Peneliti bisa saja berbias dan walaupun representatif, **tingkat kesalahan tak dapat diketahui** karena tidak diketahui struktur probabilitasnya.
+
+Cara benar:
+
+-   Undian - masukkan angka 1 sampai n, ambil!
+-   Tabel angka acak - biasananya menggunakan komputer!
+
+### Exercise: deskripsikan bias
+
+1. A student wants to determine the average size of farms in a county in Iowa. He drops some rice randomly on a map of the county and uses the farms hit by grains of rice as the sample (*county - kabupaten*).
+2. To find the average length of string in a bag, a student reaches in, mixes up the strings, selects one, mixes them up again, selects another, and so on (*string - tali*).
+3. To estimate the percentage of students who passed the first Advanced Placement Statistics exam, a teacher on an Internet discussion list for teachers of AP Statistics asked teachers on the list to report to him how many of their students took the test and how many passed (*discussion list - forum diskusi*).
+4. In 1984, Ann Landers conducted a poll on the marital happiness of women by asking women to write to her (*marital - pernikahan*).
+5. In a study about whether valedictorians “succeed big in life,” a professor “traveled across Illinois, attending high school graduations and selecting 81 students to participate. . . . He picked students from the most diverse communities possible, from little rural schools to rich suburban schools near Chicago to city schools.”
+
+*Valedictorian: lulusan terbaik.*
+
+Jawaban dari exercise tersebut adalah:
+
+1. A student wants to determine the average size of farms in a county in Iowa. He drops some rice randomly on a map of the county and uses the farms hit by grains of rice as the sample (*county - kabupaten*) - **proses ini cukup acak**.
+2. To find the average length of string in a bag, a student reaches in, mixes up the strings, selects one, mixes them up again, selects another, and so on (*string - tali*) - **proses ini juga cukup acak**.
+3. To estimate the percentage of students who passed the first Advanced Placement Statistics exam, a teacher on an Internet discussion list for teachers of AP Statistics asked teachers on the list to report to him how many of their students took the test and how many passed (*discussion list - forum diskusi*) - **ada bias yang muncul karena guru-guru yang menjawab di forum diskusi belum tentu representatif terhadap guru umumnya**. Mungkin, guru tersebut lebih ambisius.
+4. In 1984, Ann Landers conducted a poll on the marital happiness of women by asking women to write to her (*marital - pernikahan*). **Bias yang sama**. Orang yang menulis tentang pernikahannya mungkin memiliki perasaan ekstrim, seperti sangat senang atau sangat marah.
+5. In a study about whether valedictorians “succeed big in life,” a professor “traveled across Illinois, attending high school graduations and selecting 81 students to participate. . . . He picked students from the most diverse communities possible, from little rural schools to rich suburban schools near Chicago to city schools.” 
+
+**Walaupun representatif, tingkat kesalahan tak dapat diperkirakan**.
+
+Untuk melakukan pengacakan, sering dipakai *random number generator*:
+
+::: {.panel-tabset}
+## Excel
+
+Gunakan fungsi `=RAND()`:
+![Contoh di Excel](excel-rand.png)
+
+## R
+Gunakan fungsi `runif()`:
+
+```{r}
+runif(100) |> head(5)
+```
+
+## Python
+Gunakan rng dari package `numpy`:
+
+```{python}
+import numpy as np
+
+rng = np.random.default_rng(3854)
+rng.random(5)
+```
+:::
+
+## Memilih sampel acak sederhana
+
+Algoritma:
+
+1. Buat angka acak sejumlah elemen yang ada
+2. Pasangkan tiap elemen dengan angka acak
+3. Urutkan elemen sesuai angka acak, pilih n teratas.
+
+### Step 0: Lihat Dataset dan Jumlah Row
+
+Sebelum melaksanakan algoritma tersebut, lihat dataset dan jumlah row:
+
+::: {.panel-tabset}
+## Excel
+
+Pertama, ambil data dari csv:
+
+![Pengambilan data](step0-getdata.png)
+
+Pilih file, lalu preview dan load:
+
+![Preview](step0-preview.png)
+
+Data akan terlihat di Excel.
+
+## R
+
+Langkah relatif sama. Baca CSV, lihat file.
+
+```{r}
+penguins <- read.csv("penguins.csv")
+
+penguins |> head(3)
+penguins |> nrow()
+```
+
+## Python
+```{python}
+import pandas as pd
+
+penguins = pd.read_csv("penguins.csv")
+print(penguins.head())
+print(len(penguins.index))
+```
+:::
+
+### Step 1-2: Angka Acak, Pasangkan
+
+Lalu, buat angka acak. Angka acak ini merupakan kolom baru di dataset. Tiap elemen mendapat angka acak yang unik. Bagaimana kita tahu jumlah angka acak yang perlu dibuat? Cari terlebih dahulu jumlah elemen di dataset.
+
+::: {.panel-tabset}
+## Excel
+
+Buat angka acak dengan `rand()`.
+
+![Angka acak](step1-genrand.png)
+
+Namun, angka acak ini akan selalu berubah jika di-*sort*. Oleh karena itu, *copy*, (**CTRL+C**) lalu paste *as value*. Opsi *paste as value* ditemukan dengan meng-klik kanan:
+
+![Menu paste](step1-paste1.png)
+
+Lalu ditemukan opsi tersebut; opsi berupa suatu *clipboard* (kertas di atas papan jalan) dengan angka 123:
+
+![Paste as value](step1-paste2.png)
+
+## R
+
+Jumlah angka acak dicari menggunakan nrow dari dataset. Mutate menghasilkan peubah baru.
+
+```{r}
+library(dplyr)
+penguins <- read.csv("penguins.csv")
+penguins <- penguins |> mutate(rando = runif(nrow(penguins)))
+
+penguins |> head(3) |> knitr::kable()
+```
+
+## Python
+
+Algoritma sama. `namaDataset.insert` digunakan untuk memasukkan angka acak.
+
+```{python}
+import pandas as pd
+import numpy as np
+penguins = pd.read_csv("penguins.csv") #load csv
+
+#generate random number
+rng = np.random.default_rng(3854)
+rando = rng.random(len(penguins.index))
+
+penguins.insert(loc = 0, column = 'randomNumber', value = rando) #insert random number
+penguins.head() #show
+```
+:::
+
+### Step 3: Sort, Ambil
+
+Lalu, sortir data-nya dan ambil n data teratas:
+
+::: {.panel-tabset}
+## Excel
+
+Jika sudah berbentuk tabel, klik kolom nilai acak lalu *sort* sesuai keinginan:
+
+![Sortir, jika tabel](step3-sort1.png)
+
+Jika belum berbentuk tabel, pilih *sampling frame* yang ingin disortir, lalu klik *sort & filter*.
+
+![Sortir, tanpa tabel](step-sort21.png)
+
+Lalu, pilih kolom nilai acak dan sortir.
+
+![](step2-sort22.png)
+
+## R
+
+Sortir menggunakan *arrange*. 
+
+```{r}
+penguins |> arrange(desc(rando)) |>
+  head(3) |> knitr::kable()
+```
+
+## Python
+
+Gunakan `namaDataset.sort_values(by = "kolom angka acak", ...)` 
+
+```{python}
+import pandas as pd
+
+penguins_sorted = penguins.sort_values(by = "randomNumber", ascending=False)
+print(penguins_sorted.head(58))
+```
+:::
+
+### Alternatif
+
+1. Buat $n$ integer random dari $1$ ke $N$, jumlah populasi.
+2. Ambil row yang sesuai integer random tersebut.
+
+::: {.panel-tabset}
+## R
+```{r}
+library(dplyr)
+
+indexes <- sample.int(n = nrow(penguins), size = 3)
+penguins |> filter(rowid %in% indexes) |> knitr::kable()
+```
+
+## Python
+```{python}
+import pandas as pd
+import numpy as np
+
+indexes = np.random.randint(0, len(penguins.index),5)
+
+newpenguins = penguins[(penguins.index).isin(indexes)]
+newpenguins
+```
+:::
+
+### Exercise
+
+Bagi jadi 3 - ambil sampel sebanyak:
+
+1. 40 dari dataset Iris (https://www.kaggle.com/datasets/arshid/iris-flower-dataset)
+2. 14 dari dataset mtcars (https://gist.github.com/seankross/a412dfbd88b3db70b74b)
+3. 58 dari dataset penguins (https://gist.github.com/slopp/ce3b90b9168f2f921784de84fa445651)
+
+## Menduga Parameter populasi
+
+Beberapa rumus yang digunakan untuk menduga parameter populasi:
+
+::: {.panel-tabset}
+## Mean
+
+$$
+\begin{aligned}
+\hat{\mu}&=\bar{y}=\frac{\sum_{i=1}^n y_i}{n} & \text{(mean)}\\
+\hat{V}(\bar{y})&=\left(1-\frac{n}{N}\right)\frac{s^2}{n}&\text{(ragam penduga)}\\\
+s^2&=\frac{1}{n-1}\sum_{i=1}^n(y_i-\bar{y})^2 &\\
+\hat{\mu}&\pm2\sqrt{\hat{V}(\bar{y})} & \text{(selang kepercayaan)}
+\end{aligned}
+$$
+
+Penduga bagi mean adalah rataan sampel, yaitu total nilai dari sampel dibagi ukuran sampel. Bagaimana untuk ragam penduga? Penurunan rumus ini dimulai dari nilai $V\left(\bar{y}\right)$. Dalam kasus populasi tak hingga yang saling bebas dan memiliki ragam sama: 
+$$
+\begin{aligned}
+V\left(\bar{y}\right)&=V\left(\frac{y_1+\ldots+y_n}{n}\right)=\frac{1}{n^2}V(y_1+\ldots+y_n)\\ 
+&=\frac{V(y_1)+\ldots+V(y_n)}{n^2}=\frac{n\sigma}{n^2}=\frac{\sigma}{n}
+\end{aligned}
+$$ 
+
+Jadi, misal ada 100 elemen yang diobservasi di sampel, ragam dari rata-ratanya seharusnya menjadi $\sigma/n$. Namun jika sampel terhingga, misal 100, maka ragamnya bukan $\sigma/n$. Harusnya nol karena kita mengobservasi seluruh populasi!
+
+Dengan logika yang sama, dalam kasus populasi terhingga, ukuran sampel dianggap besar atau kecil relatif terhadap ukuran populasi. Jika sebagian besar populasi sudah diambil di sampel walaupun $n$ atau ukuran absolutnya kecil, seharusnya ragam dari rata-rata berkurang signifikan. Oleh karena itu, perlu ada *faktor koreksi populasi terhingga*. Dengan faktor koreksi tersebut, ditemukan bahwa 
+$$
+\mathrm{Var}(\bar{y}) = \frac{\sigma^2}{n} \left( \frac{N-n}{N-1} \right)
+$$
+
+Untuk lengkapnya, baca di [sini](https://stats.stackexchange.com/questions/5158/explanation-of-finite-population-correction-factor).
+
+Lalu ternyata $E(s^2)=\frac{N}{N-1}\sigma^2$. Derivasi ada di halaman akhir buku Schaeffer. Oleh karena itu, agar pendugaan tak bias, perlu dikalikan dengan $\frac{N-n}{N}=\left(1-\frac{n}{N})\right$.
+
+Selang kepercayaan $95\%$ selalu akan memiliki bentuk $\hat{\mu}&\pm2\sqrt{\hat{V}(\bar{y})} $. Agar kepercayaan $95\%$, maka probabilitas di sisi kiri dan kanan masing masing $2.5\%$. $Z_{0.025}=1.96$.
+
+## Total
+
+$$
+\begin{aligned}
+\hat{\tau}&=N\bar{y}=\frac{N\sum_{i=1}^n y_i}{n} & \text{(total)}\\
+\hat{V}(\hat{\tau})&=\hat{V}(N\bar{y})=N^2\left(1-\frac{n}{N}\right)\frac{s^2}{n}&\text{(ragam penduga)}\\\
+\hat{\tau}&\pm2\sqrt{\hat{V}(\tau)} & \text{(selang kepercayaan)}
+\end{aligned}
+$$
+
+Logika dari penduga ini adalah perkalian penduga-penduga mean sebelumnya dengan ukuran populasi $N$. Karena ragam merupakan semua bentuk kuadrat, maka ukuran populasi dikuadratkan ($N^2$).
+
+## Proporsi
+
+$$
+\begin{aligned}
+\hat{p}&=\bar{y}=\frac{\sum_{i=1}^n y_i}{n} & \text{(proporsi, y=1 atau 0)}\\
+\hat{V}(\hat{p})&=\left(1-\frac{n}{N}\right)\frac{\hat{p}\hat{q}}{n-1}&\text{(ragam penduga)}\\
+\hat{q}&=1-\hat{p}\\
+\hat{p}&\pm2\sqrt{\hat{V}(p)} & \text{(selang kepercayaan)}
+\end{aligned}
+$$
+
+Penduga ragam proporsi tersebut berasal dari sebaran Bernoulli. Peluang satu observasi $Y$ memiliki nilai 1 (sukses) atau 0 (gagal) dimodelkan dengan:
+
+$$
+f(y)=p^{y}(1-p)^{1-y}
+$$
+
+Nilai harapannya adalah:
+
+$$
+0\cdot f(0)+1\cdot f(1)=p
+$$
+
+Dan ragamnya adalah:
+
+$$
+\begin{aligned}
+(0-p)^2 f(o)+(1-p)^2f(1)&=p^2(1-p)+p(1-p)^2\\ 
+&=p(p-p^2+1-2p+p^2)=p(1-p)\\ 
+&=pq
+\end{aligned}
+$$
+
+Yang menggantikan $\sigma$ untuk satu observasi. Selebihnya, filosofi penurunannya sama.
+
+:::
+
+### Cara Perhitungan: Excel Cheatsheet
+
+#### Mean
+
+Asumsikan Anda ingin menghitung rata-rata *bill length* dari 50 penguin di sebuah sampel dataset penguins. Asumsikan bahwa data tersebut dikumpulkan melalui *simple ranom sampling*, dari populasi 344 penguin di dataset.
+
+![Dataset](count-1.png)
+
+Sebelum menghitung rata-rata, perhatikan bahwa angka-angka di dataset rata kiri. Ternyata, angka tersebut belum dianggap data numerik oleh Excel. Oleh karena itu, buat kolom baru untuk konversi menggunakan fungsi `VALUE`. Untuk baris pertama, misal, nilai *bill length* berada di D2. Oleh karena itu, nilai kolom baru tersebut adalah `VALUE(D2)`.
+
+![Konversi](count-2.png)
+
+Langkah pertama adalah menghitung rata-rata. Bill length yang berbentuk angka berada di kolom E, 2-51. Maka tuliskan `SUM(E2:E51)/50` atau `AVERAGE(E2:E51)`
+
+![Penduga rataan](count-3.png)
+
+Dapat dilakukan dua cara untuk menghitung simpangan baku sampel. Pertama, dapat dibuat kolom simpangan $y-\bar{y}$, lalu dikuadratkan. Karena kita ingin mengurangi seluruh kolom E dengan konstanta di B53, maka gunakan `$B$53` agar posisi sel yang mengandung rataan sampel tidak berubah. `$B` menetapkan indeks kolom (tidak berubah  jika di-*copy* ke kanan-kiri) dan `$53` menetapkan indeks baris (tidak berubah  jika di-*copy* ke atas-bawah). Kolom E tidak perlu diberi tanda `$`. Justru, jika diberi tanda dolar di `E$1`, misal, indeks baris (angka) akan tetap di E1 walaupun rumus di-*copy* ke baris di bawahnya. 
+
+![Deviasi](count-4.png)
+
+Untuk mengkuadratkan, gunakan `[tempat sel]^2`. Misal ingin mengkuadratkan sel E1, maka tulis `E1^2`. Gunakan `SUM` untuk mencari jumlah, dan bagi $n-1$. Atau, dapat digunakan `VAR.S(RANGE)`. Jadi, buat `VAR.S(E2:E51)`.
+
+![Ragam](count-6.png)
+
+Lalu, hitung faktor koreksi dan $1/n$. Gunakan `PRODUCT` untuk menghitung perkalian:
+
+![Ragam penduga](count-7.png)
+
+BoE selalu memiliki bentuk $2\sqrt{V(\hat{\mu})}$ untuk mean:
+
+![BoE](count-8.png)
+
+#### Total
+
+Karena diketahui bahwa:
+
+$$
+\hat{\tau}=N\bar{y};\quad \mathrm{V(\hat{\tau})}= \mathrm{V(N\bar{y})=N^2V(\bar{y})}
+$$
+
+Maka perhitungan cukup sederhana.
+
+![Total](count-9.png)
+
+#### Proporsi
+
+Misal ingin dihitung proporsi penguin laki-laki. Cara sederhana adalah mengkonversi data kategorik jenis kelamin menjadi data biner 0/1 menggunakan fungsi `IF`. Misal jika baris pertama (K2) laki-laki, buat menjadi 1. Jika tidak, buat menjadi 0. Jadi:  `IF(K2="male"; 1; 0)`. Lalu tambahkan dan bagi 50 untuk mendapat proporsi.
+
+![Konversi](count-10.png)
+
+Sehingga hasilnya:
+
+![](count-11.png)
+
+### Reporting menggunakan LaTeX
+
+Rumus-rumus matematika dapat ditulis dengan lebih mudah menggunakan LaTeX. LaTeX dapat digunakan di Microsoft Word di menu *Equation*. Menu tersebut diakses menggunakan `Alt + Tab`. 
+
+![](count-12.png)
+
+Atau, dapat diakses menggunakan [Overleaf](https://www.overleaf.com/). 
+
+Angka dituliskan di LaTeX seperti biasa. Simbol-simbol ditulis menggunakan `\namasimbol`, misal `\theta` untuk $\theta$. `\mu` dan `\sigma` menuliskan $\mu$ dan $\sigma$. `\bar{y}` menghasilkan $\bar{y}$ dan `\hat{\mu}` menghasilkan $\hat{\mu}$. 
+
+Subskrip dan superskrip ditulis menggunakan _ dan ^. Misal, `y_{i3}^{e4}` menghasilkan $y_{i3}^{e4}$. Pertambahan ditulis menggunakan `\sum`. 
+
+Pecahan ditulis menggunakan `\frac{}{}`. Misal `\frac{1}{2}` menghasilkan $\frac{1}{2}$. Pertambahan dituliskan menggunakan `\sum` dan perkalian dituliskan menggunakan `\prod`.
+
+Ada beberapa *environment* di LaTeX. *Environment* yang cukup penting adalah *aligned*. Tiap baris dipisahkan menggunakan `//`. Kesejajaran tiap baris dipastikan dengan tanda `&`. Misal `&=` memastikan tanda sama dengan pertama di tiap baris sejajar.
+
+Misal, kode LaTeX untuk menuliskan penduga mean:
+
+```
+\begin{aligned}
+\hat{\mu}&=\bar{y}=\frac{\sum_{i=1}^n y_i}{n} & \text{(mean)}\\
+\hat{V}(\bar{y})&=\left(1-\frac{n}{N}\right)\frac{s^2}{n}&\text{(ragam penduga)}\\\
+s^2&=\frac{1}{n-1}\sum_{i=1}^n(y_i-\bar{y})^2 &\\
+\hat{\mu}&\pm2\sqrt{\hat{V}(\bar{y})} & \text{(selang kepercayaan)}
+\end{aligned}
+```
+
+### Exercise
+
+Hitung mean, total, dan proporsi 3 variabel di sampel yang kamu ambil. Bandingkan dengan nilai parameter populasi:
+
+1. Apakah sama?
+2. Apakah nilai parameter populasi masuk selang kepercayaan?
+
+## Menghitung Ukuran Sampel
+
+Penduga untuk ukuran sampel secara umum ditemukan dengan memodifikasi rumus BoE. Ingat bahwa BoE adalah $2\sqrt{V(\bar{y})}$. Oleh karena itu, ukuran sampel yang mengontrol BoE menjadi jumlah tertentu ditemukan dengan memanipulasi rumus tersebut.
+
+::: {.panel-tabset}
+## Mean
+
+$$
+\begin{aligned}
+n=\frac{N\sigma^2}{(N-1)D+\sigma^2}; \quad D=\frac{B^2}{4}
+\end{aligned}
+$$
+
+Rumus itu tidak lain ditemukan dari:
+
+$$
+\begin{aligned}
+\mathrm{Var}(\bar{y})&= \frac{\sigma^2}{n} \left( \frac{N-n}{N-1} \right)\\ 
+B&=2\sqrt{\mathrm{V}(\bar{y})}\\ 
+\sqrt{D}&=\frac{B}{2}=\sqrt{\frac{\sigma^2}{n} \left( \frac{N-n}{N-1} \right)}\\ 
+D&=\frac{\sigma^2}{n} \left( \frac{N-n}{N-1} \right)=\frac{1}{n}\left(\frac{\sigma^2N-\sigma^2n}{N-1}\right)\\ 
+n&=\frac{\sigma^2N-\sigma^2n}{ND-D}\\ 
+n+\frac{\sigma^2n}{ND-D}&=\frac{\sigma^2N}{ND-D}\\ 
+n\left(1+\frac{\sigma^2}{ND-D}\right)&=\frac{\sigma^2N}{ND-D}\\ 
+n&=\frac{\sigma^2N}{ND-D}\cdot\frac{ND-D}{ND-D+\sigma^2}=\frac{N\sigma^2}{(N-1)D+\sigma^2}
+\end{aligned}
+$$
+
+Penurunan untuk kasus-kasus lain akan relatif sama dengan penurunan ini.
+
+## Total
+
+$$
+\begin{aligned}
+n=\frac{N\sigma^2}{(N-1)D+\sigma^2}; \quad D=\frac{B^2}{4N^2}
+\end{aligned}
+$$
+
+Rumus ini ditemukan dari fakta bahwa $\tau=N\bar{y}$ sehingga:
+
+$$
+\begin{aligned}
+B&=2\sqrt{\mathrm{V}(N\bar{y})}=2\sqrt{N^2 V(\bar{y})}=2N\sqrt{V(\bar{y})}\\ 
+\sqrt{D}&=\frac{B}{2N}=\sqrt{V(\bar{y})}\\ 
+\end{aligned}
+$$
+
+Yang diturunkan dengan cara sama seperti sebelumnya.
+
+## Proporsi
+
+$$
+\begin{aligned}
+n=\frac{Npq}{(N-1)D+pq}; \quad D=\frac{B^2}{4N}, \ q=1-p
+\end{aligned}
+$$
+
+$\sigma^2$ digantikan saja dengan $pq$, dengan alasan yang dijelaskan di penduga ragam proporsi. 
+
+Keuntungan perhitungan ukuran sampel untuk proporsi adalah dapat dihitung jika $p$ dan $q$ tidak diketahui. Dapat diasumsikan $p$ dan $q$ yang memaksimumkan ragam, yaitu $0.5$ (ambil turunan pertama dari $p-p^2$).
+:::
+
+## Membandingkan Penduga
+
+Untuk dua peubah acak $y_1$ dan $y_2$:
+
+$$
+E(y_1-y_2)=E(y_1)-E(y_2)
+$$
+
+Dan:
+
+$$
+V(y_1-y_2)=V(y_1)+V(y_2)-2\mathrm{Cov}(y_1,y_2)
+$$
+
+Jika $y_1$ dan $y_2$ saling bebas $\mathrm{Cov}(y_1,y_2)=0$. Jika $y_1, \ldots, y_n$ dan $x_1, \ldots, x_m$ saling bebas dengan rata-rata $\mu_x$ dan $\mu_y$. Maka jika diduga menggunakan $\bar{y}-\bar{x}$.
+
+$$
+E(\bar{y}-\bar{x})=E(\bar{y})-E(\bar{x})=\mu_y-\mu_x
+$$
+
+Dan:
+
+$$
+V(\bar{y}-\bar{x})=V(\bar{y})+V(\bar{x})
+$$
+
+Yang ditemukan melalui rumus sebelumnya.

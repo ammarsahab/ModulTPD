@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>modulTPD2 - 2&nbsp; Konsep Dasar Survey Sampling</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./3-SimpleRandom.html" rel="next">
+<link href="./1-Review.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Konsep Dasar Survey Sampling</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">modulTPD2</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-Review.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Review Statistika Dasar</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-Terminologi.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Konsep Dasar Survey Sampling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-SimpleRandom.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Sampling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-Stratified.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Random Sampling</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sensus-vs.-survei" id="toc-sensus-vs.-survei" class="nav-link active" data-scroll-target="#sensus-vs.-survei"> <span class="header-section-number">2.1</span> Sensus vs.&nbsp;Survei</a></li>
+  <li><a href="#terminologi" id="toc-terminologi" class="nav-link" data-scroll-target="#terminologi"> <span class="header-section-number">2.2</span> Terminologi</a>
+  <ul class="collapse">
+  <li><a href="#elemen" id="toc-elemen" class="nav-link" data-scroll-target="#elemen"> <span class="header-section-number">2.2.1</span> Elemen</a></li>
+  <li><a href="#satuan-penarikan-contoh" id="toc-satuan-penarikan-contoh" class="nav-link" data-scroll-target="#satuan-penarikan-contoh"> <span class="header-section-number">2.2.2</span> Satuan penarikan contoh</a></li>
+  <li><a href="#kerangka" id="toc-kerangka" class="nav-link" data-scroll-target="#kerangka"> <span class="header-section-number">2.2.3</span> Kerangka</a></li>
+  <li><a href="#sampel" id="toc-sampel" class="nav-link" data-scroll-target="#sampel"> <span class="header-section-number">2.2.4</span> Sampel</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"> <span class="header-section-number">2.2.5</span> Exercise</a></li>
+  </ul></li>
+  <li><a href="#sampling" id="toc-sampling" class="nav-link" data-scroll-target="#sampling"> <span class="header-section-number">2.3</span> Sampling</a>
+  <ul class="collapse">
+  <li><a href="#probability-sampling" id="toc-probability-sampling" class="nav-link" data-scroll-target="#probability-sampling"> <span class="header-section-number">2.3.1</span> Probability sampling</a></li>
+  <li><a href="#non-probability-sampling" id="toc-non-probability-sampling" class="nav-link" data-scroll-target="#non-probability-sampling"> <span class="header-section-number">2.3.2</span> Non-probability sampling</a></li>
+  <li><a href="#sampling-error" id="toc-sampling-error" class="nav-link" data-scroll-target="#sampling-error"> <span class="header-section-number">2.3.3</span> Sampling error</a></li>
+  </ul></li>
+  <li><a href="#non-sampling-errors" id="toc-non-sampling-errors" class="nav-link" data-scroll-target="#non-sampling-errors"> <span class="header-section-number">2.4</span> Non-sampling errors</a>
+  <ul class="collapse">
+  <li><a href="#nonobservation" id="toc-nonobservation" class="nav-link" data-scroll-target="#nonobservation"> <span class="header-section-number">2.4.1</span> Nonobservation</a></li>
+  <li><a href="#errors-of-observation" id="toc-errors-of-observation" class="nav-link" data-scroll-target="#errors-of-observation"> <span class="header-section-number">2.4.2</span> Errors of observation</a></li>
+  </ul></li>
+  <li><a href="#mengurangi-kesalahan" id="toc-mengurangi-kesalahan" class="nav-link" data-scroll-target="#mengurangi-kesalahan"> <span class="header-section-number">2.5</span> Mengurangi kesalahan</a>
+  <ul class="collapse">
+  <li><a href="#trade-off-sampling-error-vs-non-sampling" id="toc-trade-off-sampling-error-vs-non-sampling" class="nav-link" data-scroll-target="#trade-off-sampling-error-vs-non-sampling"> <span class="header-section-number">2.5.1</span> Trade-off: sampling error vs non-sampling</a></li>
+  <li><a href="#cara-mengurangi-non-sampling-error" id="toc-cara-mengurangi-non-sampling-error" class="nav-link" data-scroll-target="#cara-mengurangi-non-sampling-error"> <span class="header-section-number">2.5.2</span> Cara mengurangi non-sampling error</a></li>
+  </ul></li>
+  <li><a href="#cara-pengumpulan-data" id="toc-cara-pengumpulan-data" class="nav-link" data-scroll-target="#cara-pengumpulan-data"> <span class="header-section-number">2.6</span> Cara pengumpulan data</a>
+  <ul class="collapse">
+  <li><a href="#personal-interview" id="toc-personal-interview" class="nav-link" data-scroll-target="#personal-interview"> <span class="header-section-number">2.6.1</span> Personal interview:</a></li>
+  <li><a href="#telephone-interview" id="toc-telephone-interview" class="nav-link" data-scroll-target="#telephone-interview"> <span class="header-section-number">2.6.2</span> Telephone interview</a></li>
+  <li><a href="#self-administered-questionnaire" id="toc-self-administered-questionnaire" class="nav-link" data-scroll-target="#self-administered-questionnaire"> <span class="header-section-number">2.6.3</span> Self-Administered Questionnaire</a></li>
+  <li><a href="#observasi" id="toc-observasi" class="nav-link" data-scroll-target="#observasi"> <span class="header-section-number">2.6.4</span> Observasi</a></li>
+  </ul></li>
+  <li><a href="#tahapan-pembuatan-survey" id="toc-tahapan-pembuatan-survey" class="nav-link" data-scroll-target="#tahapan-pembuatan-survey"> <span class="header-section-number">2.7</span> Tahapan pembuatan survey</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Konsep Dasar Survey Sampling</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="sensus-vs.-survei" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sensus-vs.-survei"><span class="header-section-number">2.1</span> Sensus vs.&nbsp;Survei</h2>
+<p>Dalam <strong>sensus</strong>, peneliti mengamati seluruh anggota populasi. Karena tenaga dan waktu yang dibutuhkan lama, sensus dilakukan dalam jangka waktu panjang, misal 10 tahun sekali. Sedangkan, di <strong>survei</strong> sebagian anggota populasi diamati.</p>
+</section>
+<section id="terminologi" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="terminologi"><span class="header-section-number">2.2</span> Terminologi</h2>
+<section id="elemen" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="elemen"><span class="header-section-number">2.2.1</span> Elemen</h3>
+<p>Proses penjelasan terminologi dimulai dari membayangkan pelaksanaan survei. <strong>Siapa yang ingin ada teliti</strong>?</p>
+<p>Objek apa yang Anda ingin ketahui karakteristiknya, atau Anda ingin ukur?</p>
+<p>Ini adalah elemen.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+<svg width="161pt" height="44pt" viewbox="0.00 0.00 161.44 44.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 40)">
+<title>
+G
+</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-40 157.44,-40 157.44,4 -4,4"></polygon> <!-- unsur --> <g id="node1" class="node">
+<title>
+unsur
+</title>
+<text text-anchor="middle" x="27" y="-13.8" font-family="Times,serif" font-size="14.00">unsur</text> </g> <!-- populasi --> <g id="node2" class="node">
+<title>
+populasi
+</title>
+<text text-anchor="middle" x="121.72" y="-13.8" font-family="Times,serif" font-size="14.00">populasi</text> </g> <!-- unsur&#45;&gt;populasi --> <g id="edge1" class="edge">
+<title>
+unsur-&gt;populasi
+</title>
+<path fill="none" stroke="black" d="M54.32,-18C62.16,-18 70.95,-18 79.5,-18"></path> <polygon fill="black" stroke="black" points="79.74,-21.5 89.74,-18 79.74,-14.5 79.74,-21.5"></polygon> </g> </g>
+</svg>
+</p>
+</div>
+</div>
+</div>
+<p>Grafik mengambarkan agregasi unit dari satu elemen ke kumpulan elemen. <strong>Populasi</strong> adalah koleksi unsur yang ingin diduga karakteristiknya. Sebagai contoh:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+<svg width="261pt" height="98pt" viewbox="0.00 0.00 261.40 98.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 94)">
+<title>
+G
+</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-94 257.4,-94 257.4,4 -4,4"></polygon> <!-- a --> <g id="node1" class="node">
+<title>
+a
+</title>
+<text text-anchor="middle" x="49.78" y="-13.8" font-family="Times,serif" font-size="14.00">satu orang</text> </g> <!-- b --> <g id="node2" class="node">
+<title>
+b
+</title>
+<text text-anchor="middle" x="194.49" y="-13.8" font-family="Times,serif" font-size="14.00">warga Bogor</text> </g> <!-- a&#45;&gt;b --> <g id="edge1" class="edge">
+<title>
+a-&gt;b
+</title>
+<path fill="none" stroke="black" d="M86.79,-18C102.88,-18 122.16,-18 139.89,-18"></path> <polygon fill="black" stroke="black" points="140.11,-21.5 150.11,-18 140.11,-14.5 140.11,-21.5"></polygon> </g> <!-- c --> <g id="node3" class="node">
+<title>
+c
+</title>
+<text text-anchor="middle" x="49.78" y="-67.8" font-family="Times,serif" font-size="14.00">satu kendaraan</text> </g> <!-- d --> <g id="node4" class="node">
+<title>
+d
+</title>
+<text text-anchor="middle" x="194.49" y="-67.8" font-family="Times,serif" font-size="14.00">kendaraan di Bara</text> </g> <!-- c&#45;&gt;d --> <g id="edge2" class="edge">
+<title>
+c-&gt;d
+</title>
+<path fill="none" stroke="black" d="M99.5,-72C107.85,-72 116.67,-72 125.42,-72"></path> <polygon fill="black" stroke="black" points="125.64,-75.5 135.64,-72 125.64,-68.5 125.64,-75.5"></polygon> </g> </g>
+</svg>
+</p>
+</div>
+</div>
+</div>
+<p>Warga Bogor adalah koleksi orang di Bogor. Kendaraan di Babakan Raya adalah koleksi kendaraan.</p>
+</section>
+<section id="satuan-penarikan-contoh" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="satuan-penarikan-contoh"><span class="header-section-number">2.2.2</span> Satuan penarikan contoh</h3>
+<p>Koleksi elemen dari populasi yang tidak <strong>tumpang tindih</strong> dan mencakup seluruh populasi. Maksudnya? Paling sederhana <strong>elemen = satuan penarikan contoh</strong>. Dalam contoh orang, tentu tidak mungkin tumpang tindih. Apakah orang, jika digabung, mencakup seluruh warga Bogor?</p>
+<p>Namun, satuan penarikan contoh bisa juga tak sama dengan elemen:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+<svg width="292pt" height="44pt" viewbox="0.00 0.00 292.47 44.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 40)">
+<title>
+G
+</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-40 288.47,-40 288.47,4 -4,4"></polygon> <!-- a --> <g id="node1" class="node">
+<title>
+a
+</title>
+<text text-anchor="middle" x="28.21" y="-13.8" font-family="Times,serif" font-size="14.00">elemen</text> </g> <!-- b --> <g id="node2" class="node">
+<title>
+b
+</title>
+<text text-anchor="middle" x="138.73" y="-13.8" font-family="Times,serif" font-size="14.00">sampling unit</text> </g> <!-- a&#45;&gt;b --> <g id="edge1" class="edge">
+<title>
+a-&gt;b
+</title>
+<path fill="none" stroke="black" d="M56.59,-18C64.44,-18 73.29,-18 82.19,-18"></path> <polygon fill="black" stroke="black" points="82.2,-21.5 92.2,-18 82.2,-14.5 82.2,-21.5"></polygon> </g> <!-- c --> <g id="node3" class="node">
+<title>
+c
+</title>
+<text text-anchor="middle" x="252.75" y="-13.8" font-family="Times,serif" font-size="14.00">populasi</text> </g> <!-- b&#45;&gt;c --> <g id="edge2" class="edge">
+<title>
+b-&gt;c
+</title>
+<path fill="none" stroke="black" d="M184.97,-18C193.42,-18 202.22,-18 210.54,-18"></path> <polygon fill="black" stroke="black" points="210.77,-21.5 220.77,-18 210.77,-14.5 210.77,-21.5"></polygon> </g> </g>
+</svg>
+</p>
+</div>
+</div>
+</div>
+<p>Sama seperti diagram sebelumnya, panah menunjukkan arah dari unit yang kecil ke unit yang besar. Elemen dapat digabung menjadi sebuah sampling unit. Gabungan sampling unit menjadi populasi. Sebagai contoh:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+<svg width="357pt" height="98pt" viewbox="0.00 0.00 356.65 98.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 94)">
+<title>
+G
+</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-94 352.65,-94 352.65,4 -4,4"></polygon> <!-- a --> <g id="node1" class="node">
+<title>
+a
+</title>
+<text text-anchor="middle" x="37.36" y="-13.8" font-family="Times,serif" font-size="14.00">satu orang</text> </g> <!-- b --> <g id="node2" class="node">
+<title>
+b
+</title>
+<text text-anchor="middle" x="165.19" y="-13.8" font-family="Times,serif" font-size="14.00">keluarga</text> </g> <!-- a&#45;&gt;b --> <g id="edge1" class="edge">
+<title>
+a-&gt;b
+</title>
+<path fill="none" stroke="black" d="M74.42,-18C89.41,-18 106.9,-18 122.44,-18"></path> <polygon fill="black" stroke="black" points="122.83,-21.5 132.83,-18 122.83,-14.5 122.83,-21.5"></polygon> </g> <!-- c --> <g id="node3" class="node">
+<title>
+c
+</title>
+<text text-anchor="middle" x="302.16" y="-13.8" font-family="Times,serif" font-size="14.00">warga Bogor</text> </g> <!-- b&#45;&gt;c --> <g id="edge2" class="edge">
+<title>
+b-&gt;c
+</title>
+<path fill="none" stroke="black" d="M197.49,-18C212.33,-18 230.47,-18 247.41,-18"></path> <polygon fill="black" stroke="black" points="247.76,-21.5 257.76,-18 247.76,-14.5 247.76,-21.5"></polygon> </g> <!-- d --> <g id="node4" class="node">
+<title>
+d
+</title>
+<text text-anchor="middle" x="37.36" y="-67.8" font-family="Times,serif" font-size="14.00">satu mobil</text> </g> <!-- e --> <g id="node5" class="node">
+<title>
+e
+</title>
+<text text-anchor="middle" x="165.19" y="-67.8" font-family="Times,serif" font-size="14.00">mobil di menit x</text> </g> <!-- d&#45;&gt;e --> <g id="edge3" class="edge">
+<title>
+d-&gt;e
+</title>
+<path fill="none" stroke="black" d="M74.76,-72C82.79,-72 91.53,-72 100.3,-72"></path> <polygon fill="black" stroke="black" points="100.56,-75.5 110.56,-72 100.56,-68.5 100.56,-75.5"></polygon> </g> <!-- f --> <g id="node6" class="node">
+<title>
+f
+</title>
+<text text-anchor="middle" x="302.16" y="-67.8" font-family="Times,serif" font-size="14.00">mobil di Bara</text> </g> <!-- e&#45;&gt;f --> <g id="edge4" class="edge">
+<title>
+e-&gt;f
+</title>
+<path fill="none" stroke="black" d="M219.92,-72C228.28,-72 236.94,-72 245.34,-72"></path> <polygon fill="black" stroke="black" points="245.44,-75.5 255.44,-72 245.44,-68.5 245.44,-75.5"></polygon> </g> </g>
+</svg>
+</p>
+</div>
+</div>
+</div>
+<p>Orang/mobil jika digabung dapat menjadi satu keluarga/satu mobil di interval waktu tertentu. Jika sampling unit digabung, maka menjadi populasi. Note: dalam contoh mobil, ada kemungkinan <strong>tumpang tindih</strong>! Walaupun tiap orang hanya memiliki satu keluarga, bisa jadi mobil yang di menit sebelumnya berada di Babakan Raya ada juga di menit selanjutnya, karena macet!</p>
+</section>
+<section id="kerangka" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="kerangka"><span class="header-section-number">2.2.3</span> Kerangka</h3>
+<p>Kerangka adalah <strong>daftar</strong> sampling unit di populasi. Ini dapat digambarkan sebagai suatu tabel, di mana populasi dibagi menjadi beberapa sampling unit. Lalu tiap sampling unit memiliki elemen:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+<svg width="282pt" height="298pt" viewbox="0.00 0.00 282.00 298.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 294)"> <polygon fill="white" stroke="transparent" points="-4,4 -4,-294 278,-294 278,4 -4,4"></polygon> <!-- tbl --> <g id="node1" class="node">
+<title>
+tbl
+</title>
+<text text-anchor="start" x="12.28" y="-246.3" font-family="Times,serif" font-size="14.00"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;populasi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text> <polygon fill="none" stroke="red" points="121.5,-246 121.5,-284 219.5,-284 219.5,-246 121.5,-246"></polygon> <text text-anchor="start" x="132.19" y="-260.4" font-family="Times,serif" font-size="14.00">sampling unit</text> <polygon fill="none" stroke="red" points="121.5,-208 121.5,-246 219.5,-246 219.5,-208 121.5,-208"></polygon> <text text-anchor="start" x="132.19" y="-222.4" font-family="Times,serif" font-size="14.00">sampling unit</text> <polygon fill="none" stroke="red" points="121.5,-170 121.5,-208 219.5,-208 219.5,-170 121.5,-170"></polygon> <text text-anchor="start" x="132.19" y="-184.4" font-family="Times,serif" font-size="14.00">sampling unit</text> </g> <!-- tbl2 --> <g id="node2" class="node">
+<title>
+tbl2
+</title>
+<polygon fill="none" stroke="red" points="75.5,-51 75.5,-124 217.5,-124 217.5,-51 75.5,-51"></polygon> <text text-anchor="start" x="80.19" y="-83.3" font-family="Times,serif" font-size="14.00"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sampling unit &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text> <polygon fill="none" stroke="red" points="217.5,-4 217.5,-124 266.5,-124 266.5,-4 217.5,-4"></polygon> <polygon fill="none" stroke="black" points="220.5,-83 220.5,-121 263.5,-121 263.5,-83 220.5,-83"></polygon> <text text-anchor="start" x="231.11" y="-97.4" font-family="Times,serif" font-size="14.00">unit</text> <polygon fill="none" stroke="black" points="220.5,-45 220.5,-83 263.5,-83 263.5,-45 220.5,-45"></polygon> <text text-anchor="start" x="231.11" y="-59.4" font-family="Times,serif" font-size="14.00">unit</text> <polygon fill="none" stroke="black" points="220.5,-7 220.5,-45 263.5,-45 263.5,-7 220.5,-7"></polygon> <text text-anchor="start" x="231.11" y="-21.4" font-family="Times,serif" font-size="14.00">unit</text> </g> <!-- tbl&#45;&gt;tbl2 --> <g id="edge1" class="edge">
+<title>
+tbl:port_one-&gt;tbl2
+</title>
+<path fill="none" stroke="black" d="M220.5,-265C274.94,-265 247.03,-194.39 215.42,-137.08"></path> <polygon fill="black" stroke="black" points="218.27,-135.01 210.32,-128.01 212.17,-138.44 218.27,-135.01"></polygon> </g> </g>
+</svg>
+</p>
+</div>
+</div>
+</div>
+<p>Sebagai contoh:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+<svg width="292pt" height="260pt" viewbox="0.00 0.00 292.00 260.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 256)"> <polygon fill="white" stroke="transparent" points="-4,4 -4,-256 288,-256 288,4 -4,4"></polygon> <!-- tbl --> <g id="node1" class="node">
+<title>
+tbl
+</title>
+<text text-anchor="start" x="11.65" y="-208.3" font-family="Times,serif" font-size="14.00"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warga Bogor &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text> <polygon fill="none" stroke="red" points="146,-208 146,-246 198,-246 198,-208 146,-208"></polygon> <text text-anchor="start" x="156.64" y="-222.4" font-family="Times,serif" font-size="14.00">KK 1</text> <polygon fill="none" stroke="red" points="146,-170 146,-208 198,-208 198,-170 146,-170"></polygon> <text text-anchor="start" x="156.64" y="-184.4" font-family="Times,serif" font-size="14.00">KK 2</text> <polygon fill="none" stroke="red" points="146,-132 146,-170 198,-170 198,-132 146,-132"></polygon> <text text-anchor="start" x="156.64" y="-146.4" font-family="Times,serif" font-size="14.00">KK 3</text> </g> <!-- tbl2 --> <g id="node2" class="node">
+<title>
+tbl2
+</title>
+<polygon fill="none" stroke="red" points="68,-32 68,-86 164,-86 164,-32 68,-32"></polygon> <text text-anchor="start" x="72.64" y="-54.8" font-family="Times,serif" font-size="14.00"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KK 1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text> <polygon fill="none" stroke="red" points="164,-4 164,-86 276,-86 276,-4 164,-4"></polygon> <polygon fill="none" stroke="black" points="167,-45 167,-83 273,-83 273,-45 167,-45"></polygon> <text text-anchor="start" x="177.81" y="-59.4" font-family="Times,serif" font-size="14.00">Susi - 37 tahun</text> <polygon fill="none" stroke="black" points="167,-7 167,-45 273,-45 273,-7 167,-7"></polygon> <text text-anchor="start" x="179.75" y="-21.4" font-family="Times,serif" font-size="14.00">Budi - 5 tahun</text> </g> <!-- tbl&#45;&gt;tbl2 --> <g id="edge1" class="edge">
+<title>
+tbl:port_one-&gt;tbl2
+</title>
+<path fill="none" stroke="black" d="M199,-227C251.11,-227 225.37,-152.71 200.14,-99.32"></path> <polygon fill="black" stroke="black" points="203.28,-97.76 195.78,-90.28 196.97,-100.81 203.28,-97.76"></polygon> </g> </g>
+</svg>
+</p>
+</div>
+</div>
+</div>
+<p>Pemerintah Kota Bogor memiliki list Kepala Keluarga; lalu, di tiap KK tersebut ada suatu keluarga yang beranggotakan elemen bernama Susi dan Budi.</p>
+</section>
+<section id="sampel" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="sampel"><span class="header-section-number">2.2.4</span> Sampel</h3>
+<p>Sampel adalah kumpulan satuan penarikan contoh dari kerangka. Misal, ambil KK 1 dan 2. Hitung mobil di jam-jam tertentu</p>
+</section>
+<section id="exercise" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="exercise"><span class="header-section-number">2.2.5</span> Exercise</h3>
+<ol type="1">
+<li>Cari suatu unit!</li>
+<li>Kumpulan unit seperti apa yang kamu ingin duga karakteristiknya!</li>
+<li>Kumpulan unit yang lebih kecil dari populasi apa saja yang mungkin terjadi?</li>
+<li>Bagaimana bentuk kerangkanya?</li>
+<li>Beri contoh pengambilan sampel dari kerangka tersebut.</li>
+</ol>
+</section>
+</section>
+<section id="sampling" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sampling"><span class="header-section-number">2.3</span> Sampling</h2>
+<section id="probability-sampling" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="probability-sampling"><span class="header-section-number">2.3.1</span> Probability sampling</h3>
+<p>Dalam probability sampling, tiap anggota populasi memiliki probabilitas untuk dipilih; probabilitasnya tidak perlu sama. Bisa saja:</p>
+<ol type="1">
+<li>Probabilitas semua anggota dipilih sama.</li>
+<li>Anggota kelompok tertentu, yang memang memiliki proporsi lebih besar di kerangka, memiliki probabilitas dipilih lebih besar.</li>
+<li>Cara lain.</li>
+</ol>
+</section>
+<section id="non-probability-sampling" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="non-probability-sampling"><span class="header-section-number">2.3.2</span> Non-probability sampling</h3>
+<p>Probabilitas anggota populasi dipilih tidak diketahui di non-probability sampling.</p>
+</section>
+<section id="sampling-error" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="sampling-error"><span class="header-section-number">2.3.3</span> Sampling error</h3>
+<p>Berapa banyak dari kalian yang suka matematika?</p>
+<p>Apa kesimpulan yang dapat diambil mengenai minat matematika mahasiswa IPB? Kemungkinan susah untuk mengambil kesimpulan; mungkin saja mahasiswa Statistika memiliki kemampuan matematika lebih tinggi, atau ketertarikan matematika lebih tinggi. Mungkin saja mahasiswa Statistika terlalu sering terekspos matematika sehingga tidak menyukai pelajaran tersebut. Jika kita mengamati sebagian populasi (contoh), akan ada keslahan karena contoh tersebut belum tentu mewakili keragaman populasi. Jika mahasiswa dari berbagai jurusan diamati, kesimpulan lebih valid. Lalu, dengan <strong>probability sampling</strong> tingkat kesalahan dapat diduga.</p>
+</section>
+</section>
+<section id="non-sampling-errors" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="non-sampling-errors"><span class="header-section-number">2.4</span> Non-sampling errors</h2>
+<section id="nonobservation" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="nonobservation"><span class="header-section-number">2.4.1</span> Nonobservation</h3>
+<p>Kesalahan yang terjadi karena gagal mengobservasi elemen:</p>
+<section id="non-coverage" class="level4" data-number="2.4.1.1">
+<h4 data-number="2.4.1.1" class="anchored" data-anchor-id="non-coverage"><span class="header-section-number">2.4.1.1</span> <em>Non-coverage</em></h4>
+<p>Jika kerangka sampling tidak mencakup seluruh populasi, misal DPT tidak lengkap atau tidak semua pengemudi punya SIM!</p>
+</section>
+<section id="non-response" class="level4" data-number="2.4.1.2">
+<h4 data-number="2.4.1.2" class="anchored" data-anchor-id="non-response"><span class="header-section-number">2.4.1.2</span> <em>Non-response</em></h4>
+<p>Error ini sering lebih fatal. Beberapa jenis error:</p>
+<ol type="1">
+<li>Tidak bisa mengontak unit</li>
+</ol>
+<p>Tanpa keluar CCR, misal Anda coba survei jumlah pekerja dan pemasok tempat makan kalian hari ini. Anda mungkin tak memiliki kontak elemen survei tersebut! Namun, jika Anda menanyakan apa yang dimakan teman Anda hari ini, hal tersebut mungkin ditemukan.</p>
+<p>Misal, dengan contoh acak sederhana tiap elemen memiliki probabilitas <span class="math inline">\(1/n\)</span> untuk disampel. Apakah ada bisa menghitung probabilitas elemen disampel jika sebenarnya dipilih elemen lain, elemen lain tidak ada, lalu diganti elemen yang dekat? Ini susah.</p>
+<p>Lalu, misal Anda melakukan survey ke rumah warga di jam siang. Ternyata, orang berusia dewasa sedang kerja. Apa yang terjadi jika yang ditanya adalah orang yang ada di rumah?</p>
+<ul>
+<li>Siapa yang mungkin di rumah warga pada jam siang?</li>
+<li>Apakah mungkin profil orang tersebut beda dengan warga yang Anda cari?</li>
+</ul>
+<ol start="2" type="1">
+<li>Unit tak bisa menjawab pertanyaan</li>
+</ol>
+<p>Buat pertanyaan yang susah dijawab orang. Bukan pertanyaan yang sensitif, tetapi susah dimengerti/susah dicari jawabannya. Misal, apakah Anda mengingat informasi:</p>
+<ol type="1">
+<li>Pengeluaran dalam minggu ini.</li>
+<li>Jarak berjalan kaki dalam hari ini.</li>
+<li>Jumlah teman yang dikontak melalui WhatsApp dua hari ini.</li>
+</ol>
+<p>Belum tentu responden mengetahui/mengingat informasi yang kita ingin tanyakan.</p>
+<ol start="3" type="1">
+<li>Unit tidak ingin menjawab pertanyaan</li>
+</ol>
+<p>Ini cukup jelas.</p>
+<ol start="4" type="1">
+<li>Dishonest interviewer</li>
+</ol>
+<p>Selain kesalahan dari responden, interviewer dapat tidak jujur dan mengisi survei dengan sendirinya.</p>
+</section>
+</section>
+<section id="errors-of-observation" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="errors-of-observation"><span class="header-section-number">2.4.2</span> Errors of observation</h3>
+<p>Informasi dari elemen dapat diobservasi, tetapi diobservasi dengan salah.</p>
+<section id="interviewer-yang-tidak-netral" class="level4" data-number="2.4.2.1">
+<h4 data-number="2.4.2.1" class="anchored" data-anchor-id="interviewer-yang-tidak-netral"><span class="header-section-number">2.4.2.1</span> Interviewer yang tidak netral</h4>
+<p>Apakah kalian suka cari masalah dengan orang? Jika interviewer dirasa mendukung posisi tertentu, responden mungkin saja mencoba mengikuti posisi interviewer, atau melawan posisi tersebut.</p>
+</section>
+<section id="kesalahan-responden" class="level4" data-number="2.4.2.2">
+<h4 data-number="2.4.2.2" class="anchored" data-anchor-id="kesalahan-responden"><span class="header-section-number">2.4.2.2</span> Kesalahan responden</h4>
+<ol type="1">
+<li>Jika Anda ditanya harga outfit Anda (dan kebetulan bagus outfitnya), apakah Anda ingin menaikkan harga outfit tersebut ke interviewer?</li>
+<li>Jika Anda ditanya pernah melanggar aturan kampus, apakah Anda akan menjawab ya atau tidak?</li>
+<li>Apakah Anda akan mengatakan jumlah uang bulanan Anda secara tepat jika ditanya?</li>
+</ol>
+<p>Inti dari aktivitas ini: responden memiliki motivasi yang berbeda-beda untuk menjawab pertanyaan. Misal, responden ingin tampak mengikuti aturan, ingin tampak kaya (atau menyembunyikan kekayaan), dan lain-lain.</p>
+</section>
+<section id="instrumen" class="level4" data-number="2.4.2.3">
+<h4 data-number="2.4.2.3" class="anchored" data-anchor-id="instrumen"><span class="header-section-number">2.4.2.3</span> Instrumen</h4>
+<p>Apa definisi Anda untuk:</p>
+<ol type="1">
+<li>Anak</li>
+<li>Pengangguran</li>
+<li>Harga makanan murah</li>
+</ol>
+<p>Apakah definisi semua orang sama? Bagaimana jika survei menanyakan suatu hal yang definisinya tidak jelas?</p>
+</section>
+<section id="input-data" class="level4" data-number="2.4.2.4">
+<h4 data-number="2.4.2.4" class="anchored" data-anchor-id="input-data"><span class="header-section-number">2.4.2.4</span> Input Data</h4>
+<p>Misal data sudah dikumpulkan. Apakah Anda pernah salah ketik? Apakah komputer Anda pernah mengalami <em>bug</em>? Data tersebut mungkin akan berubah.</p>
+</section>
+</section>
+</section>
+<section id="mengurangi-kesalahan" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="mengurangi-kesalahan"><span class="header-section-number">2.5</span> Mengurangi kesalahan</h2>
+<section id="trade-off-sampling-error-vs-non-sampling" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="trade-off-sampling-error-vs-non-sampling"><span class="header-section-number">2.5.1</span> Trade-off: sampling error vs non-sampling</h3>
+<p>Mana yang lebih mengikuti kaidah percontohan: mengambil contoh acak mahasiswa IPB atau menanya teman? Siapa yang lebih mungkin merespon: teman atau mahasiswa yang dicontoh acak?</p>
+<p>Semakin besar ukuran sampel, semakin mendekati populasi. Kira-kira, apakah Anda akan lebih lelah menanyakan lebih banyak orang lalu memasukkan datanya? Jika lebih lelah, apakah Anda lebih mungkin salah?</p>
+</section>
+<section id="cara-mengurangi-non-sampling-error" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="cara-mengurangi-non-sampling-error"><span class="header-section-number">2.5.2</span> Cara mengurangi non-sampling error</h3>
+<ol type="1">
+<li>Callback</li>
+</ol>
+<p>Apakah chat Anda pernah tidak direspon? Apa yang Anda lakukan? Jika di-chat lagi, apakah biasanya ada beberapa yang merespon kembali? Sama saja, di survei, surveyor dapat kembali ke responden yang belum merespon dan menanyakan pertanyaan yang sama lagi.</p>
+<ol start="2" type="1">
+<li>Rewards</li>
+</ol>
+<p>Jika mengisi, dapat uang/dst. Pertanyaannya: apakah orang yang ingin mengisi survei untuk dapat <em>reward</em> beda dengan orang pada umumnya? Mungkin orang tersebut memiliki keadaan finansial tertentu, atau lebih suka uang.</p>
+<ol start="3" type="1">
+<li>Melatih interviewer</li>
+</ol>
+<p>Interview dapat dilatih agar tampak netral dan mengetahui jawaban jujur/tidak jujur</p>
+<ol start="4" type="1">
+<li>Data checking</li>
+</ol>
+<p>Apakah mungkin:</p>
+<ul>
+<li>Seseorang berusia 1000 tahun?</li>
+<li>Satu keluarga memiliki 50 anak?</li>
+<li>Orang dewasa yang sudah menikah berusia 5 tahun?</li>
+</ul>
+<p>Data-data tersebut perlu diperiksa.</p>
+<ol start="5" type="1">
+<li>Memperbaiki kuesioner</li>
+</ol>
+<p>Beberapa aspek yang dapat diperhatikan:</p>
+<ul>
+<li>Urutan pertanyaan</li>
+</ul>
+<p>Biasanya, responden ingin konsisten dengan jawabannya. Misal, ditanyakan “Apakah Anda setuju dengan pemotongan subsidi BBM untuk peningkatan dana pendidikan?”. Jika setelah pertanyaan itu ditanyakan “Apakah Anda setuju dengan pemotongan subsidi BBM?”, responden lebih mungkin menjawab “Ya”. Urutan tersebut pelru diperhatikan.</p>
+<ul>
+<li>Pertanyaan terbuka vs.&nbsp;tertutup</li>
+</ul>
+<p>Pertanyaaan terbuka memberi lebih banyak opsi bagi responden, tapi susah diproses (non-sampling error meningkat). Pertanyaan tertutup dapat lebih mudah diproses, tetapi harus dipastikan semua opsi yang hendak dipilih responden ada.</p>
+<ul>
+<li>Opsi</li>
+</ul>
+<p>Misal, opsi netral. Kebanyakan responden mungkin memilih opsi netral. Apakah lebih baik untuk memaksa responden memilih?</p>
+<ul>
+<li>Wording</li>
+</ul>
+<p>Responden mungkin tidak menyukai kata yang sangat negatif seperti “melarang”, tetapi jika responden ditanya “Apakah setuju dengan membolehkan X”, bisa jadi banyak responden menjawab “Tidak”.</p>
+</section>
+</section>
+<section id="cara-pengumpulan-data" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="cara-pengumpulan-data"><span class="header-section-number">2.6</span> Cara pengumpulan data</h2>
+<section id="personal-interview" class="level3" data-number="2.6.1">
+<h3 data-number="2.6.1" class="anchored" data-anchor-id="personal-interview"><span class="header-section-number">2.6.1</span> Personal interview:</h3>
+<ul>
+<li>Apakah Anda akan merespon orang yang menanyakan Anda secara langsung?</li>
+<li>Biasanya, Anda bicara mengikuti prosedur tertentu, atau mengikuti saja alur perbincangannya bagaimana?</li>
+</ul>
+<p>Personal interview biasanya memiliki tingkat respon tinggi, tetapi bias mungkin muncul dari interviewer.</p>
+</section>
+<section id="telephone-interview" class="level3" data-number="2.6.2">
+<h3 data-number="2.6.2" class="anchored" data-anchor-id="telephone-interview"><span class="header-section-number">2.6.2</span> Telephone interview</h3>
+<ul>
+<li>Apakah semua kontak di HP Anda nomor orang? Apakah ada nomor bisnis? Nomor penipu? Nomor lama yang sudah tidak dipakai lagi? Mungkin saja kerangka percontohan tak akurat.</li>
+<li>Biasanya, berapa lama Anda berbicara di telepon? Orang biasanya tak ingin berbicara lama.</li>
+</ul>
+</section>
+<section id="self-administered-questionnaire" class="level3" data-number="2.6.3">
+<h3 data-number="2.6.3" class="anchored" data-anchor-id="self-administered-questionnaire"><span class="header-section-number">2.6.3</span> Self-Administered Questionnaire</h3>
+<ul>
+<li>Tidak bisa memastikan responden mengisi atau tidak. Jika tidak ada yang mengingatkan/mengawasi, apakah Anda pernah lupa mengisi form?</li>
+</ul>
+<p>Cara ingin sangat mudah, tetapi response rate rawan rendah.</p>
+</section>
+<section id="observasi" class="level3" data-number="2.6.4">
+<h3 data-number="2.6.4" class="anchored" data-anchor-id="observasi"><span class="header-section-number">2.6.4</span> Observasi</h3>
+<p>Misal Anda ingin meneliti berapa sering seseorang masuk kuliah. Apakah Anda akan:</p>
+<ol type="1">
+<li>Melihat absensi?</li>
+<li>Menanyakan orang tersebut?</li>
+</ol>
+<p>Kadang, beberapa data lebih baik diobservasi langsung.</p>
+</section>
+</section>
+<section id="tahapan-pembuatan-survey" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="tahapan-pembuatan-survey"><span class="header-section-number">2.7</span> Tahapan pembuatan survey</h2>
+<p>Lakukan tahap 1-3!</p>
+<ol type="1">
+<li>Tujuan survei apa?</li>
+<li>Populasi target apa?</li>
+<li>Dari mana Anda memperoleh sampling frame?</li>
+</ol>
+<p>Lalu lakukan tahap 5-7!</p>
+<ol start="5" type="1">
+<li>Apakah Anda akan mewawancara responden?</li>
+<li>Bagaimana cara Anda memastikan kuesioner reliabel dan valid?</li>
+<li>Apakah pewawancara perlu dilatih; seperti apa?</li>
+</ol>
+<p>Terakhir, lakukan tahap 9-12!</p>
+<ol start="9" type="1">
+<li>Bagaimana Anda mengumpulkan data dari responden?</li>
+<li>Data ditaruh di mana?</li>
+<li>Bagaimana Anda menganalisis data?</li>
+<li>Bagaimana Anda melaporkan hasil survei?</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./1-Review.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Review Statistika Dasar</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./3-SimpleRandom.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

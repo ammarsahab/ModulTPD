@@ -1,0 +1,150 @@
+---
+title: "Review Statistika Dasar"
+format: 
+  html
+execute:
+  echo: false
+---
+
+## Skala Pengukuran
+
+Mengumpulkan data pada dasarnya berarti mencari nilai-nilai dari variabel tertentu yang menggambarkan suatu objek. **Skala pengukuran** apa saja yang bisa dipakai? Dalam kata lain, jenis variabel apa saja yang dapat menggambarkan objek?
+
+### Skala Nominal
+
+Anggap Anda memiliki nilai data mengenai warna rambut dan mata sebagai berikut:
+
+```{r}
+HairEyeColor |> tibble::as_tibble() |> knitr::kable()
+```
+
+Skala tersebut disebut **skala nominal**. Skala nominal **mengelompokkan** observasi, tanpa mengurutkan. Skala tersebut berupa **kualitatif** sehingga tidak direpresentasikan angka. Dalam kasus ini, tidak ada urutan tertentu; tidak ada warna mata terbaik, atau warna rambut terbaik.
+
+Contoh representasi skala nominal adalah *factor* di bahasa R:
+
+```{r}
+#| echo: true
+#| code-line-numbers: "3-4"
+library(tidyverse)
+
+HairEyeColor |> 
+  tibble::as_tibble() |> summary()
+```
+
+Representasi data tersebut masih sebuah karakter. Ubah representasi menjadi faktor:
+```{r}
+#| echo: true
+#| code-line-numbers: "5-6"
+library(tidyverse)
+
+HairEyeColor |> 
+  tibble::as_tibble() |>
+  mutate_if(is.character, as.factor) |>
+  summary()
+```
+
+Setelah mengubah karakter menjadi representasi faktor, kita mengetahui golongan-golongan rambut yang ada di dataset. Jika representasi skala tertentu di suatu *software* benar, *software* tersebut sering memiliki alat-alat untuk menanangani skala dengan baik.
+
+### Skala Ordinal
+
+Jika kita memasukkan *level* atau tingkatan dari faktor, dan mengurutkannya, kita membuat suatu variabel dengan skala ordinal:
+
+```{r}
+#| echo: true
+
+factor(c("SMA", "S1", "SMP", "SD",
+         "SD", "S1", "S2"),
+       levels = c("SD", "SMP", "SMA", "S1", "S2")) |>
+  ordered()
+```
+
+Objek ini disebut *ordered factor*. Skala ordinal dapat diurutkan, tetapi tidak dapat direpresentasikan dengan angka (masih **kualitatif**).
+
+### Skala Interval
+
+Kita mulai memasuki skala numerik. Artinya, variabel tersebut dapat direpresentasikan **angka**, atau **kuantitatif**. Skala interval memiliki jarak, tetapi tidak ada nol yang berarti. Skala temperatur Celsius dan Fahrenheit tidak memiliki nol. Oleh karena itu, tidak bisa diambil rasio. Atau, jarak antara 16 Agustus dan 17 Agustus adalah satu hari, tapi tidak logis untuk mengatakan satu hari adalah $n$ kali hari lainnya.
+
+### Skala Rasio
+
+Memiliki nol yang berarti, sehingga rasio dapat dibandingkan. Jenis-jenis variabel ini termasuk tinggi, berat, lebar, dan lain-lain.
+
+### Exercise: Skala apa saja?
+
+![Penguins](penguins2.jpg)
+
+```{r}
+library(palmerpenguins)
+
+penguins |> summary()
+```
+
+Tabel berasal dari dataset **Palmer Penguins**. Kalau tabel ini?
+
+```{r}
+esoph |> summary()
+```
+
+- agegp: Kelompok Usia
+- alcgp dan tobgp: Konsumsi alkohol dan tembakau
+- ncases dan ncontrols: Jumlah kasus dan kontrol untuk kanker esofagus.
+
+### Aplikasikan: Mau mencari nilai variabel apa?
+
+Misal kamu ingin tahu lebih lanjut tentang:
+
+1. Asisten, 
+2. Temanmu di kelas praktikum, dan 
+3. Gedung CCR.
+
+Apa variabel yang ingin kamu ketahui? Skala pengukurannya apa?
+
+## Populasi dan Sampel
+
+Dalam tiap studi tersebut, asisten, teman kelas, dan gedung CCR merupakan **populasi** - seperangkat objek dengan karakteristik tertentu yang kita ingin ketahui. Kita mencari **parameter** populasi - suatu kuantitas yang mendeskripsikan suatu aspek populasi.
+
+### Aplikasikan: tanya asisten
+
+Kamu punya 2 menit - kumpulkan data dari asisten!
+
+Gunakan variabel-variabel yang kamu telah pikirkan di aplikasi sebelumnya. Cari nilainya!
+
+### Aplikasikan: tanya teman kuliahmu
+
+Kamu punya 3 menit - kumpulkan data dari teman kuliahmu di ruang praktikum!
+
+Gunakan variabel-variabel yang kamu telah pikirkan di aplikasi sebelumnya. Cari nilainya!
+
+## Sampling
+
+Apakah kamu berhasil mengumpulkan data dari **semua** temanmu di kelas ini? Bagaimana jika kamu ingin mengumpulkan data semua mahasiswa IPB, semua warga Bogor, semua warga Indonesia? Terkadang, data populasi **tidak bisa dikumpulkan**, atau **membutuhkan waktu dan tenaga yang banyak**. Pencarian data juga dapat **destruktif** - misal ingin mengetahui ketahanan baterai suatu merk jika dipanaskan - tidak mungkin kita panaskan dan rusaki semua baterai yang diproduksi merk tersebut! 
+
+
+### Aplikasikan: cari sampel
+
+Kamu memiliki waktu 2 menit. Sekarang tanyakan *7* teman kamu saja!
+
+Tiga orang akan maju dan deskripsikan hasilnya.
+
+### Statistik
+
+Nilai yang ditemukan dari menanyakan 7 teman adalah  **statistik** sampel - suatu kuantitas yang mendeskripsikan suatu aspek sampel. Jika kita menunjukkan grafik data, atau menunjukkan rataan/median, kita melakukan **statistika deskriptif**. Namun, Apa yang kita bisa katakan mengenai populasi, dengan data sampel?
+
+Ambil satu variabel yang kamu cari datanya ke 7 teman kelas. Lalu tanyakan ke semua teman; apakah berbeda?
+
+### Inferensia
+
+Diperlukan **inferensia** untuk menduga parameter populasi dari statistik sampel. Ilmu peluang digunakan untuk menduga dan menentukan ketepatan dugaan tersebut.
+
+## Pengumpulan Data
+
+Dari mana asal dataset **Palmer Penguins** dan **Esophageal Cancer**? Pihak lain telah mengumpulkan datanya - ini disebut **data sekunder**. Dalam mata kuliah ini, kita belajar mengumpulkan data, seperti tadi - data yang dikumpulkan sendiri disebut **data primer**.
+
+Bagaimana kita mengumpulkan data untuk mendeskripsikan gedung CCR?  Kita telah melakukan **survei** - berinteraksi dengan objek sampel untuk mengumpulkan data. Juga ada **sensus** - mengumpulkan data dari seluruh populasi. Tentu kita tidak dapat menanyakan gedung CCR! Hanya dapat **diobservasi** saja, tanpa interaksi.
+
+Bagaimana jika datanya belum ada? Apa efek mendengarkan asisten sambil jungkir balik pada nilai kuliah? Apakah ada yang kuliah sambil jungkir balik? Harus dilakukan **percobaan** - memberikan perlakuan tertentu, untuk membangkitkan data tersebut.
+
+## Exercise
+
+https://openintro-ims.netlify.app/data-design.html#chp2-exercises
+
+Kerjakan no 1, 2, 7, 8.

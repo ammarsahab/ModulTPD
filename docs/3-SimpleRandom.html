@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>modulTPD2 - 3&nbsp; Simple Random Sampling</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./4-Stratified.html" rel="next">
+<link href="./2-Terminologi.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Sampling</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">modulTPD2</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-Review.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Review Statistika Dasar</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-Terminologi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Konsep Dasar Survey Sampling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-SimpleRandom.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Sampling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-Stratified.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Random Sampling</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#simple-random-sampling" id="toc-simple-random-sampling" class="nav-link active" data-scroll-target="#simple-random-sampling"> <span class="header-section-number">3.1</span> Simple Random Sampling</a>
+  <ul class="collapse">
+  <li><a href="#exercise-apakah-ini-sampel-acak-sederhana" id="toc-exercise-apakah-ini-sampel-acak-sederhana" class="nav-link" data-scroll-target="#exercise-apakah-ini-sampel-acak-sederhana"> <span class="header-section-number">3.1.1</span> Exercise: apakah ini sampel acak sederhana?</a></li>
+  <li><a href="#contoh---rating-tv" id="toc-contoh---rating-tv" class="nav-link" data-scroll-target="#contoh---rating-tv"> <span class="header-section-number">3.1.2</span> Contoh - Rating TV</a></li>
+  <li><a href="#cara-mengambil-sampel-acak-sederhana" id="toc-cara-mengambil-sampel-acak-sederhana" class="nav-link" data-scroll-target="#cara-mengambil-sampel-acak-sederhana"> <span class="header-section-number">3.1.3</span> Cara Mengambil Sampel Acak Sederhana</a></li>
+  <li><a href="#exercise-deskripsikan-bias" id="toc-exercise-deskripsikan-bias" class="nav-link" data-scroll-target="#exercise-deskripsikan-bias"> <span class="header-section-number">3.1.4</span> Exercise: deskripsikan bias</a></li>
+  </ul></li>
+  <li><a href="#memilih-sampel-acak-sederhana" id="toc-memilih-sampel-acak-sederhana" class="nav-link" data-scroll-target="#memilih-sampel-acak-sederhana"> <span class="header-section-number">3.2</span> Memilih sampel acak sederhana</a>
+  <ul class="collapse">
+  <li><a href="#step-0-lihat-dataset-dan-jumlah-row" id="toc-step-0-lihat-dataset-dan-jumlah-row" class="nav-link" data-scroll-target="#step-0-lihat-dataset-dan-jumlah-row"> <span class="header-section-number">3.2.1</span> Step 0: Lihat Dataset dan Jumlah Row</a></li>
+  <li><a href="#step-1-2-angka-acak-pasangkan" id="toc-step-1-2-angka-acak-pasangkan" class="nav-link" data-scroll-target="#step-1-2-angka-acak-pasangkan"> <span class="header-section-number">3.2.2</span> Step 1-2: Angka Acak, Pasangkan</a></li>
+  <li><a href="#step-3-sort-ambil" id="toc-step-3-sort-ambil" class="nav-link" data-scroll-target="#step-3-sort-ambil"> <span class="header-section-number">3.2.3</span> Step 3: Sort, Ambil</a></li>
+  <li><a href="#alternatif" id="toc-alternatif" class="nav-link" data-scroll-target="#alternatif"> <span class="header-section-number">3.2.4</span> Alternatif</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"> <span class="header-section-number">3.2.5</span> Exercise</a></li>
+  </ul></li>
+  <li><a href="#menduga-parameter-populasi" id="toc-menduga-parameter-populasi" class="nav-link" data-scroll-target="#menduga-parameter-populasi"> <span class="header-section-number">3.3</span> Menduga Parameter populasi</a>
+  <ul class="collapse">
+  <li><a href="#cara-perhitungan-excel-cheatsheet" id="toc-cara-perhitungan-excel-cheatsheet" class="nav-link" data-scroll-target="#cara-perhitungan-excel-cheatsheet"> <span class="header-section-number">3.3.1</span> Cara Perhitungan: Excel Cheatsheet</a></li>
+  <li><a href="#reporting-menggunakan-latex" id="toc-reporting-menggunakan-latex" class="nav-link" data-scroll-target="#reporting-menggunakan-latex"> <span class="header-section-number">3.3.2</span> Reporting menggunakan LaTeX</a></li>
+  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1"> <span class="header-section-number">3.3.3</span> Exercise</a></li>
+  </ul></li>
+  <li><a href="#menghitung-ukuran-sampel" id="toc-menghitung-ukuran-sampel" class="nav-link" data-scroll-target="#menghitung-ukuran-sampel"> <span class="header-section-number">3.4</span> Menghitung Ukuran Sampel</a></li>
+  <li><a href="#membandingkan-penduga" id="toc-membandingkan-penduga" class="nav-link" data-scroll-target="#membandingkan-penduga"> <span class="header-section-number">3.5</span> Membandingkan Penduga</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Sampling</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Survei adalah <strong>menduga</strong> parameter populasi berdasarsarkan informasi sampel. Faktor apa saja yang memengaruhi jumlah informasi di sampel?</p>
+<ol type="1">
+<li>Ukuran sampel</li>
+<li>Keragaman di sampel - dapat dikontrol dengan rancangan percontohan yang baik. Paling sederhana: <strong>simple random sampling</strong></li>
+</ol>
+<section id="simple-random-sampling" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="simple-random-sampling"><span class="header-section-number">3.1</span> Simple Random Sampling</h2>
+<p>Dua poin penting:</p>
+<ol type="1">
+<li>Semua elemen memiliki <strong>peluang sama</strong> untuk dipilih.</li>
+<li>Pemilihan elemen <strong>saling bebas</strong>. Artinya, ada atau tidaknya elemen di sampel tidak memengaruhi probabilitas elemen lain dipilih.</li>
+</ol>
+<section id="exercise-apakah-ini-sampel-acak-sederhana" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="exercise-apakah-ini-sampel-acak-sederhana"><span class="header-section-number">3.1.1</span> Exercise: apakah ini sampel acak sederhana?</h3>
+<p>Do these methods produce a simple random sample of students from a class of 30 students?</p>
+<ol type="1">
+<li>Select the first six students on the class roll sheet (<em>absensi</em>).</li>
+<li>Pick a digit at random and select those students whose phone numbers end in that digit.</li>
+<li>If the classroom has six rows of chairs with five seats in each row, choose a row at random and select all students in that row.</li>
+<li>If the class consists of 15 boys and 15 girls, assign the boys the numbers from 1 to 15, and the girls the numbers from 16 to 30. Then use a random digit table to select six numbers from 1 to 30. Select the students assigned those numbers in your sample.</li>
+<li>If the class consists of 15 boys and 15 girls, assign the boys the numbers from 1 to 15, and the girls the numbers from 16 to 30. Then use a random digit table to select three numbers from 1 to 15 and three numbers from 16 to 30. Select the students assigned those numbers in your sample.</li>
+<li>Randomly choose a letter from the English alphabet and select for the sample those students whose last names begin with that letter. If no last name begins with that letter, randomly choose another letter from the alphabet.</li>
+</ol>
+<p>Kunci dari jawaban tersebut adalah:</p>
+<ol type="1">
+<li>Select the first six students on the class roll sheet (<em>absensi</em>) - <strong>peluang tak sama</strong>. Enam orang pertama pasti terpilih, orang lainnya tidak mungkin terpilih.</li>
+<li>Pick a digit at random and select those students whose phone numbers end in that digit - <strong>sampel acak sederhana</strong>. Alokasi nomor telpon cukup acak dan pemilihan juga acak.</li>
+<li>If the classroom has six rows of chairs with five seats in each row, choose a row at random and select all students in that row - <strong>tidak saling bebas</strong>. Jika elemen di baris tersebut terpilih, pasti elemen lain juga terpilih. Lalu, elemen di baris lain pasti tidak terpilih.</li>
+<li>If the class consists of 15 boys and 15 girls, assign the boys the numbers from 1 to 15, and the girls the numbers from 16 to 30. Then use a random digit table to select six numbers from 1 to 30. Select the students assigned those numbers in your sample - <strong>sampel acak sederhana</strong>.</li>
+<li>If the class consists of 15 boys and 15 girls, assign the boys the numbers from 1 to 15, and the girls the numbers from 16 to 30. Then use a random digit table to select three numbers from 1 to 15 and three numbers from 16 to 30. Select the students assigned those numbers in your sample - <strong>tidak saling bebas</strong>. Jika 3 laki-laki dipilih, pasti tidak mungkin laki-laki lain dipilih.</li>
+<li>Randomly choose a letter from the English alphabet and select for the sample those students whose last names begin with that letter. If no last name begins with that letter, randomly choose another letter from the alphabet. <strong>Apakah nama-nama yang diawali alfabet tertentu lebih mungkin daripada alfabet lain?</strong>. Selain itu, mungkin tidak saling bebas karena jika nama akhir yang banyak dimiliki orang terpilih; orang dengan nama lain tak mungkin terpilih.</li>
+</ol>
+</section>
+<section id="contoh---rating-tv" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="contoh---rating-tv"><span class="header-section-number">3.1.2</span> Contoh - Rating TV</h3>
+<ul>
+<li>Apakah Anda memiliki acara televisi favorit?</li>
+<li>Apakah acara favorit Anda pernah mengalami berhenti tayang (<em>cancellation</em>)?</li>
+<li>Bagaimana stasiun televisi menentukan acara mana yang diberhentikan?</li>
+</ul>
+<p>Nielsen Ratings - ambil 5000 rumah tangga di AS; tidak boleh ada relawan. Dipasang meter elektronik yang mengetahui acara yang sedang ditonton.</p>
+</section>
+<section id="cara-mengambil-sampel-acak-sederhana" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="cara-mengambil-sampel-acak-sederhana"><span class="header-section-number">3.1.3</span> Cara Mengambil Sampel Acak Sederhana</h3>
+<p>Cara salah:</p>
+<ul>
+<li>Haphazard: sesuai keinginan peneliti</li>
+<li>Representative: ambil sampel yang dianggap mewakili populasi</li>
+</ul>
+<p>Peneliti bisa saja berbias dan walaupun representatif, <strong>tingkat kesalahan tak dapat diketahui</strong> karena tidak diketahui struktur probabilitasnya.</p>
+<p>Cara benar:</p>
+<ul>
+<li>Undian - masukkan angka 1 sampai n, ambil!</li>
+<li>Tabel angka acak - biasananya menggunakan komputer!</li>
+</ul>
+</section>
+<section id="exercise-deskripsikan-bias" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="exercise-deskripsikan-bias"><span class="header-section-number">3.1.4</span> Exercise: deskripsikan bias</h3>
+<ol type="1">
+<li>A student wants to determine the average size of farms in a county in Iowa. He drops some rice randomly on a map of the county and uses the farms hit by grains of rice as the sample (<em>county - kabupaten</em>).</li>
+<li>To find the average length of string in a bag, a student reaches in, mixes up the strings, selects one, mixes them up again, selects another, and so on (<em>string - tali</em>).</li>
+<li>To estimate the percentage of students who passed the first Advanced Placement Statistics exam, a teacher on an Internet discussion list for teachers of AP Statistics asked teachers on the list to report to him how many of their students took the test and how many passed (<em>discussion list - forum diskusi</em>).</li>
+<li>In 1984, Ann Landers conducted a poll on the marital happiness of women by asking women to write to her (<em>marital - pernikahan</em>).</li>
+<li>In a study about whether valedictorians “succeed big in life,” a professor “traveled across Illinois, attending high school graduations and selecting 81 students to participate. . . . He picked students from the most diverse communities possible, from little rural schools to rich suburban schools near Chicago to city schools.”</li>
+</ol>
+<p><em>Valedictorian: lulusan terbaik.</em></p>
+<p>Jawaban dari exercise tersebut adalah:</p>
+<ol type="1">
+<li>A student wants to determine the average size of farms in a county in Iowa. He drops some rice randomly on a map of the county and uses the farms hit by grains of rice as the sample (<em>county - kabupaten</em>) - <strong>proses ini cukup acak</strong>.</li>
+<li>To find the average length of string in a bag, a student reaches in, mixes up the strings, selects one, mixes them up again, selects another, and so on (<em>string - tali</em>) - <strong>proses ini juga cukup acak</strong>.</li>
+<li>To estimate the percentage of students who passed the first Advanced Placement Statistics exam, a teacher on an Internet discussion list for teachers of AP Statistics asked teachers on the list to report to him how many of their students took the test and how many passed (<em>discussion list - forum diskusi</em>) - <strong>ada bias yang muncul karena guru-guru yang menjawab di forum diskusi belum tentu representatif terhadap guru umumnya</strong>. Mungkin, guru tersebut lebih ambisius.</li>
+<li>In 1984, Ann Landers conducted a poll on the marital happiness of women by asking women to write to her (<em>marital - pernikahan</em>). <strong>Bias yang sama</strong>. Orang yang menulis tentang pernikahannya mungkin memiliki perasaan ekstrim, seperti sangat senang atau sangat marah.</li>
+<li>In a study about whether valedictorians “succeed big in life,” a professor “traveled across Illinois, attending high school graduations and selecting 81 students to participate. . . . He picked students from the most diverse communities possible, from little rural schools to rich suburban schools near Chicago to city schools.”</li>
+</ol>
+<p><strong>Walaupun representatif, tingkat kesalahan tak dapat diperkirakan</strong>.</p>
+<p>Untuk melakukan pengacakan, sering dipakai <em>random number generator</em>:</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Excel</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Gunakan fungsi <code>=RAND()</code>: <img src="excel-rand.png" class="img-fluid" alt="Contoh di Excel"></p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Gunakan fungsi <code>runif()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">100</span>) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4870800 0.4889403 0.5108707 0.3366076 0.9833237</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>Gunakan rng dari package <code>numpy</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">3854</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>rng.random(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>array([0.50955422, 0.53163209, 0.98811285, 0.47079458, 0.08600762])</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="memilih-sampel-acak-sederhana" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="memilih-sampel-acak-sederhana"><span class="header-section-number">3.2</span> Memilih sampel acak sederhana</h2>
+<p>Algoritma:</p>
+<ol type="1">
+<li>Buat angka acak sejumlah elemen yang ada</li>
+<li>Pasangkan tiap elemen dengan angka acak</li>
+<li>Urutkan elemen sesuai angka acak, pilih n teratas.</li>
+</ol>
+<section id="step-0-lihat-dataset-dan-jumlah-row" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="step-0-lihat-dataset-dan-jumlah-row"><span class="header-section-number">3.2.1</span> Step 0: Lihat Dataset dan Jumlah Row</h3>
+<p>Sebelum melaksanakan algoritma tersebut, lihat dataset dan jumlah row:</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Excel</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Pertama, ambil data dari csv:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="step0-getdata.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Pengambilan data</figcaption><p></p>
+</figure>
+</div>
+<p>Pilih file, lalu preview dan load:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="step0-preview.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Preview</figcaption><p></p>
+</figure>
+</div>
+<p>Data akan terlihat di Excel.</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>Langkah relatif sama. Baca CSV, lihat file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"penguins.csv"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  rowid species    island bill_length_mm bill_depth_mm flipper_length_mm
+1     1  Adelie Torgersen           39.1          18.7               181
+2     2  Adelie Torgersen           39.5          17.4               186
+3     3  Adelie Torgersen           40.3          18.0               195
+  body_mass_g    sex year
+1        3750   male 2007
+2        3800 female 2007
+3        3250 female 2007</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> <span class="fu">nrow</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 344</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> pd.read_csv(<span class="st">"penguins.csv"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   rowid species     island  ...  body_mass_g     sex  year
+0      1  Adelie  Torgersen  ...       3750.0    male  2007
+1      2  Adelie  Torgersen  ...       3800.0  female  2007
+2      3  Adelie  Torgersen  ...       3250.0  female  2007
+3      4  Adelie  Torgersen  ...          NaN     NaN  2007
+4      5  Adelie  Torgersen  ...       3450.0  female  2007
+
+[5 rows x 9 columns]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(penguins.index))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>344</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-1-2-angka-acak-pasangkan" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="step-1-2-angka-acak-pasangkan"><span class="header-section-number">3.2.2</span> Step 1-2: Angka Acak, Pasangkan</h3>
+<p>Lalu, buat angka acak. Angka acak ini merupakan kolom baru di dataset. Tiap elemen mendapat angka acak yang unik. Bagaimana kita tahu jumlah angka acak yang perlu dibuat? Cari terlebih dahulu jumlah elemen di dataset.</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Excel</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p>Buat angka acak dengan <code>rand()</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="step1-genrand.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Angka acak</figcaption><p></p>
+</figure>
+</div>
+<p>Namun, angka acak ini akan selalu berubah jika di-<em>sort</em>. Oleh karena itu, <em>copy</em>, (<strong>CTRL+C</strong>) lalu paste <em>as value</em>. Opsi <em>paste as value</em> ditemukan dengan meng-klik kanan:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="step1-paste1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Menu paste</figcaption><p></p>
+</figure>
+</div>
+<p>Lalu ditemukan opsi tersebut; opsi berupa suatu <em>clipboard</em> (kertas di atas papan jalan) dengan angka 123:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="step1-paste2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Paste as value</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<p>Jumlah angka acak dicari menggunakan nrow dari dataset. Mutate menghasilkan peubah baru.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"penguins.csv"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">rando =</span> <span class="fu">runif</span>(<span class="fu">nrow</span>(penguins)))</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">3</span>) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 17%">
+<col style="width: 11%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">rowid</th>
+<th style="text-align: left;">species</th>
+<th style="text-align: left;">island</th>
+<th style="text-align: right;">bill_length_mm</th>
+<th style="text-align: right;">bill_depth_mm</th>
+<th style="text-align: right;">flipper_length_mm</th>
+<th style="text-align: right;">body_mass_g</th>
+<th style="text-align: left;">sex</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">rando</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Adelie</td>
+<td style="text-align: left;">Torgersen</td>
+<td style="text-align: right;">39.1</td>
+<td style="text-align: right;">18.7</td>
+<td style="text-align: right;">181</td>
+<td style="text-align: right;">3750</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.1489368</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Adelie</td>
+<td style="text-align: left;">Torgersen</td>
+<td style="text-align: right;">39.5</td>
+<td style="text-align: right;">17.4</td>
+<td style="text-align: right;">186</td>
+<td style="text-align: right;">3800</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.9326685</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Adelie</td>
+<td style="text-align: left;">Torgersen</td>
+<td style="text-align: right;">40.3</td>
+<td style="text-align: right;">18.0</td>
+<td style="text-align: right;">195</td>
+<td style="text-align: right;">3250</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.5013268</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<p>Algoritma sama. <code>namaDataset.insert</code> digunakan untuk memasukkan angka acak.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> pd.read_csv(<span class="st">"penguins.csv"</span>) <span class="co">#load csv</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#generate random number</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">3854</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>rando <span class="op">=</span> rng.random(<span class="bu">len</span>(penguins.index))</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>penguins.insert(loc <span class="op">=</span> <span class="dv">0</span>, column <span class="op">=</span> <span class="st">'randomNumber'</span>, value <span class="op">=</span> rando) <span class="co">#insert random number</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>penguins.head() <span class="co">#show</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   randomNumber  rowid species  ... body_mass_g     sex  year
+0      0.509554      1  Adelie  ...      3750.0    male  2007
+1      0.531632      2  Adelie  ...      3800.0  female  2007
+2      0.988113      3  Adelie  ...      3250.0  female  2007
+3      0.470795      4  Adelie  ...         NaN     NaN  2007
+4      0.086008      5  Adelie  ...      3450.0  female  2007
+
+[5 rows x 10 columns]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3-sort-ambil" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="step-3-sort-ambil"><span class="header-section-number">3.2.3</span> Step 3: Sort, Ambil</h3>
+<p>Lalu, sortir data-nya dan ambil n data teratas:</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">Excel</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<p>Jika sudah berbentuk tabel, klik kolom nilai acak lalu <em>sort</em> sesuai keinginan:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="step3-sort1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Sortir, jika tabel</figcaption><p></p>
+</figure>
+</div>
+<p>Jika belum berbentuk tabel, pilih <em>sampling frame</em> yang ingin disortir, lalu klik <em>sort &amp; filter</em>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="step-sort21.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Sortir, tanpa tabel</figcaption><p></p>
+</figure>
+</div>
+<p>Lalu, pilih kolom nilai acak dan sortir.</p>
+<p><img src="step2-sort22.png" class="img-fluid"></p>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<p>Sortir menggunakan <em>arrange</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(rando)) <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 17%">
+<col style="width: 11%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">rowid</th>
+<th style="text-align: left;">species</th>
+<th style="text-align: left;">island</th>
+<th style="text-align: right;">bill_length_mm</th>
+<th style="text-align: right;">bill_depth_mm</th>
+<th style="text-align: right;">flipper_length_mm</th>
+<th style="text-align: right;">body_mass_g</th>
+<th style="text-align: left;">sex</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">rando</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">273</td>
+<td style="text-align: left;">Gentoo</td>
+<td style="text-align: left;">Biscoe</td>
+<td style="text-align: right;">46.8</td>
+<td style="text-align: right;">14.3</td>
+<td style="text-align: right;">215</td>
+<td style="text-align: right;">4850</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.9963196</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">251</td>
+<td style="text-align: left;">Gentoo</td>
+<td style="text-align: left;">Biscoe</td>
+<td style="text-align: right;">48.4</td>
+<td style="text-align: right;">14.4</td>
+<td style="text-align: right;">203</td>
+<td style="text-align: right;">4625</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.9911072</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">206</td>
+<td style="text-align: left;">Gentoo</td>
+<td style="text-align: left;">Biscoe</td>
+<td style="text-align: right;">50.1</td>
+<td style="text-align: right;">15.0</td>
+<td style="text-align: right;">225</td>
+<td style="text-align: right;">5000</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">0.9888132</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
+<p>Gunakan <code>namaDataset.sort_values(by = "kolom angka acak", ...)</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>penguins_sorted <span class="op">=</span> penguins.sort_values(by <span class="op">=</span> <span class="st">"randomNumber"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(penguins_sorted.head(<span class="dv">58</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     randomNumber  rowid    species  ... body_mass_g     sex  year
+82       0.998006     83     Adelie  ...      3800.0  female  2008
+2        0.988113      3     Adelie  ...      3250.0  female  2007
+179      0.985227    180     Gentoo  ...      5650.0    male  2007
+64       0.982089     65     Adelie  ...      2850.0  female  2008
+20       0.981606     21     Adelie  ...      3400.0  female  2007
+316      0.979618    317  Chinstrap  ...      3950.0    male  2008
+36       0.978045     37     Adelie  ...      3950.0    male  2007
+226      0.971176    227     Gentoo  ...      4700.0  female  2008
+88       0.968786     89     Adelie  ...      3950.0    male  2008
+291      0.967539    292  Chinstrap  ...      4050.0    male  2007
+142      0.964342    143     Adelie  ...      3050.0  female  2009
+66       0.964280     67     Adelie  ...      3350.0  female  2008
+192      0.964219    193     Gentoo  ...      3950.0  female  2008
+245      0.962202    246     Gentoo  ...      5650.0    male  2009
+337      0.957290    338  Chinstrap  ...      3650.0  female  2009
+261      0.955021    262     Gentoo  ...      5500.0    male  2009
+215      0.951514    216     Gentoo  ...      5650.0    male  2008
+91       0.949608     92     Adelie  ...      4300.0    male  2008
+73       0.949112     74     Adelie  ...      4150.0    male  2008
+223      0.938686    224     Gentoo  ...      5000.0    male  2008
+289      0.929323    290  Chinstrap  ...      4050.0    male  2007
+242      0.923924    243     Gentoo  ...      4950.0  female  2009
+317      0.914438    318  Chinstrap  ...      3650.0  female  2008
+19       0.908108     20     Adelie  ...      4200.0    male  2007
+197      0.906972    198     Gentoo  ...      4900.0  female  2008
+177      0.905509    178     Gentoo  ...      5100.0    male  2007
+229      0.901730    230     Gentoo  ...      6000.0    male  2008
+54       0.900127     55     Adelie  ...      2900.0  female  2008
+156      0.898963    157     Gentoo  ...      5400.0    male  2007
+225      0.891437    226     Gentoo  ...      5200.0  female  2008
+239      0.887460    240     Gentoo  ...      5300.0    male  2009
+273      0.884751    274     Gentoo  ...      5750.0    male  2009
+324      0.883531    325  Chinstrap  ...      3250.0    male  2009
+23       0.881101     24     Adelie  ...      3950.0    male  2007
+27       0.880034     28     Adelie  ...      3200.0  female  2007
+175      0.876310    176     Gentoo  ...      5050.0    male  2007
+134      0.876252    135     Adelie  ...      3425.0  female  2009
+310      0.869858    311  Chinstrap  ...      3600.0    male  2008
+272      0.866883    273     Gentoo  ...      4850.0  female  2009
+106      0.861813    107     Adelie  ...      3750.0  female  2009
+11       0.860677     12     Adelie  ...      3700.0     NaN  2007
+280      0.857667    281  Chinstrap  ...      3725.0    male  2007
+320      0.857076    321  Chinstrap  ...      3675.0  female  2009
+70       0.855720     71     Adelie  ...      3600.0  female  2008
+297      0.853891    298  Chinstrap  ...      3400.0    male  2007
+189      0.849117    190     Gentoo  ...      5250.0    male  2008
+110      0.832433    111     Adelie  ...      3825.0  female  2009
+100      0.829604    101     Adelie  ...      3725.0  female  2009
+178      0.828691    179     Gentoo  ...      4100.0     NaN  2007
+234      0.828592    235     Gentoo  ...      4725.0  female  2009
+194      0.824546    195     Gentoo  ...      4300.0  female  2008
+195      0.821451    196     Gentoo  ...      4750.0    male  2008
+202      0.819321    203     Gentoo  ...      4850.0  female  2008
+247      0.818314    248     Gentoo  ...      5200.0    male  2009
+307      0.817592    308  Chinstrap  ...      4300.0    male  2008
+224      0.814083    225     Gentoo  ...      5100.0    male  2008
+308      0.813684    309  Chinstrap  ...      3350.0  female  2008
+257      0.807059    258     Gentoo  ...      5500.0    male  2009
+
+[58 rows x 10 columns]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="alternatif" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="alternatif"><span class="header-section-number">3.2.4</span> Alternatif</h3>
+<ol type="1">
+<li>Buat <span class="math inline">\(n\)</span> integer random dari <span class="math inline">\(1\)</span> ke <span class="math inline">\(N\)</span>, jumlah populasi.</li>
+<li>Ambil row yang sesuai integer random tersebut.</li>
+</ol>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>indexes <span class="ot">&lt;-</span> <span class="fu">sample.int</span>(<span class="at">n =</span> <span class="fu">nrow</span>(penguins), <span class="at">size =</span> <span class="dv">3</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> <span class="fu">filter</span>(rowid <span class="sc">%in%</span> indexes) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 17%">
+<col style="width: 11%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">rowid</th>
+<th style="text-align: left;">species</th>
+<th style="text-align: left;">island</th>
+<th style="text-align: right;">bill_length_mm</th>
+<th style="text-align: right;">bill_depth_mm</th>
+<th style="text-align: right;">flipper_length_mm</th>
+<th style="text-align: right;">body_mass_g</th>
+<th style="text-align: left;">sex</th>
+<th style="text-align: right;">year</th>
+<th style="text-align: right;">rando</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">198</td>
+<td style="text-align: left;">Gentoo</td>
+<td style="text-align: left;">Biscoe</td>
+<td style="text-align: right;">43.6</td>
+<td style="text-align: right;">13.9</td>
+<td style="text-align: right;">217</td>
+<td style="text-align: right;">4900</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">0.6722550</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">250</td>
+<td style="text-align: left;">Gentoo</td>
+<td style="text-align: left;">Biscoe</td>
+<td style="text-align: right;">46.9</td>
+<td style="text-align: right;">14.6</td>
+<td style="text-align: right;">222</td>
+<td style="text-align: right;">4875</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.1157471</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">274</td>
+<td style="text-align: left;">Gentoo</td>
+<td style="text-align: left;">Biscoe</td>
+<td style="text-align: right;">50.4</td>
+<td style="text-align: right;">15.7</td>
+<td style="text-align: right;">222</td>
+<td style="text-align: right;">5750</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.5235881</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>indexes <span class="op">=</span> np.random.randint(<span class="dv">0</span>, <span class="bu">len</span>(penguins.index),<span class="dv">5</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>newpenguins <span class="op">=</span> penguins[(penguins.index).isin(indexes)]</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>newpenguins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     randomNumber  rowid species  ... body_mass_g   sex  year
+10       0.704636     11  Adelie  ...      3300.0   NaN  2007
+43       0.302492     44  Adelie  ...      4400.0  male  2007
+141      0.313089    142  Adelie  ...      3475.0  male  2009
+153      0.141227    154  Gentoo  ...      5700.0  male  2007
+233      0.556984    234  Gentoo  ...      5450.0  male  2009
+
+[5 rows x 10 columns]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise" class="level3" data-number="3.2.5">
+<h3 data-number="3.2.5" class="anchored" data-anchor-id="exercise"><span class="header-section-number">3.2.5</span> Exercise</h3>
+<p>Bagi jadi 3 - ambil sampel sebanyak:</p>
+<ol type="1">
+<li>40 dari dataset Iris (https://www.kaggle.com/datasets/arshid/iris-flower-dataset)</li>
+<li>14 dari dataset mtcars (https://gist.github.com/seankross/a412dfbd88b3db70b74b)</li>
+<li>58 dari dataset penguins (https://gist.github.com/slopp/ce3b90b9168f2f921784de84fa445651)</li>
+</ol>
+</section>
+</section>
+<section id="menduga-parameter-populasi" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="menduga-parameter-populasi"><span class="header-section-number">3.3</span> Menduga Parameter populasi</h2>
+<p>Beberapa rumus yang digunakan untuk menduga parameter populasi:</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">Mean</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">Total</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-3" role="tab" aria-controls="tabset-6-3" aria-selected="false">Proporsi</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\mu}&amp;=\bar{y}=\frac{\sum_{i=1}^n y_i}{n} &amp; \text{(mean)}\\
+\hat{V}(\bar{y})&amp;=\left(1-\frac{n}{N}\right)\frac{s^2}{n}&amp;\text{(ragam penduga)}\\\
+s^2&amp;=\frac{1}{n-1}\sum_{i=1}^n(y_i-\bar{y})^2 &amp;\\
+\hat{\mu}&amp;\pm2\sqrt{\hat{V}(\bar{y})} &amp; \text{(selang kepercayaan)}
+\end{aligned}
+\]</span></p>
+<p>Penduga bagi mean adalah rataan sampel, yaitu total nilai dari sampel dibagi ukuran sampel. Bagaimana untuk ragam penduga? Penurunan rumus ini dimulai dari nilai <span class="math inline">\(V\left(\bar{y}\right)\)</span>. Dalam kasus populasi tak hingga yang saling bebas dan memiliki ragam sama:</p>
+<p><span class="math display">\[
+\begin{aligned}
+V\left(\bar{y}\right)&amp;=V\left(\frac{y_1+\ldots+y_n}{n}\right)=\frac{1}{n^2}V(y_1+\ldots+y_n)\\
+&amp;=\frac{V(y_1)+\ldots+V(y_n)}{n^2}=\frac{n\sigma}{n^2}=\frac{\sigma}{n}
+\end{aligned}
+\]</span></p>
+<p>Jadi, misal ada 100 elemen yang diobservasi di sampel, ragam dari rata-ratanya seharusnya menjadi <span class="math inline">\(\sigma/n\)</span>. Namun jika sampel terhingga, misal 100, maka ragamnya bukan <span class="math inline">\(\sigma/n\)</span>. Harusnya nol karena kita mengobservasi seluruh populasi!</p>
+<p>Dengan logika yang sama, dalam kasus populasi terhingga, ukuran sampel dianggap besar atau kecil relatif terhadap ukuran populasi. Jika sebagian besar populasi sudah diambil di sampel walaupun <span class="math inline">\(n\)</span> atau ukuran absolutnya kecil, seharusnya ragam dari rata-rata berkurang signifikan. Oleh karena itu, perlu ada <em>faktor koreksi populasi terhingga</em>. Dengan faktor koreksi tersebut, ditemukan bahwa</p>
+<p><span class="math display">\[
+\mathrm{Var}(\bar{y}) = \frac{\sigma^2}{n} \left( \frac{N-n}{N-1} \right)
+\]</span></p>
+<p>Untuk lengkapnya, baca di <a href="https://stats.stackexchange.com/questions/5158/explanation-of-finite-population-correction-factor">sini</a>.</p>
+<p>Lalu ternyata <span class="math inline">\(E(s^2)=\frac{N}{N-1}\sigma^2\)</span>. Derivasi ada di halaman akhir buku Schaeffer. Oleh karena itu, agar pendugaan tak bias, perlu dikalikan dengan <span class="math inline">\(\frac{N-n}{N}=\left(1-\frac{n}{N})\right\)</span>.</p>
+<p>Selang kepercayaan <span class="math inline">\(95\%\)</span> selalu akan memiliki bentuk $&amp; $. Agar kepercayaan <span class="math inline">\(95\%\)</span>, maka probabilitas di sisi kiri dan kanan masing masing <span class="math inline">\(2.5\%\)</span>. <span class="math inline">\(Z_{0.025}=1.96\)</span>.</p>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\tau}&amp;=N\bar{y}=\frac{N\sum_{i=1}^n y_i}{n} &amp; \text{(total)}\\
+\hat{V}(\hat{\tau})&amp;=\hat{V}(N\bar{y})=N^2\left(1-\frac{n}{N}\right)\frac{s^2}{n}&amp;\text{(ragam penduga)}\\\
+\hat{\tau}&amp;\pm2\sqrt{\hat{V}(\tau)} &amp; \text{(selang kepercayaan)}
+\end{aligned}
+\]</span></p>
+<p>Logika dari penduga ini adalah perkalian penduga-penduga mean sebelumnya dengan ukuran populasi <span class="math inline">\(N\)</span>. Karena ragam merupakan semua bentuk kuadrat, maka ukuran populasi dikuadratkan (<span class="math inline">\(N^2\)</span>).</p>
+</div>
+<div id="tabset-6-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-3-tab">
+<p><span class="math display">\[
+\begin{aligned}
+\hat{p}&amp;=\bar{y}=\frac{\sum_{i=1}^n y_i}{n} &amp; \text{(proporsi, y=1 atau 0)}\\
+\hat{V}(\hat{p})&amp;=\left(1-\frac{n}{N}\right)\frac{\hat{p}\hat{q}}{n-1}&amp;\text{(ragam penduga)}\\
+\hat{q}&amp;=1-\hat{p}\\
+\hat{p}&amp;\pm2\sqrt{\hat{V}(p)} &amp; \text{(selang kepercayaan)}
+\end{aligned}
+\]</span></p>
+<p>Penduga ragam proporsi tersebut berasal dari sebaran Bernoulli. Peluang satu observasi <span class="math inline">\(Y\)</span> memiliki nilai 1 (sukses) atau 0 (gagal) dimodelkan dengan:</p>
+<p><span class="math display">\[
+f(y)=p^{y}(1-p)^{1-y}
+\]</span></p>
+<p>Nilai harapannya adalah:</p>
+<p><span class="math display">\[
+0\cdot f(0)+1\cdot f(1)=p
+\]</span></p>
+<p>Dan ragamnya adalah:</p>
+<p><span class="math display">\[
+\begin{aligned}
+(0-p)^2 f(o)+(1-p)^2f(1)&amp;=p^2(1-p)+p(1-p)^2\\
+&amp;=p(p-p^2+1-2p+p^2)=p(1-p)\\
+&amp;=pq
+\end{aligned}
+\]</span></p>
+<p>Yang menggantikan <span class="math inline">\(\sigma\)</span> untuk satu observasi. Selebihnya, filosofi penurunannya sama.</p>
+</div>
+</div>
+</div>
+<section id="cara-perhitungan-excel-cheatsheet" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="cara-perhitungan-excel-cheatsheet"><span class="header-section-number">3.3.1</span> Cara Perhitungan: Excel Cheatsheet</h3>
+<section id="mean-1" class="level4" data-number="3.3.1.1">
+<h4 data-number="3.3.1.1" class="anchored" data-anchor-id="mean-1"><span class="header-section-number">3.3.1.1</span> Mean</h4>
+<p>Asumsikan Anda ingin menghitung rata-rata <em>bill length</em> dari 50 penguin di sebuah sampel dataset penguins. Asumsikan bahwa data tersebut dikumpulkan melalui <em>simple ranom sampling</em>, dari populasi 344 penguin di dataset.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="count-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Dataset</figcaption><p></p>
+</figure>
+</div>
+<p>Sebelum menghitung rata-rata, perhatikan bahwa angka-angka di dataset rata kiri. Ternyata, angka tersebut belum dianggap data numerik oleh Excel. Oleh karena itu, buat kolom baru untuk konversi menggunakan fungsi <code>VALUE</code>. Untuk baris pertama, misal, nilai <em>bill length</em> berada di D2. Oleh karena itu, nilai kolom baru tersebut adalah <code>VALUE(D2)</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="count-2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Konversi</figcaption><p></p>
+</figure>
+</div>
+<p>Langkah pertama adalah menghitung rata-rata. Bill length yang berbentuk angka berada di kolom E, 2-51. Maka tuliskan <code>SUM(E2:E51)/50</code> atau <code>AVERAGE(E2:E51)</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="count-3.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Penduga rataan</figcaption><p></p>
+</figure>
+</div>
+<p>Dapat dilakukan dua cara untuk menghitung simpangan baku sampel. Pertama, dapat dibuat kolom simpangan <span class="math inline">\(y-\bar{y}\)</span>, lalu dikuadratkan. Karena kita ingin mengurangi seluruh kolom E dengan konstanta di B53, maka gunakan <code>$B$53</code> agar posisi sel yang mengandung rataan sampel tidak berubah. <code>$B</code> menetapkan indeks kolom (tidak berubah jika di-<em>copy</em> ke kanan-kiri) dan <code>$53</code> menetapkan indeks baris (tidak berubah jika di-<em>copy</em> ke atas-bawah). Kolom E tidak perlu diberi tanda <code>$</code>. Justru, jika diberi tanda dolar di <code>E$1</code>, misal, indeks baris (angka) akan tetap di E1 walaupun rumus di-<em>copy</em> ke baris di bawahnya.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="count-4.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Deviasi</figcaption><p></p>
+</figure>
+</div>
+<p>Untuk mengkuadratkan, gunakan <code>[tempat sel]^2</code>. Misal ingin mengkuadratkan sel E1, maka tulis <code>E1^2</code>. Gunakan <code>SUM</code> untuk mencari jumlah, dan bagi <span class="math inline">\(n-1\)</span>. Atau, dapat digunakan <code>VAR.S(RANGE)</code>. Jadi, buat <code>VAR.S(E2:E51)</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="count-6.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Ragam</figcaption><p></p>
+</figure>
+</div>
+<p>Lalu, hitung faktor koreksi dan <span class="math inline">\(1/n\)</span>. Gunakan <code>PRODUCT</code> untuk menghitung perkalian:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="count-7.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Ragam penduga</figcaption><p></p>
+</figure>
+</div>
+<p>BoE selalu memiliki bentuk <span class="math inline">\(2\sqrt{V(\hat{\mu})}\)</span> untuk mean:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="count-8.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">BoE</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="total-1" class="level4" data-number="3.3.1.2">
+<h4 data-number="3.3.1.2" class="anchored" data-anchor-id="total-1"><span class="header-section-number">3.3.1.2</span> Total</h4>
+<p>Karena diketahui bahwa:</p>
+<p><span class="math display">\[
+\hat{\tau}=N\bar{y};\quad \mathrm{V(\hat{\tau})}= \mathrm{V(N\bar{y})=N^2V(\bar{y})}
+\]</span></p>
+<p>Maka perhitungan cukup sederhana.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="count-9.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Total</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="proporsi-1" class="level4" data-number="3.3.1.3">
+<h4 data-number="3.3.1.3" class="anchored" data-anchor-id="proporsi-1"><span class="header-section-number">3.3.1.3</span> Proporsi</h4>
+<p>Misal ingin dihitung proporsi penguin laki-laki. Cara sederhana adalah mengkonversi data kategorik jenis kelamin menjadi data biner 0/1 menggunakan fungsi <code>IF</code>. Misal jika baris pertama (K2) laki-laki, buat menjadi 1. Jika tidak, buat menjadi 0. Jadi: <code>IF(K2="male"; 1; 0)</code>. Lalu tambahkan dan bagi 50 untuk mendapat proporsi.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="count-10.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Konversi</figcaption><p></p>
+</figure>
+</div>
+<p>Sehingga hasilnya:</p>
+<p><img src="count-11.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="reporting-menggunakan-latex" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="reporting-menggunakan-latex"><span class="header-section-number">3.3.2</span> Reporting menggunakan LaTeX</h3>
+<p>Rumus-rumus matematika dapat ditulis dengan lebih mudah menggunakan LaTeX. LaTeX dapat digunakan di Microsoft Word di menu <em>Equation</em>. Menu tersebut diakses menggunakan <code>Alt + Tab</code>.</p>
+<p><img src="count-12.png" class="img-fluid"></p>
+<p>Atau, dapat diakses menggunakan <a href="https://www.overleaf.com/">Overleaf</a>.</p>
+<p>Angka dituliskan di LaTeX seperti biasa. Simbol-simbol ditulis menggunakan <code>\namasimbol</code>, misal <code>\theta</code> untuk <span class="math inline">\(\theta\)</span>. <code>\mu</code> dan <code>\sigma</code> menuliskan <span class="math inline">\(\mu\)</span> dan <span class="math inline">\(\sigma\)</span>. <code>\bar{y}</code> menghasilkan <span class="math inline">\(\bar{y}\)</span> dan <code>\hat{\mu}</code> menghasilkan <span class="math inline">\(\hat{\mu}\)</span>.</p>
+<p>Subskrip dan superskrip ditulis menggunakan _ dan ^. Misal, <code>y_{i3}^{e4}</code> menghasilkan <span class="math inline">\(y_{i3}^{e4}\)</span>. Pertambahan ditulis menggunakan <code>\sum</code>.</p>
+<p>Pecahan ditulis menggunakan <code>\frac{}{}</code>. Misal <code>\frac{1}{2}</code> menghasilkan <span class="math inline">\(\frac{1}{2}\)</span>. Pertambahan dituliskan menggunakan <code>\sum</code> dan perkalian dituliskan menggunakan <code>\prod</code>.</p>
+<p>Ada beberapa <em>environment</em> di LaTeX. <em>Environment</em> yang cukup penting adalah <em>aligned</em>. Tiap baris dipisahkan menggunakan <code>//</code>. Kesejajaran tiap baris dipastikan dengan tanda <code>&amp;</code>. Misal <code>&amp;=</code> memastikan tanda sama dengan pertama di tiap baris sejajar.</p>
+<p>Misal, kode LaTeX untuk menuliskan penduga mean:</p>
+<pre><code>\begin{aligned}
+\hat{\mu}&amp;=\bar{y}=\frac{\sum_{i=1}^n y_i}{n} &amp; \text{(mean)}\\
+\hat{V}(\bar{y})&amp;=\left(1-\frac{n}{N}\right)\frac{s^2}{n}&amp;\text{(ragam penduga)}\\\
+s^2&amp;=\frac{1}{n-1}\sum_{i=1}^n(y_i-\bar{y})^2 &amp;\\
+\hat{\mu}&amp;\pm2\sqrt{\hat{V}(\bar{y})} &amp; \text{(selang kepercayaan)}
+\end{aligned}</code></pre>
+</section>
+<section id="exercise-1" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="exercise-1"><span class="header-section-number">3.3.3</span> Exercise</h3>
+<p>Hitung mean, total, dan proporsi 3 variabel di sampel yang kamu ambil. Bandingkan dengan nilai parameter populasi:</p>
+<ol type="1">
+<li>Apakah sama?</li>
+<li>Apakah nilai parameter populasi masuk selang kepercayaan?</li>
+</ol>
+</section>
+</section>
+<section id="menghitung-ukuran-sampel" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="menghitung-ukuran-sampel"><span class="header-section-number">3.4</span> Menghitung Ukuran Sampel</h2>
+<p>Penduga untuk ukuran sampel secara umum ditemukan dengan memodifikasi rumus BoE. Ingat bahwa BoE adalah <span class="math inline">\(2\sqrt{V(\bar{y})}\)</span>. Oleh karena itu, ukuran sampel yang mengontrol BoE menjadi jumlah tertentu ditemukan dengan memanipulasi rumus tersebut.</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">Mean</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">Total</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-3" role="tab" aria-controls="tabset-7-3" aria-selected="false">Proporsi</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<p><span class="math display">\[
+\begin{aligned}
+n=\frac{N\sigma^2}{(N-1)D+\sigma^2}; \quad D=\frac{B^2}{4}
+\end{aligned}
+\]</span></p>
+<p>Rumus itu tidak lain ditemukan dari:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathrm{Var}(\bar{y})&amp;= \frac{\sigma^2}{n} \left( \frac{N-n}{N-1} \right)\\
+B&amp;=2\sqrt{\mathrm{V}(\bar{y})}\\
+\sqrt{D}&amp;=\frac{B}{2}=\sqrt{\frac{\sigma^2}{n} \left( \frac{N-n}{N-1} \right)}\\
+D&amp;=\frac{\sigma^2}{n} \left( \frac{N-n}{N-1} \right)=\frac{1}{n}\left(\frac{\sigma^2N-\sigma^2n}{N-1}\right)\\
+n&amp;=\frac{\sigma^2N-\sigma^2n}{ND-D}\\
+n+\frac{\sigma^2n}{ND-D}&amp;=\frac{\sigma^2N}{ND-D}\\
+n\left(1+\frac{\sigma^2}{ND-D}\right)&amp;=\frac{\sigma^2N}{ND-D}\\
+n&amp;=\frac{\sigma^2N}{ND-D}\cdot\frac{ND-D}{ND-D+\sigma^2}=\frac{N\sigma^2}{(N-1)D+\sigma^2}
+\end{aligned}
+\]</span></p>
+<p>Penurunan untuk kasus-kasus lain akan relatif sama dengan penurunan ini.</p>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<p><span class="math display">\[
+\begin{aligned}
+n=\frac{N\sigma^2}{(N-1)D+\sigma^2}; \quad D=\frac{B^2}{4N^2}
+\end{aligned}
+\]</span></p>
+<p>Rumus ini ditemukan dari fakta bahwa <span class="math inline">\(\tau=N\bar{y}\)</span> sehingga:</p>
+<p><span class="math display">\[
+\begin{aligned}
+B&amp;=2\sqrt{\mathrm{V}(N\bar{y})}=2\sqrt{N^2 V(\bar{y})}=2N\sqrt{V(\bar{y})}\\
+\sqrt{D}&amp;=\frac{B}{2N}=\sqrt{V(\bar{y})}\\
+\end{aligned}
+\]</span></p>
+<p>Yang diturunkan dengan cara sama seperti sebelumnya.</p>
+</div>
+<div id="tabset-7-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-3-tab">
+<p><span class="math display">\[
+\begin{aligned}
+n=\frac{Npq}{(N-1)D+pq}; \quad D=\frac{B^2}{4N}, \ q=1-p
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(\sigma^2\)</span> digantikan saja dengan <span class="math inline">\(pq\)</span>, dengan alasan yang dijelaskan di penduga ragam proporsi.</p>
+<p>Keuntungan perhitungan ukuran sampel untuk proporsi adalah dapat dihitung jika <span class="math inline">\(p\)</span> dan <span class="math inline">\(q\)</span> tidak diketahui. Dapat diasumsikan <span class="math inline">\(p\)</span> dan <span class="math inline">\(q\)</span> yang memaksimumkan ragam, yaitu <span class="math inline">\(0.5\)</span> (ambil turunan pertama dari <span class="math inline">\(p-p^2\)</span>).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="membandingkan-penduga" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="membandingkan-penduga"><span class="header-section-number">3.5</span> Membandingkan Penduga</h2>
+<p>Untuk dua peubah acak <span class="math inline">\(y_1\)</span> dan <span class="math inline">\(y_2\)</span>:</p>
+<p><span class="math display">\[
+E(y_1-y_2)=E(y_1)-E(y_2)
+\]</span></p>
+<p>Dan:</p>
+<p><span class="math display">\[
+V(y_1-y_2)=V(y_1)+V(y_2)-2\mathrm{Cov}(y_1,y_2)
+\]</span></p>
+<p>Jika <span class="math inline">\(y_1\)</span> dan <span class="math inline">\(y_2\)</span> saling bebas <span class="math inline">\(\mathrm{Cov}(y_1,y_2)=0\)</span>. Jika <span class="math inline">\(y_1, \ldots, y_n\)</span> dan <span class="math inline">\(x_1, \ldots, x_m\)</span> saling bebas dengan rata-rata <span class="math inline">\(\mu_x\)</span> dan <span class="math inline">\(\mu_y\)</span>. Maka jika diduga menggunakan <span class="math inline">\(\bar{y}-\bar{x}\)</span>.</p>
+<p><span class="math display">\[
+E(\bar{y}-\bar{x})=E(\bar{y})-E(\bar{x})=\mu_y-\mu_x
+\]</span></p>
+<p>Dan:</p>
+<p><span class="math display">\[
+V(\bar{y}-\bar{x})=V(\bar{y})+V(\bar{x})
+\]</span></p>
+<p>Yang ditemukan melalui rumus sebelumnya.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./2-Terminologi.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Konsep Dasar Survey Sampling</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./4-Stratified.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Random Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

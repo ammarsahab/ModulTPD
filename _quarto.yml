@@ -1,0 +1,25 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "modulTPD2"
+  author: "Jane Doe"
+  date: "9/22/2022"
+  chapters:
+    - index.qmd
+    - 1-Review.qmd
+    - 2-Terminologi.qmd
+    - 3-SimpleRandom.qmd
+    - 4-Stratified.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

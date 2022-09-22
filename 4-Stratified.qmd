@@ -1,0 +1,132 @@
+---
+title: "Stratified Random Sampling"
+format: html
+---
+
+## Definisi
+
+Tujuan dari sampling dalam survei adalah memaksimumkan informasi dengan batasan biaya tertentu. Terkadang, lebih banyak informasi (atau BoE) lebih rendah dapat ditemukan dengan menggunakan **stratified random sampling**. Contoh acak berlapis diambil dengan memisahkan populasi menjadi beberapa kelompok yang tidak tumpang tindih, disebut *strata*, dan mengambil contoh acak sederhana di tiap *strata*/lapisan.
+
+Sebagai ilustrasi, sebuah survei hendak dilakukan untuk menduga warga yang mendukung meningkatkan alokasi anggaran di suatu kabupaten untuk memperbaiki layanan ambulans. Di kabupaten tersebut, terdapat dua area perkotaan dan sebuah area desa. Dapat diambil contoh acak sederhana di tiap kota dan di pedesaan. Dua kota dan satu desa menjadi tiga strata di mana contoh acak sederhana diambil. Mengapa dipilih contoh acak berlapis?
+
+1. Contoh acak yang memiliki keragaman kecil di antara elemennya akan menghasilkan BoE kecil. Jika warga tiap kota memiliki opini yang mirip, sampel di tiap strata akan memiliki keragaman kecil. Misal kota A memiliki rumah sakit sehingga ambulans tidak dibutuhkan. Namun, kota B tidak memiliki rumah sakit sehingga membutuhkan ambulans. Opini yang berbeda lagi dimiliki masyarakat desa yang mungkin jauh dari fasilitas tertentu.
+2. Jika lapisan diatur sedemikian rupa sehingga surveyor lebih mudah memilih responden dan melaksanakan survei di area geografis yang dekat, biaya dapat dikurangi. 
+3. Dapat melakukan pendugaan parameter untuk tiap lapisan. Misal, pemerintahan kota A ingin mengetahui opini masyarakat kota tersebut. Proporsi tersebut dapat dihitung.
+
+Oleh karena itu, contoh acak berlapis dapat dipilih karena:
+
+1. Stratifikasi dapat menghasilkan BoE lebih kecil daripada contoh acak sederhana. Ini terjadi jika elemen **di dalam strata homogen** dan **antarstrata homogen**
+2. Harga pengamatan dapat dikurangi jika strata dikelompokkan sedemikian rupa sehingga memudahkan pengamatan.
+3. Penduga parameter dapat ditemukan untuk tiap strata.
+
+## Mengambil Contoh Acak Berlapis
+
+Langkah pertama dari mengambil contoh acak berlapis adalah menspesifikasi strata dan memasukkan tiap unit percontohan ke strata yang tepat. Setelah itu, ambil contoh acak sederhana di tiap strata.
+
+## Pendugaan Parameter
+
+Penduga-penduga parameter di contoh acak berlapis adalah:
+
+::: {.panel-tabset}
+## Mean
+
+$$
+\begin{aligned}
+\hat{\mu}&=\bar{y}_{st}=\frac{1}{N}[N_1\bar{y}_1+N_2\bar{y}_2+\ldots+N_L\bar{y}_L]& \text{(mean)}\\
+&=\frac{1}{N}\sum_{i=1}^L N_i\bar{y}_i\\
+\hat{V}(\bar{y_{st}})&=\frac{1}{N^2}\left[N_1^2 V(\bar{y_1})+N_1^2 V(\bar{y_2})+\ldots+N_L^2 V(\bar{y_L})\right]\\
+&=\frac{1}{N^2}\left[N_1^2\left(1-\frac{n_1}{N_1}\right)\frac{s_1^2}{n_1}+\ldots\right]\\
+&=\frac{1}{N^2}\sum_{i=1}^L N_i^2\left(1-\frac{n_i}{N_i}\right)\frac{s_i^2}{n_i}&\text{(ragam penduga)}\\\
+\hat{\mu}&\pm2\sqrt{\hat{V}(\bar{y})} & \text{(selang kepercayaan)}
+\end{aligned}
+$$
+
+Bagaimana penduga tersebut diturunkan? Pertama, rata-rata dihitung di tiap strata. Namun, tidak cukup untuk menghitung rata-rata dari rata-rata. Tiap strata harusnya mendapat bobot yang berbeda karena jumlah populasi di tiap strata berbeda juga. Strata yang berkontribusi banyak ke populasi (dalam kata lain, menyusun sebagian besar dari populasi) seharusnya memiliki bobot lebih besar daripada strata yang berkontribusi sedikit. Oleh karena itu, tiap rataan strata diboboti dengan jumlah elemen di tiap strata dalam populasi.
+
+Atau, dapat diturunkan dengan menghitung total terlebih dahulu. Dugaan total tidak lain adalah pertambahan dari dugaan total tiap strata, dan dugaan total untuk strata ke-i adalah $N_i\bar{y}_i$. Lalu, dugaan total tersebut dibagi dengan ukuran populasi sehingga jadi rata-rata. Oleh karena itu, rumus rata-rata tersebut ditemukan.
+
+Karena rataan tiap strata dianggap saling bebas jika pengacakan benar, ragam hanya perlu ditambahkan. 
+
+## Total
+
+$$
+\begin{aligned}
+\hat{\tau}&=N\bar{y}_{st}=N_1\bar{y}_1+N_2\bar{y}_2+\ldots+N_L\bar{y}_L&\\
+&= \sum_{i=1}^L N_i\bar{y}_i &  \text{(total)}\\
+\hat{V}(N\bar{y}_{st})&=N^2V(\bar{y}_{st})\\ 
+&=\sum_{i=1}^L N_i^2\left(1-\frac{n_i}{N_i}\right)\frac{s_i^2}{n_i}&\text{(ragam penduga)}\\\
+\hat{\tau}&\pm2\sqrt{\hat{V}(\bar{Ny_{st}})} & \text{(selang kepercayaan)}
+\end{aligned}
+$$
+
+Penduga tersebut tidak lain penduga mean yang dikali $N$ saja.
+
+## Proporsi
+
+$$
+\begin{aligned}
+\hat{p_{st}}&=\frac{1}{N}[N_1\hat{p}_1+N_2\hat{p}_2+\ldots+N_L\hat{p}_L]& \text{(proporsi)}\\
+&= \frac{1}{N}\sum_{i=1}^L N_i\hat{p}_i\\
+\hat{V}(\bar{y_{st}})&=\frac{1}{N^2}\left[N_1^2 V(\hat{p}_1)+N_1^2 V(\hat{p}_2)+\ldots+N_L^2 V(\hat{p}_L)\right]\\
+&=\frac{1}{N^2}\left[N_1^2\left(1-\frac{n_1}{N_1}\right)\frac{\hat{p_1}\hat{q_1}}{n_1}+\ldots\right]\\
+ &=\frac{1}{N^2}\sum_{i=1}^L N_i^2\left(1-\frac{n_i}{N_i}\right)\frac{\hat{p_I}\hat{q_I}}{n_i}&\text{(ragam penduga)}\\\
+\hat{p}&\pm2\sqrt{\hat{V}(\hat{p})} & \text{(selang kepercayaan)}
+\end{aligned}
+$$
+
+Sama seperti mean, tapi $s^2$ diduga dengan $pq$.
+:::
+
+## Contoh perhitungan
+
+Bayangkan survei yang dijelaskan di skenario sebelumnya benar dilakukan. Dalam kata lain, dilakukan pengambilan contoh acak berlapis dari 2 kota (A dan B) serta daerah pedesaan. Objek survei adalah rata-rata jam yang dihabiskan per hari untuk menonton televisi. Lalu terkumpul data:
+
+```{r}
+townrural <- read.csv2("ocrdat1.csv") 
+
+townrural |> knitr::kable()
+```
+
+Lakukan pendugaan rataan dan BoE! Kasus ini akan diilustrasikan menggunakan R. Pertama, untuk menduga rataan, hitung $N_iy_i$ lalu tambahkan. Buat peubah baru, yaitu $N_iy_i$. Namun, ternyata semua peubah masih karakter:
+
+```{r}
+townrural |> summary()
+```
+
+`dplyr::mutate(across)` dapat membantu. Fungsi ini membuat peubah baru sesuai dengan fungsi yang diinginkan:
+
+```{r}
+library(dplyr)
+
+townrural |> mutate(across(!Strata, as.numeric)) |> summary()
+```
+
+Lalu buat peubah $N_iy_i$. Lakukan `mutate`, dengan fungsi `N*Mean`.
+
+```{r}
+townrural |> 
+    mutate(across(!Strata, as.numeric)) |>
+    mutate(Niybari = N*Mean) |> knitr::kable()
+```
+
+Jumlahkan dan bagi:
+
+```{r}
+townrural |> 
+    mutate(across(!Strata, as.numeric)) |>
+    mutate(Niybari = N*Mean) |> 
+    summarise(ybar = sum(Niybari)/sum(N))
+```
+
+Bagaimana dengan ragam? Sama saja, buat kolom $N_i^2$, kolom faktor koreksi, dan kolom $s_i^2/n_i$. Gunakan `mutate` lagi, lalu `summarize` untuk menyimpulkan:
+
+```{r}
+townrural |> 
+    mutate(across(!Strata, as.numeric)) |>
+    mutate(Nisq = N^2,
+           FK = 1-n/N,
+           sisqperni = SD^2/n) |>
+    mutate(varybar = Nisq*FK*sisqperni) |>
+    summarize(sum(varybar)/(sum(N)^2))
+```
+

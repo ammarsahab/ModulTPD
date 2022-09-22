@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>modulTPD2 - 4&nbsp; Stratified Random Sampling</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./3-SimpleRandom.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Random Sampling</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">modulTPD2</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-Review.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Review Statistika Dasar</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-Terminologi.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Konsep Dasar Survey Sampling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-SimpleRandom.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Sampling</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-Stratified.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Random Sampling</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#definisi" id="toc-definisi" class="nav-link active" data-scroll-target="#definisi"> <span class="header-section-number">4.1</span> Definisi</a></li>
+  <li><a href="#mengambil-contoh-acak-berlapis" id="toc-mengambil-contoh-acak-berlapis" class="nav-link" data-scroll-target="#mengambil-contoh-acak-berlapis"> <span class="header-section-number">4.2</span> Mengambil Contoh Acak Berlapis</a></li>
+  <li><a href="#pendugaan-parameter" id="toc-pendugaan-parameter" class="nav-link" data-scroll-target="#pendugaan-parameter"> <span class="header-section-number">4.3</span> Pendugaan Parameter</a></li>
+  <li><a href="#contoh-perhitungan" id="toc-contoh-perhitungan" class="nav-link" data-scroll-target="#contoh-perhitungan"> <span class="header-section-number">4.4</span> Contoh perhitungan</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Random Sampling</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="definisi" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="definisi"><span class="header-section-number">4.1</span> Definisi</h2>
+<p>Tujuan dari sampling dalam survei adalah memaksimumkan informasi dengan batasan biaya tertentu. Terkadang, lebih banyak informasi (atau BoE) lebih rendah dapat ditemukan dengan menggunakan <strong>stratified random sampling</strong>. Contoh acak berlapis diambil dengan memisahkan populasi menjadi beberapa kelompok yang tidak tumpang tindih, disebut <em>strata</em>, dan mengambil contoh acak sederhana di tiap <em>strata</em>/lapisan.</p>
+<p>Sebagai ilustrasi, sebuah survei hendak dilakukan untuk menduga warga yang mendukung meningkatkan alokasi anggaran di suatu kabupaten untuk memperbaiki layanan ambulans. Di kabupaten tersebut, terdapat dua area perkotaan dan sebuah area desa. Dapat diambil contoh acak sederhana di tiap kota dan di pedesaan. Dua kota dan satu desa menjadi tiga strata di mana contoh acak sederhana diambil. Mengapa dipilih contoh acak berlapis?</p>
+<ol type="1">
+<li>Contoh acak yang memiliki keragaman kecil di antara elemennya akan menghasilkan BoE kecil. Jika warga tiap kota memiliki opini yang mirip, sampel di tiap strata akan memiliki keragaman kecil. Misal kota A memiliki rumah sakit sehingga ambulans tidak dibutuhkan. Namun, kota B tidak memiliki rumah sakit sehingga membutuhkan ambulans. Opini yang berbeda lagi dimiliki masyarakat desa yang mungkin jauh dari fasilitas tertentu.</li>
+<li>Jika lapisan diatur sedemikian rupa sehingga surveyor lebih mudah memilih responden dan melaksanakan survei di area geografis yang dekat, biaya dapat dikurangi.</li>
+<li>Dapat melakukan pendugaan parameter untuk tiap lapisan. Misal, pemerintahan kota A ingin mengetahui opini masyarakat kota tersebut. Proporsi tersebut dapat dihitung.</li>
+</ol>
+<p>Oleh karena itu, contoh acak berlapis dapat dipilih karena:</p>
+<ol type="1">
+<li>Stratifikasi dapat menghasilkan BoE lebih kecil daripada contoh acak sederhana. Ini terjadi jika elemen <strong>di dalam strata homogen</strong> dan <strong>antarstrata homogen</strong></li>
+<li>Harga pengamatan dapat dikurangi jika strata dikelompokkan sedemikian rupa sehingga memudahkan pengamatan.</li>
+<li>Penduga parameter dapat ditemukan untuk tiap strata.</li>
+</ol>
+</section>
+<section id="mengambil-contoh-acak-berlapis" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="mengambil-contoh-acak-berlapis"><span class="header-section-number">4.2</span> Mengambil Contoh Acak Berlapis</h2>
+<p>Langkah pertama dari mengambil contoh acak berlapis adalah menspesifikasi strata dan memasukkan tiap unit percontohan ke strata yang tepat. Setelah itu, ambil contoh acak sederhana di tiap strata.</p>
+</section>
+<section id="pendugaan-parameter" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="pendugaan-parameter"><span class="header-section-number">4.3</span> Pendugaan Parameter</h2>
+<p>Penduga-penduga parameter di contoh acak berlapis adalah:</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Mean</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Total</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Proporsi</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\mu}&amp;=\bar{y}_{st}=\frac{1}{N}[N_1\bar{y}_1+N_2\bar{y}_2+\ldots+N_L\bar{y}_L]&amp; \text{(mean)}\\
+&amp;=\frac{1}{N}\sum_{i=1}^L N_i\bar{y}_i\\
+\hat{V}(\bar{y_{st}})&amp;=\frac{1}{N^2}\left[N_1^2 V(\bar{y_1})+N_1^2 V(\bar{y_2})+\ldots+N_L^2 V(\bar{y_L})\right]\\
+&amp;=\frac{1}{N^2}\left[N_1^2\left(1-\frac{n_1}{N_1}\right)\frac{s_1^2}{n_1}+\ldots\right]\\
+&amp;=\frac{1}{N^2}\sum_{i=1}^L N_i^2\left(1-\frac{n_i}{N_i}\right)\frac{s_i^2}{n_i}&amp;\text{(ragam penduga)}\\\
+\hat{\mu}&amp;\pm2\sqrt{\hat{V}(\bar{y})} &amp; \text{(selang kepercayaan)}
+\end{aligned}
+\]</span></p>
+<p>Bagaimana penduga tersebut diturunkan? Pertama, rata-rata dihitung di tiap strata. Namun, tidak cukup untuk menghitung rata-rata dari rata-rata. Tiap strata harusnya mendapat bobot yang berbeda karena jumlah populasi di tiap strata berbeda juga. Strata yang berkontribusi banyak ke populasi (dalam kata lain, menyusun sebagian besar dari populasi) seharusnya memiliki bobot lebih besar daripada strata yang berkontribusi sedikit. Oleh karena itu, tiap rataan strata diboboti dengan jumlah elemen di tiap strata dalam populasi.</p>
+<p>Atau, dapat diturunkan dengan menghitung total terlebih dahulu. Dugaan total tidak lain adalah pertambahan dari dugaan total tiap strata, dan dugaan total untuk strata ke-i adalah <span class="math inline">\(N_i\bar{y}_i\)</span>. Lalu, dugaan total tersebut dibagi dengan ukuran populasi sehingga jadi rata-rata. Oleh karena itu, rumus rata-rata tersebut ditemukan.</p>
+<p>Karena rataan tiap strata dianggap saling bebas jika pengacakan benar, ragam hanya perlu ditambahkan.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\tau}&amp;=N\bar{y}_{st}=N_1\bar{y}_1+N_2\bar{y}_2+\ldots+N_L\bar{y}_L&amp;\\
+&amp;= \sum_{i=1}^L N_i\bar{y}_i &amp;  \text{(total)}\\
+\hat{V}(N\bar{y}_{st})&amp;=N^2V(\bar{y}_{st})\\
+&amp;=\sum_{i=1}^L N_i^2\left(1-\frac{n_i}{N_i}\right)\frac{s_i^2}{n_i}&amp;\text{(ragam penduga)}\\\
+\hat{\tau}&amp;\pm2\sqrt{\hat{V}(\bar{Ny_{st}})} &amp; \text{(selang kepercayaan)}
+\end{aligned}
+\]</span></p>
+<p>Penduga tersebut tidak lain penduga mean yang dikali <span class="math inline">\(N\)</span> saja.</p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p><span class="math display">\[
+\begin{aligned}
+\hat{p_{st}}&amp;=\frac{1}{N}[N_1\hat{p}_1+N_2\hat{p}_2+\ldots+N_L\hat{p}_L]&amp; \text{(proporsi)}\\
+&amp;= \frac{1}{N}\sum_{i=1}^L N_i\hat{p}_i\\
+\hat{V}(\bar{y_{st}})&amp;=\frac{1}{N^2}\left[N_1^2 V(\hat{p}_1)+N_1^2 V(\hat{p}_2)+\ldots+N_L^2 V(\hat{p}_L)\right]\\
+&amp;=\frac{1}{N^2}\left[N_1^2\left(1-\frac{n_1}{N_1}\right)\frac{\hat{p_1}\hat{q_1}}{n_1}+\ldots\right]\\
+&amp;=\frac{1}{N^2}\sum_{i=1}^L N_i^2\left(1-\frac{n_i}{N_i}\right)\frac{\hat{p_I}\hat{q_I}}{n_i}&amp;\text{(ragam penduga)}\\\
+\hat{p}&amp;\pm2\sqrt{\hat{V}(\hat{p})} &amp; \text{(selang kepercayaan)}
+\end{aligned}
+\]</span></p>
+<p>Sama seperti mean, tapi <span class="math inline">\(s^2\)</span> diduga dengan <span class="math inline">\(pq\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="contoh-perhitungan" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="contoh-perhitungan"><span class="header-section-number">4.4</span> Contoh perhitungan</h2>
+<p>Bayangkan survei yang dijelaskan di skenario sebelumnya benar dilakukan. Dalam kata lain, dilakukan pengambilan contoh acak berlapis dari 2 kota (A dan B) serta daerah pedesaan. Objek survei adalah rata-rata jam yang dihabiskan per hari untuk menonton televisi. Lalu terkumpul data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"ocrdat1.csv"</span>) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Strata</th>
+<th style="text-align: left;">N</th>
+<th style="text-align: left;">n</th>
+<th style="text-align: left;">Mean</th>
+<th style="text-align: left;">Median</th>
+<th style="text-align: left;">SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Town A</td>
+<td style="text-align: left;">155.00</td>
+<td style="text-align: left;">20.00</td>
+<td style="text-align: left;">33.90</td>
+<td style="text-align: left;">34.50</td>
+<td style="text-align: left;">5.95</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Town B</td>
+<td style="text-align: left;">62.00</td>
+<td style="text-align: left;">8.00</td>
+<td style="text-align: left;">25.12</td>
+<td style="text-align: left;">26.00</td>
+<td style="text-align: left;">15.25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rural</td>
+<td style="text-align: left;">93.00</td>
+<td style="text-align: left;">12.00</td>
+<td style="text-align: left;">19.00</td>
+<td style="text-align: left;">17.50</td>
+<td style="text-align: left;">9.36</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Lakukan pendugaan rataan dan BoE! Kasus ini akan diilustrasikan menggunakan R. Pertama, untuk menduga rataan, hitung <span class="math inline">\(N_iy_i\)</span> lalu tambahkan. Buat peubah baru, yaitu <span class="math inline">\(N_iy_i\)</span>. Namun, ternyata semua peubah masih karakter:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Strata               N                  n                 Mean          
+ Length:3           Length:3           Length:3           Length:3          
+ Class :character   Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+    Median               SD           
+ Length:3           Length:3          
+ Class :character   Class :character  
+ Mode  :character   Mode  :character  </code></pre>
+</div>
+</div>
+<p><code>dplyr::mutate(across)</code> dapat membantu. Fungsi ini membuat peubah baru sesuai dengan fungsi yang diinginkan:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">!</span>Strata, as.numeric)) <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Strata                N               n              Mean      
+ Length:3           Min.   : 62.0   Min.   : 8.00   Min.   :19.00  
+ Class :character   1st Qu.: 77.5   1st Qu.:10.00   1st Qu.:22.06  
+ Mode  :character   Median : 93.0   Median :12.00   Median :25.12  
+                    Mean   :103.3   Mean   :13.33   Mean   :26.01  
+                    3rd Qu.:124.0   3rd Qu.:16.00   3rd Qu.:29.51  
+                    Max.   :155.0   Max.   :20.00   Max.   :33.90  
+     Median            SD        
+ Min.   :17.50   Min.   : 5.950  
+ 1st Qu.:21.75   1st Qu.: 7.655  
+ Median :26.00   Median : 9.360  
+ Mean   :26.00   Mean   :10.187  
+ 3rd Qu.:30.25   3rd Qu.:12.305  
+ Max.   :34.50   Max.   :15.250  </code></pre>
+</div>
+</div>
+<p>Lalu buat peubah <span class="math inline">\(N_iy_i\)</span>. Lakukan <code>mutate</code>, dengan fungsi <code>N*Mean</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">!</span>Strata, as.numeric)) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Niybari =</span> N<span class="sc">*</span>Mean) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Strata</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">Median</th>
+<th style="text-align: right;">SD</th>
+<th style="text-align: right;">Niybari</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Town A</td>
+<td style="text-align: right;">155</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">33.90</td>
+<td style="text-align: right;">34.5</td>
+<td style="text-align: right;">5.95</td>
+<td style="text-align: right;">5254.50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Town B</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">25.12</td>
+<td style="text-align: right;">26.0</td>
+<td style="text-align: right;">15.25</td>
+<td style="text-align: right;">1557.44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rural</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">19.00</td>
+<td style="text-align: right;">17.5</td>
+<td style="text-align: right;">9.36</td>
+<td style="text-align: right;">1767.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Jumlahkan dan bagi:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">!</span>Strata, as.numeric)) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Niybari =</span> N<span class="sc">*</span>Mean) <span class="sc">|&gt;</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">ybar =</span> <span class="fu">sum</span>(Niybari)<span class="sc">/</span><span class="fu">sum</span>(N))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    ybar
+1 27.674</code></pre>
+</div>
+</div>
+<p>Bagaimana dengan ragam? Sama saja, buat kolom <span class="math inline">\(N_i^2\)</span>, kolom faktor koreksi, dan kolom <span class="math inline">\(s_i^2/n_i\)</span>. Gunakan <code>mutate</code> lagi, lalu <code>summarize</code> untuk menyimpulkan:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">!</span>Strata, as.numeric)) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Nisq =</span> N<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">FK =</span> <span class="dv">1</span><span class="sc">-</span>n<span class="sc">/</span>N,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">sisqperni =</span> SD<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n) <span class="sc">|&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">varybar =</span> Nisq<span class="sc">*</span>FK<span class="sc">*</span>sisqperni) <span class="sc">|&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="fu">sum</span>(varybar)<span class="sc">/</span>(<span class="fu">sum</span>(N)<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  sum(varybar)/(sum(N)^2)
+1                1.970491</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./3-SimpleRandom.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simple Random Sampling</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

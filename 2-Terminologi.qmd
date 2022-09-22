@@ -1,0 +1,390 @@
+---
+title: "Konsep Dasar Survey Sampling"
+format: 
+  html
+execute:
+  echo: false
+---
+
+## Sensus vs. Survei
+
+Dalam **sensus**, peneliti mengamati seluruh anggota populasi. Karena tenaga dan waktu yang dibutuhkan lama, sensus dilakukan dalam jangka waktu panjang, misal 10 tahun sekali. Sedangkan, di **survei** sebagian anggota populasi diamati.
+
+## Terminologi 
+
+### Elemen
+
+Proses penjelasan terminologi dimulai dari membayangkan pelaksanaan survei. **Siapa yang ingin ada teliti**? 
+
+Objek apa yang Anda ingin ketahui karakteristiknya, atau Anda ingin ukur?
+
+Ini adalah elemen.
+
+```{dot}
+digraph G {
+  rankdir = "LR"
+  unsur[shape=plaintext]
+  populasi[shape=plaintext]
+  unsur -> populasi
+}
+```
+
+Grafik mengambarkan agregasi unit dari satu elemen ke kumpulan elemen. **Populasi** adalah koleksi unsur yang ingin diduga karakteristiknya. Sebagai contoh:
+```{dot}
+digraph G {
+  rankdir = "LR"
+  a[shape=plaintext, label ="satu orang"]
+  b[shape=plaintext, label ="warga Bogor"]
+  c[shape=plaintext, label ="satu kendaraan"]
+  d[shape=plaintext, label ="kendaraan di Bara"]
+
+  a -> b
+  c -> d
+}
+```
+
+Warga Bogor adalah koleksi orang di Bogor. Kendaraan di Babakan Raya adalah koleksi kendaraan.
+
+### Satuan penarikan contoh
+
+Koleksi elemen dari populasi yang tidak **tumpang tindih** dan mencakup seluruh populasi. Maksudnya? Paling sederhana **elemen = satuan penarikan contoh**. Dalam contoh orang, tentu tidak mungkin tumpang tindih. Apakah orang, jika digabung, mencakup seluruh warga Bogor?
+
+Namun, satuan penarikan contoh bisa juga tak sama dengan elemen:
+
+```{dot}
+digraph G {
+rankdir = "LR"
+  a[shape=plaintext, label ="elemen"]
+  b[shape=plaintext, label ="sampling unit"]
+  c[shape=plaintext, label ="populasi"]
+
+  a -> b
+  b -> c
+}
+```
+
+Sama seperti diagram sebelumnya, panah menunjukkan arah dari unit yang kecil ke unit yang besar. Elemen dapat digabung menjadi sebuah sampling unit. Gabungan sampling unit menjadi populasi. Sebagai contoh:
+```{dot}
+digraph G {
+  rankdir = "LR"
+  a[shape=plaintext, label ="satu orang"]
+  b[shape=plaintext, label ="keluarga"]
+  c[shape=plaintext, label ="warga Bogor"]
+  d[shape=plaintext, label ="satu mobil"]
+  e[shape=plaintext, label ="mobil di menit x"]
+  f[shape=plaintext, label ="mobil di Bara"]
+
+  a -> b
+  b -> c
+  d -> e
+  e -> f
+}
+```
+
+Orang/mobil jika digabung dapat menjadi satu keluarga/satu mobil di interval waktu tertentu. Jika sampling unit digabung, maka menjadi populasi. Note: dalam contoh mobil, ada kemungkinan **tumpang tindih**! Walaupun tiap orang hanya memiliki satu keluarga, bisa jadi mobil yang di menit sebelumnya berada di Babakan Raya ada juga di menit selanjutnya, karena macet!
+
+### Kerangka 
+
+Kerangka adalah **daftar** sampling unit di populasi. Ini dapat digambarkan sebagai suatu tabel, di mana populasi dibagi menjadi beberapa sampling unit. Lalu tiap sampling unit memiliki elemen:
+
+```{dot}
+digraph {
+  tbl [
+
+    shape=plaintext
+    label=<
+
+      <table border='0' cellborder='0' color='blue' cellspacing='0'>
+        <tr><td cellpadding='4'>
+        populasi
+        </td>
+        <td colspan='2' rowspan='2'>
+          <table color='red' border='0' cellborder='1' cellpadding='10' cellspacing='0'>
+            <tr><td port='port_one'>sampling unit</td></tr>
+            <tr><td>sampling unit</td></tr>
+            <tr><td>sampling unit</td></tr>
+          </table>
+        </td> 
+        </tr>
+      </table>
+    >];
+
+  tbl2[
+
+    shape=plaintext
+    label=<
+
+      <table border='0' cellborder='1' color='red' cellspacing='0'>
+        <tr><td cellpadding='4'>
+        sampling unit
+        </td>
+        <td colspan='2' rowspan='2'>
+          <table color='black' border='0' cellborder='1' cellpadding='10' cellspacing='0'>
+            <tr><td>unit</td></tr>
+            <tr><td>unit</td></tr>
+            <tr><td>unit</td></tr>
+          </table>
+        </td> 
+        </tr>
+      </table>
+    >];
+
+    tbl:port_one -> tbl2
+}
+```
+
+Sebagai contoh:
+
+```{dot}
+digraph {
+  tbl [
+
+    shape=plaintext
+    label=<
+
+      <table border='0' cellborder='0' color='blue' cellspacing='0'>
+        <tr><td cellpadding='4'>
+        warga Bogor
+        </td>
+        <td colspan='2' rowspan='2'>
+          <table color='red' border='0' cellborder='1' cellpadding='10' cellspacing='0'>
+            <tr><td port='port_one'>KK 1</td></tr>
+            <tr><td>KK 2</td></tr>
+            <tr><td>KK 3</td></tr>
+          </table>
+        </td> 
+        </tr>
+      </table>
+    >];
+
+  tbl2[
+
+    shape=plaintext
+    label=<
+
+      <table border='0' cellborder='1' color='red' cellspacing='0'>
+        <tr><td cellpadding='4'>
+        KK 1
+        </td>
+        <td colspan='2' rowspan='2'>
+          <table color='black' border='0' cellborder='1' cellpadding='10' cellspacing='0'>
+            <tr><td>Susi - 37 tahun</td></tr>
+            <tr><td>Budi - 5 tahun</td></tr>
+          </table>
+        </td> 
+        </tr>
+      </table>
+    >];
+
+    tbl:port_one -> tbl2
+}
+```
+
+Pemerintah Kota Bogor memiliki list Kepala Keluarga; lalu, di tiap KK tersebut ada suatu keluarga yang beranggotakan elemen bernama Susi dan Budi.
+
+### Sampel
+
+Sampel adalah kumpulan satuan penarikan contoh dari kerangka. Misal, ambil KK 1 dan 2. Hitung mobil di jam-jam tertentu
+
+### Exercise
+
+1. Cari suatu unit!
+2. Kumpulan unit seperti apa yang kamu ingin duga karakteristiknya!
+3. Kumpulan unit yang lebih kecil dari populasi apa saja yang mungkin terjadi?
+4. Bagaimana bentuk kerangkanya?
+5. Beri contoh pengambilan sampel dari kerangka tersebut.
+
+## Sampling
+
+### Probability sampling
+
+Dalam probability sampling, tiap anggota populasi memiliki probabilitas untuk dipilih; probabilitasnya tidak perlu sama. Bisa saja:
+
+  1. Probabilitas semua anggota dipilih sama.
+  2. Anggota kelompok tertentu, yang memang memiliki proporsi lebih besar di kerangka, memiliki probabilitas dipilih lebih besar.
+  3. Cara lain.
+  
+### Non-probability sampling
+
+ Probabilitas anggota populasi dipilih tidak diketahui di non-probability sampling.
+
+### Sampling error
+
+Berapa banyak dari kalian yang suka matematika?
+
+Apa kesimpulan yang dapat diambil mengenai minat matematika mahasiswa IPB? Kemungkinan susah untuk mengambil kesimpulan; mungkin saja mahasiswa Statistika memiliki kemampuan matematika lebih tinggi, atau ketertarikan matematika lebih tinggi. Mungkin saja mahasiswa Statistika terlalu sering terekspos matematika sehingga tidak menyukai pelajaran tersebut. Jika kita mengamati sebagian populasi (contoh), akan ada keslahan karena contoh tersebut belum tentu mewakili keragaman populasi. Jika mahasiswa dari berbagai jurusan diamati, kesimpulan lebih valid. Lalu, dengan **probability sampling** tingkat kesalahan dapat diduga.
+
+## Non-sampling errors 
+
+### Nonobservation
+
+Kesalahan yang terjadi karena gagal mengobservasi elemen:
+
+#### *Non-coverage*
+
+Jika kerangka sampling tidak mencakup seluruh populasi, misal DPT tidak lengkap atau tidak semua pengemudi punya SIM!
+
+#### *Non-response*
+
+Error ini sering lebih fatal. Beberapa jenis error:
+
+1. Tidak bisa mengontak unit
+
+Tanpa keluar CCR, misal Anda coba survei jumlah pekerja dan pemasok tempat makan kalian hari ini. Anda mungkin tak memiliki kontak elemen survei tersebut! Namun, jika Anda menanyakan apa yang dimakan teman Anda hari ini, hal tersebut mungkin ditemukan.
+
+Misal, dengan contoh acak sederhana tiap elemen memiliki probabilitas $1/n$ untuk disampel. Apakah ada bisa menghitung probabilitas elemen disampel jika sebenarnya dipilih elemen lain, elemen lain tidak ada, lalu diganti elemen yang dekat? Ini susah.
+
+Lalu, misal Anda melakukan survey ke rumah warga di jam siang. Ternyata, orang berusia dewasa sedang kerja. Apa yang terjadi jika yang ditanya adalah orang yang ada di rumah?
+
+- Siapa yang mungkin di rumah warga pada jam siang?
+- Apakah mungkin profil orang tersebut beda dengan warga yang Anda cari?
+
+2. Unit tak bisa menjawab pertanyaan
+
+Buat pertanyaan yang susah dijawab orang. Bukan pertanyaan yang sensitif, tetapi susah dimengerti/susah dicari jawabannya. Misal, apakah Anda mengingat informasi:
+
+1. Pengeluaran dalam minggu ini.
+2. Jarak berjalan kaki dalam hari ini.
+3. Jumlah teman yang dikontak melalui WhatsApp dua hari ini.
+
+Belum tentu responden mengetahui/mengingat informasi yang kita ingin tanyakan.
+
+3. Unit tidak ingin menjawab pertanyaan
+
+Ini cukup jelas.
+
+4. Dishonest interviewer
+
+Selain kesalahan dari responden, interviewer dapat tidak jujur dan mengisi survei dengan sendirinya.
+
+### Errors of observation
+
+Informasi dari elemen dapat diobservasi, tetapi diobservasi dengan salah.
+
+#### Interviewer yang tidak netral
+
+Apakah kalian suka cari masalah dengan orang? Jika interviewer dirasa mendukung posisi tertentu, responden mungkin saja mencoba mengikuti posisi interviewer, atau melawan posisi tersebut.
+
+#### Kesalahan responden
+
+1. Jika Anda ditanya harga outfit Anda (dan kebetulan bagus outfitnya), apakah Anda ingin menaikkan harga outfit tersebut ke interviewer?
+2. Jika Anda ditanya pernah melanggar aturan kampus, apakah Anda akan menjawab ya atau tidak?
+3. Apakah Anda akan mengatakan jumlah uang bulanan Anda secara tepat jika ditanya?
+
+Inti dari aktivitas ini: responden memiliki motivasi yang berbeda-beda untuk menjawab pertanyaan. Misal, responden ingin tampak mengikuti aturan, ingin tampak kaya (atau menyembunyikan kekayaan), dan lain-lain.
+
+#### Instrumen
+
+Apa definisi Anda untuk:
+
+1. Anak
+2. Pengangguran
+3. Harga makanan murah
+
+Apakah definisi semua orang sama? Bagaimana jika survei menanyakan suatu hal yang definisinya tidak jelas? 
+
+#### Input Data
+
+Misal data sudah dikumpulkan. Apakah Anda pernah salah ketik? Apakah komputer Anda pernah mengalami *bug*? Data tersebut mungkin akan berubah.
+
+## Mengurangi kesalahan
+
+### Trade-off: sampling error vs non-sampling
+
+Mana yang lebih mengikuti kaidah percontohan: mengambil contoh acak mahasiswa IPB atau menanya teman? Siapa yang lebih mungkin merespon: teman atau mahasiswa yang dicontoh acak?
+
+Semakin besar ukuran sampel, semakin mendekati populasi. Kira-kira, apakah Anda akan lebih lelah menanyakan lebih banyak orang lalu memasukkan datanya? Jika lebih lelah, apakah Anda lebih mungkin salah?
+
+### Cara mengurangi non-sampling error
+
+1. Callback
+
+Apakah chat Anda pernah tidak direspon? Apa yang Anda lakukan? Jika di-chat lagi, apakah biasanya ada beberapa yang merespon kembali? Sama saja, di survei, surveyor dapat kembali ke responden yang belum merespon dan menanyakan pertanyaan yang sama lagi.
+
+2. Rewards
+
+Jika mengisi, dapat uang/dst. Pertanyaannya: apakah orang yang ingin mengisi survei untuk dapat *reward* beda dengan orang pada umumnya? Mungkin orang tersebut memiliki keadaan finansial tertentu, atau lebih suka uang.
+
+3. Melatih interviewer
+
+Interview dapat dilatih agar tampak netral dan mengetahui jawaban jujur/tidak jujur
+
+4. Data checking
+
+Apakah mungkin:
+
+- Seseorang berusia 1000 tahun?
+- Satu keluarga memiliki 50 anak?
+- Orang dewasa yang sudah menikah berusia 5 tahun?
+
+Data-data tersebut perlu diperiksa.
+
+5. Memperbaiki kuesioner
+
+Beberapa aspek yang dapat diperhatikan:
+
+- Urutan pertanyaan
+
+Biasanya, responden ingin konsisten dengan jawabannya. Misal, ditanyakan "Apakah Anda setuju dengan pemotongan subsidi BBM untuk peningkatan dana pendidikan?". Jika setelah pertanyaan itu ditanyakan "Apakah Anda setuju dengan pemotongan subsidi BBM?", responden lebih mungkin menjawab "Ya". Urutan tersebut pelru diperhatikan.
+
+- Pertanyaan terbuka vs. tertutup
+
+Pertanyaaan terbuka memberi lebih banyak opsi bagi responden, tapi susah diproses (non-sampling error meningkat). Pertanyaan tertutup dapat lebih mudah diproses, tetapi harus dipastikan semua opsi yang hendak dipilih responden ada.
+
+- Opsi
+
+Misal, opsi netral. Kebanyakan responden mungkin memilih opsi netral. Apakah lebih baik untuk memaksa responden memilih?
+
+- Wording
+
+Responden mungkin tidak menyukai kata yang sangat negatif seperti "melarang", tetapi jika responden ditanya "Apakah setuju dengan membolehkan X", bisa jadi banyak responden menjawab "Tidak".
+
+## Cara pengumpulan data
+
+### Personal interview:
+
+- Apakah Anda akan merespon orang yang menanyakan Anda secara langsung?
+- Biasanya, Anda bicara mengikuti prosedur tertentu, atau mengikuti saja alur perbincangannya bagaimana?
+
+Personal interview biasanya memiliki tingkat respon tinggi, tetapi bias mungkin muncul dari interviewer.
+
+### Telephone interview
+
+- Apakah semua kontak di HP Anda nomor orang? Apakah ada nomor bisnis? Nomor penipu? Nomor lama yang sudah tidak dipakai lagi? Mungkin saja kerangka percontohan tak akurat.
+- Biasanya, berapa lama Anda berbicara di telepon? Orang biasanya tak ingin berbicara lama.
+
+### Self-Administered Questionnaire
+
+- Tidak bisa memastikan responden mengisi atau tidak. Jika tidak ada yang mengingatkan/mengawasi, apakah Anda pernah lupa mengisi form?
+
+Cara ingin sangat mudah, tetapi response rate rawan rendah.
+
+### Observasi
+
+Misal Anda ingin meneliti berapa sering seseorang masuk kuliah. Apakah Anda akan:
+
+1. Melihat absensi?
+2. Menanyakan orang tersebut?
+
+Kadang, beberapa data lebih baik diobservasi langsung.
+
+## Tahapan pembuatan survey
+
+Lakukan tahap 1-3!
+
+1. Tujuan survei apa?
+2. Populasi target apa?
+3. Dari mana Anda memperoleh sampling frame?
+
+Lalu lakukan tahap 5-7!
+
+5. Apakah Anda akan mewawancara responden?
+6. Bagaimana cara Anda memastikan kuesioner reliabel dan valid?
+7. Apakah pewawancara perlu dilatih; seperti apa?
+
+Terakhir, lakukan tahap 9-12!
+
+9. Bagaimana Anda mengumpulkan data dari responden?
+10. Data ditaruh di mana?
+11. Bagaimana Anda menganalisis data?
+12. Bagaimana Anda melaporkan hasil survei?
