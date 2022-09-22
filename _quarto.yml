@@ -3,8 +3,8 @@ project:
   output-dir: docs
 
 book:
-  title: "modulTPD2"
-  author: "Jane Doe"
+  title: "Modul Teknik Pengumpulan Data"
+  author: "Muhammad Ammar Sahab"
   date: "9/22/2022"
   chapters:
     - index.qmd
@@ -17,7 +17,7 @@ bibliography: references.bib
 
 format:
   html:
-    theme: cosmo
+    theme: simplex
   pdf:
     documentclass: scrreprt
 
