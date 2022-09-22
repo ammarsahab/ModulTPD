@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.22)  22 SEP 2022 22:34
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.22)  22 SEP 2022 22:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1244,7 +1244,7 @@ Overfull \hbox (5.7725pt too wide) in paragraph at lines 1633--1633
 
 
 Overfull \hbox (14.59428pt too wide) in paragraph at lines 1634--1635
- []|\TU/lmr/m/n/10.95 0.1827843|
+ []|\TU/lmr/m/n/10.95 0.0604972|
  []
 
 
@@ -1269,7 +1269,7 @@ Overfull \hbox (5.7725pt too wide) in paragraph at lines 1635--1635
 
 
 Overfull \hbox (14.59428pt too wide) in paragraph at lines 1636--1637
- []|\TU/lmr/m/n/10.95 0.2001530|
+ []|\TU/lmr/m/n/10.95 0.6459913|
  []
 
 
@@ -1294,7 +1294,7 @@ Overfull \hbox (5.7725pt too wide) in paragraph at lines 1637--1637
 
 
 Overfull \hbox (14.59428pt too wide) in paragraph at lines 1638--1639
- []|\TU/lmr/m/n/10.95 0.6075793|
+ []|\TU/lmr/m/n/10.95 0.2143289|
  []
 
 [31]
@@ -1310,203 +1310,193 @@ Overfull \hbox (10.95186pt too wide) in paragraph at lines 1710--1711
  []
 
 [32] [33]
-Overfull \hbox (6.57741pt too wide) in paragraph at lines 1737--1738
+Overfull \hbox (6.95476pt too wide) in paragraph at lines 1737--1738
  []\TU/lmr/m/n/10.95 rowid
  []
 
 
-Overfull \hbox (6.09422pt too wide) in paragraph at lines 1739--1740
-[]\TU/lmr/m/n/10.95 species  
- []
-
-
-Overfull \hbox (4.81377pt too wide) in paragraph at lines 1741--1742
+Overfull \hbox (5.25314pt too wide) in paragraph at lines 1741--1742
 []\TU/lmr/m/n/10.95 island  
  []
 
 
-Overfull \hbox (29.87523pt too wide) in paragraph at lines 1743--1744
+Overfull \hbox (30.85735pt too wide) in paragraph at lines 1743--1744
  []\TU/lmr/m/n/10.95 bill_length_mm
  []
 
 
-Overfull \hbox (30.76286pt too wide) in paragraph at lines 1745--1746
+Overfull \hbox (31.67778pt too wide) in paragraph at lines 1745--1746
  []\TU/lmr/m/n/10.95 bill_depth_mm
  []
 
 
-Overfull \hbox (35.46342pt too wide) in paragraph at lines 1747--1748
+Overfull \hbox (36.61613pt too wide) in paragraph at lines 1747--1748
  []\TU/lmr/m/n/10.95 flipper_length_mm
  []
 
 
-Overfull \hbox (29.33315pt too wide) in paragraph at lines 1749--1750
+Overfull \hbox (30.07748pt too wide) in paragraph at lines 1749--1750
  []\TU/lmr/m/n/10.95 body_mass_g
  []
 
 
-Overfull \hbox (3.50633pt too wide) in paragraph at lines 1753--1754
+Overfull \hbox (3.81131pt too wide) in paragraph at lines 1753--1754
  []\TU/lmr/m/n/10.95 year
  []
 
 
-Overfull \hbox (3.24722pt too wide) in paragraph at lines 1759--1759
-[]|\TU/lmr/m/n/10.95 Adelie|  
- []
-
-
-Overfull \hbox (8.87622pt too wide) in paragraph at lines 1759--1759
+Overfull \hbox (9.3156pt too wide) in paragraph at lines 1759--1759
 []|\TU/lmr/m/n/10.95 Dream|  
  []
 
 
-Overfull \hbox (7.47461pt too wide) in paragraph at lines 1759--1759
+Overfull \hbox (7.91399pt too wide) in paragraph at lines 1759--1759
 []|\TU/lmr/m/n/10.95 female|  
  []
 
 
-Overfull \hbox (5.30212pt too wide) in paragraph at lines 1759--1759
+Overfull \hbox (5.6071pt too wide) in paragraph at lines 1759--1759
  []|\TU/lmr/m/n/10.95 2008|
  []
 
 
-Overfull \hbox (13.64317pt too wide) in paragraph at lines 1760--1761
- []|\TU/lmr/m/n/10.95 0.9909071|
+Overfull \hbox (14.25311pt too wide) in paragraph at lines 1760--1761
+ []|\TU/lmr/m/n/10.95 0.9931674|
  []
 
 
-Overfull \hbox (8.19662pt too wide) in paragraph at lines 1761--1761
-[]|\TU/lmr/m/n/10.95 Gentoo|  
- []
-
-
-Overfull \hbox (7.37607pt too wide) in paragraph at lines 1761--1761
-[]|\TU/lmr/m/n/10.95 Biscoe|  
- []
-
-
-Overfull \hbox (5.30212pt too wide) in paragraph at lines 1761--1761
- []|\TU/lmr/m/n/10.95 2008|
- []
-
-
-Overfull \hbox (13.64317pt too wide) in paragraph at lines 1762--1763
- []|\TU/lmr/m/n/10.95 0.9892091|
- []
-
-
-Overfull \hbox (8.19662pt too wide) in paragraph at lines 1763--1763
-[]|\TU/lmr/m/n/10.95 Gentoo|  
- []
-
-
-Overfull \hbox (7.37607pt too wide) in paragraph at lines 1763--1763
-[]|\TU/lmr/m/n/10.95 Biscoe|  
- []
-
-
-Overfull \hbox (5.30212pt too wide) in paragraph at lines 1763--1763
- []|\TU/lmr/m/n/10.95 2009|
- []
-
-
-Overfull \hbox (13.64317pt too wide) in paragraph at lines 1764--1765
- []|\TU/lmr/m/n/10.95 0.9871470|
- []
-
-[34] [35]
-Overfull \hbox (6.95476pt too wide) in paragraph at lines 1884--1885
- []\TU/lmr/m/n/10.95 rowid
- []
-
-
-Overfull \hbox (5.25314pt too wide) in paragraph at lines 1888--1889
-[]\TU/lmr/m/n/10.95 island  
- []
-
-
-Overfull \hbox (30.85735pt too wide) in paragraph at lines 1890--1891
- []\TU/lmr/m/n/10.95 bill_length_mm
- []
-
-
-Overfull \hbox (31.67778pt too wide) in paragraph at lines 1892--1893
- []\TU/lmr/m/n/10.95 bill_depth_mm
- []
-
-
-Overfull \hbox (36.61613pt too wide) in paragraph at lines 1894--1895
- []\TU/lmr/m/n/10.95 flipper_length_mm
- []
-
-
-Overfull \hbox (30.07748pt too wide) in paragraph at lines 1896--1897
- []\TU/lmr/m/n/10.95 body_mass_g
- []
-
-
-Overfull \hbox (3.81131pt too wide) in paragraph at lines 1900--1901
- []\TU/lmr/m/n/10.95 year
- []
-
-
-Overfull \hbox (9.3156pt too wide) in paragraph at lines 1906--1906
-[]|\TU/lmr/m/n/10.95 Dream|  
- []
-
-
-Overfull \hbox (7.91399pt too wide) in paragraph at lines 1906--1906
-[]|\TU/lmr/m/n/10.95 female|  
- []
-
-
-Overfull \hbox (5.6071pt too wide) in paragraph at lines 1906--1906
- []|\TU/lmr/m/n/10.95 2009|
- []
-
-
-Overfull \hbox (14.25311pt too wide) in paragraph at lines 1907--1908
- []|\TU/lmr/m/n/10.95 0.6839653|
- []
-
-
-Overfull \hbox (9.3156pt too wide) in paragraph at lines 1908--1908
-[]|\TU/lmr/m/n/10.95 Dream|  
- []
-
-
-Overfull \hbox (5.6071pt too wide) in paragraph at lines 1908--1908
- []|\TU/lmr/m/n/10.95 2009|
- []
-
-
-Overfull \hbox (14.25311pt too wide) in paragraph at lines 1909--1910
- []|\TU/lmr/m/n/10.95 0.9577297|
- []
-
-
-Overfull \hbox (14.96486pt too wide) in paragraph at lines 1910--1910
+Overfull \hbox (14.96486pt too wide) in paragraph at lines 1761--1761
 []|\TU/lmr/m/n/10.95 Chinstrap|  
  []
 
 
-Overfull \hbox (9.3156pt too wide) in paragraph at lines 1910--1910
+Overfull \hbox (9.3156pt too wide) in paragraph at lines 1761--1761
 []|\TU/lmr/m/n/10.95 Dream|  
  []
 
 
-Overfull \hbox (7.91399pt too wide) in paragraph at lines 1910--1910
+Overfull \hbox (7.91399pt too wide) in paragraph at lines 1761--1761
 []|\TU/lmr/m/n/10.95 female|  
  []
 
 
-Overfull \hbox (5.6071pt too wide) in paragraph at lines 1910--1910
+Overfull \hbox (5.6071pt too wide) in paragraph at lines 1761--1761
+ []|\TU/lmr/m/n/10.95 2007|
+ []
+
+
+Overfull \hbox (14.25311pt too wide) in paragraph at lines 1762--1763
+ []|\TU/lmr/m/n/10.95 0.9877717|
+ []
+
+
+Overfull \hbox (14.96486pt too wide) in paragraph at lines 1763--1763
+[]|\TU/lmr/m/n/10.95 Chinstrap|  
+ []
+
+
+Overfull \hbox (9.3156pt too wide) in paragraph at lines 1763--1763
+[]|\TU/lmr/m/n/10.95 Dream|  
+ []
+
+
+Overfull \hbox (7.91399pt too wide) in paragraph at lines 1763--1763
+[]|\TU/lmr/m/n/10.95 female|  
+ []
+
+
+Overfull \hbox (5.6071pt too wide) in paragraph at lines 1763--1763
  []|\TU/lmr/m/n/10.95 2009|
  []
 
 
-Overfull \hbox (14.25311pt too wide) in paragraph at lines 1911--1912
- []|\TU/lmr/m/n/10.95 0.6345787|
+Overfull \hbox (14.25311pt too wide) in paragraph at lines 1764--1765
+ []|\TU/lmr/m/n/10.95 0.9871470|
+ []
+
+[34] [35]
+Overfull \hbox (7.49234pt too wide) in paragraph at lines 1884--1885
+ []\TU/lmr/m/n/10.95 rowid
+ []
+
+
+Overfull \hbox (0.97685pt too wide) in paragraph at lines 1886--1887
+[]\TU/lmr/m/n/10.95 species  
+ []
+
+
+Overfull \hbox (32.21164pt too wide) in paragraph at lines 1890--1891
+ []\TU/lmr/m/n/10.95 bill_length_mm
+ []
+
+
+Overfull \hbox (32.96487pt too wide) in paragraph at lines 1892--1893
+ []\TU/lmr/m/n/10.95 bill_depth_mm
+ []
+
+
+Overfull \hbox (38.2754pt too wide) in paragraph at lines 1894--1895
+ []\TU/lmr/m/n/10.95 flipper_length_mm
+ []
+
+
+Overfull \hbox (31.194pt too wide) in paragraph at lines 1896--1897
+ []\TU/lmr/m/n/10.95 body_mass_g
+ []
+
+
+Overfull \hbox (4.2817pt too wide) in paragraph at lines 1900--1901
+ []\TU/lmr/m/n/10.95 year
+ []
+
+
+Overfull \hbox (14.9819pt too wide) in paragraph at lines 1906--1906
+[]|\TU/lmr/m/n/10.95 Torgersen|  
+ []
+
+
+Overfull \hbox (6.07748pt too wide) in paragraph at lines 1906--1906
+ []|\TU/lmr/m/n/10.95 2009|
+ []
+
+
+Overfull \hbox (15.16805pt too wide) in paragraph at lines 1907--1908
+ []|\TU/lmr/m/n/10.95 0.9851804|
+ []
+
+
+Overfull \hbox (14.9819pt too wide) in paragraph at lines 1908--1908
+[]|\TU/lmr/m/n/10.95 Torgersen|  
+ []
+
+
+Overfull \hbox (6.07748pt too wide) in paragraph at lines 1908--1908
+ []|\TU/lmr/m/n/10.95 2009|
+ []
+
+
+Overfull \hbox (15.16805pt too wide) in paragraph at lines 1909--1910
+ []|\TU/lmr/m/n/10.95 0.0680086|
+ []
+
+
+Overfull \hbox (15.87979pt too wide) in paragraph at lines 1910--1910
+[]|\TU/lmr/m/n/10.95 Chinstrap|  
+ []
+
+
+Overfull \hbox (8.56012pt too wide) in paragraph at lines 1910--1910
+[]|\TU/lmr/m/n/10.95 female|  
+ []
+
+
+Overfull \hbox (6.07748pt too wide) in paragraph at lines 1910--1910
+ []|\TU/lmr/m/n/10.95 2007|
+ []
+
+
+Overfull \hbox (15.16805pt too wide) in paragraph at lines 1911--1912
+ []|\TU/lmr/m/n/10.95 0.6058434|
  []
 
 [36]
@@ -1523,7 +1513,7 @@ l.2010 ...rac{N-n}{N}=\left(1-\frac{n}{N})\right\)
 Here is how much of TeX's memory you used:
  36560 strings out of 477747
  775218 string characters out of 5842604
- 1401233 words of memory out of 5000000
+ 1400233 words of memory out of 5000000
  57067 multiletter control sequences out of 15000+600000
  475722 words of font info for 82 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
