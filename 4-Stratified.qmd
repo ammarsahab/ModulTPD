@@ -77,7 +77,7 @@ $$
 Sama seperti mean, tapi $s^2$ diduga dengan $pq$.
 :::
 
-## Contoh perhitungan
+### Contoh perhitungan
 
 Bayangkan survei yang dijelaskan di skenario sebelumnya benar dilakukan. Dalam kata lain, dilakukan pengambilan contoh acak berlapis dari 2 kota (A dan B) serta daerah pedesaan. Objek survei adalah rata-rata jam yang dihabiskan per hari untuk menonton televisi. Lalu terkumpul data:
 
@@ -87,7 +87,11 @@ townrural <- read.csv2("ocrdat1.csv")
 townrural |> knitr::kable()
 ```
 
-Lakukan pendugaan rataan dan BoE! Kasus ini akan diilustrasikan menggunakan R. Pertama, untuk menduga rataan, hitung $N_iy_i$ lalu tambahkan. Buat peubah baru, yaitu $N_iy_i$. Namun, ternyata semua peubah masih karakter:
+Lakukan pendugaan rataan dan BoE!
+
+Setelah mendapat data, Anda dapat mengambil *screenshot* lalu memasukkan screenshot tersebut ke aplikasi optimal character recognition (OCR). OCR dapat merubah foto menjadi data Excel, seperti di website [ini](https://easypdf.com/ocr-online). Data hasil OCR mungkin belum tepat; perlu koreksi sedikit. Namun, OCR jauh lebih cepat dari memasukkan data secara manual.
+
+Kasus ini akan diilustrasikan menggunakan R. Pertama, untuk menduga rataan, hitung $N_iy_i$ lalu tambahkan. Buat peubah baru, yaitu $N_iy_i$. Namun, ternyata semua peubah masih karakter:
 
 ```{r}
 townrural |> summary()
@@ -118,7 +122,7 @@ townrural |>
     summarise(ybar = sum(Niybari)/sum(N))
 ```
 
-Bagaimana dengan ragam? Sama saja, buat kolom $N_i^2$, kolom faktor koreksi, dan kolom $s_i^2/n_i$. Gunakan `mutate` lagi, lalu `summarize` untuk menyimpulkan:
+Bagaimana dengan ragam? Sama saja, buat kolom $N_i^2$, kolom faktor koreksi, dan kolom $s_i^2/n_i$. Gunakan `mutate` lagi, lalu `summarize` untuk menyimpulkan; jumlahkan kuantitas hasil kali $N_i^2$, faktor koreksi, dan $s_i^2/n_i$, lalu bagi dengan ukuran populasi kuadrat:
 
 ```{r}
 townrural |> 
@@ -130,3 +134,249 @@ townrural |>
     summarize(sum(varybar)/(sum(N)^2))
 ```
 
+Lalu buat BoE dengan cara yang sama:
+
+```{r}
+townrural |> 
+    mutate(across(!Strata, as.numeric)) |>
+    mutate(Nisq = N^2,
+           FK = 1-n/N,
+           sisqperni = SD^2/n) |>
+    mutate(varybar = Nisq*FK*sisqperni) |>
+    summarize(2*sqrt(sum(varybar)/(sum(N)^2))) 
+```
+
+Total dapat dihitung dengan mengalikan rata-rata dengan ukuran populasi, dan ragam total dapat dihitung dengan mengalikan ragam rata-rata dengan ukuran populasi kuadrat.
+
+## Alokasi Ukuran Sampel
+
+Sama seperti di contoh acak sederhana, filosofi dasar penentuan ukuran contoh adalah membatasi $B$ dengan membatasi $V\left(\bar{y}_{st}\right)$ melalui peningkatan $n$. Rumus $V\left(\bar{y}_{st}\right)$ mirip dengan rumus penduga yang dijelaskan sebelumnya, tetapi $s_i^2$ diganti $\sigma_i^2$. Karena:
+
+$$
+\begin{aligned}
+2\sqrt{V\left(\bar{y}_{st}\right)}&=B\\ 
+V\left(\bar{y}_{st}\right)&=\frac{B^2}{4}
+\end{aligned}
+$$
+
+Oleh karena itu, rumus ukuran sampel:
+
+::: {.panel-tabset}
+## Mean atau Total
+
+$$
+\begin{aligned}
+n&=\frac{\sum_{i=1}^L N_i^2\sigma_i^2/a_i}{N^2D+\sum_{i=1}^L N_i\sigma_i^2}
+\end{aligned}
+$$
+
+$L$ adalah jumlah strata, $a_i$ adalah proporsi observasi yang dialokasikan ke strata ke-i, $\sigma_i^2$ adalah ragam populasi untuk strata ke-i, dan:
+
+$$
+\begin{aligned}
+D&=\frac{B^2}{4},& \text{ Jika menduga }\mu;\\ 
+D&=\frac{B^2}{4N^2},& \text{ Jika menduga }\tau\\ 
+\end{aligned}
+$$
+
+$\sigma_i^2$ dapat diduga melalui $s_i^2$ dari penelitian sebelumnya. Atau, jika diketahui range dari data, dapat digunakan Teorema Tsbycheff dan sifat-sifat sebaran untuk memperkirakan bahwa range $4-6$ kali dari simpangan baku.
+
+## Proporsi
+
+$$
+\begin{aligned}
+n&=\frac{\sum_{i=1}^L N_i^2p_iq_i/a_i}{N^2D+\sum_{i=1}^L N_ip_iq_i}
+\end{aligned}
+$$
+
+
+$L$ adalah jumlah strata, $a_i$ adalah proporsi observasi yang dialokasikan ke strata ke-i, $\sigma_i^2$ adalah ragam populasi untuk strata ke-i, dan:
+$$
+\begin{aligned}
+D&=\frac{B^2}{4},& \text{ Jika menduga }p 
+\end{aligned}
+$$
+:::
+
+### Alokasi Ukuran Sampel per Strata
+
+Setelah diketahui ukuran sampel $n$, bagaimana cara mengetahui ukuran sampel tiap strata $n_1, n_2, \ldots, n_L$. Faktor-faktor yang perlu dipikirkan adalah:
+
+1. Jumlah total elemen tiap stratum
+2. Keragaman observasi tiap stratum
+3. Biaya untuk mencari observasi di tiap stratum
+
+Jumlah elemen di tiap stratum mempengaruhi jumlah informasi di sample. Sampel dengan ukuran 20 akan memberikan lebih banyak informasi jika populasi tidak terlalu besar, misal 200 elemen daripada jika populasi sangat besar, misal 20,000 elemen. Ukuran sampel yang lebih besar harusnya dialokasikan kepada strata yang memiliki ukuran populasi lebih besar.
+
+Sampel yang lebih besar dibutuhkan untuk mendapat penduga yang baik dari parameter populasi saat observasi lebih beragaman.
+
+Oleh karena itu ada beberapa cara mengalokasikan ukuran sampel:
+
+::: {.panel-tabset}
+## Biaya dan Keragaman beda
+
+Menentukan ukuran sampel stratum ke-i $n_i$:
+
+$$
+\begin{aligned}
+n_i&=n\left(\frac{N_i\sigma_i/\sqrt{c_i}}{\sum_{k=1}^L N_k\sigma_k/\sqrt{c_k}}\right)
+\end{aligned}
+$$
+
+Perhatikan bahwa $n_i/n=a_i$. Oleh karena itu dengan melakukan susbtitusi:
+
+$$
+\begin{aligned}
+n&=\frac{\sum_{i=1}^L N_i^2\sigma_i^2\cdot\frac{\sum_{i=1}^L N_k\sigma_k/\sqrt{c_k}} {N_i\sigma_i/\sqrt{c_i}}}{N^2D+\sum_{i=1}^L N_i\sigma_i^2}\\ 
+&=\frac{\left(\sum_{k=1}^L N_k\sigma_k/c_k\right)\left(\sum_{i=1}^L N_i\sigma_ic_i\right)}{N^2D+\sum_{i=1}^L N_i\sigma_i^2}
+\end{aligned}
+$$
+
+Dari kasus sebelumnya, anggap biaya melakukan observasi di kota A (strata 1) dan B (strata 2) sama, yaitu 9 dolar. Biaya melakukan observasi di daerah pedesaan (strata 3) 16 dolar. Dari penelitian sebelummya, diketahui $\sigma_1\approx 5, \sigma_2\approx 15, \sigma_3\approx 10$.
+
+Pertama, lengkapi data yang dimiliki dengan ragam dan harga:
+
+```{r}
+townrural |> 
+mutate(Biaya=c(9,9,16),
+       Ragam=c(5,15,10))
+```
+
+Dari data tersebut, dapat dihitung $\sum_{i=1}^L N_i\sigma_ic_i$ dan $\sum_{k=1}^L N_k\sigma_k/c_k$:
+
+```{r}
+townrural |> 
+mutate(across(!Strata, as.numeric)) |>
+mutate(Biaya=c(9,9,16), SD=c(5,15,10)) |>
+mutate(Nisigmai = N*SD^2, Nisigmaici = N*SD*sqrt(Biaya),
+       Nksigmak_perck = N*SD/sqrt(Biaya)) |>
+summarize(sum(Nisigmai), sum(Nisigmaici), sum(Nksigmak_perck), sum(N)) |>
+knitr::kable()
+```
+
+Maka dapat dimasukkan:
+
+$$
+\begin{aligned}
+n&=\frac{\left(\sum_{k=1}^L N_k\sigma_k/c_k\right)\left(\sum_{i=1}^L N_i\sigma_ic_i\right)}{N^2D+\sum_{i=1}^L N_i\sigma_i^2}\\ 
+&=\frac{800.8333\cdot 8835}{310^2\cdot\frac{2^2}{4}+27125}
+\end{aligned}
+$$
+
+
+```{r}
+8835*800.8333/(310^2*(2^2/4)+27125)
+```
+
+Sehingga:
+
+$n=57.418\approx 58$. Note, dalam penentuan ukuran sampel, selalu bulatkan **ke atas**. Dapat dihitung alokasi sampel tiap strata:
+
+```{r}
+townrural |> 
+mutate(across(!Strata, as.numeric)) |>
+mutate(Biaya=c(9,9,16), SD=c(5,15,10)) |>
+mutate(ni = 58*(N*SD/sqrt(Biaya))/800.8333)
+```
+
+## Alokasi Neyman: Biaya Sama
+
+Jika, biaya sama, maka:
+
+$$
+\begin{aligned}
+n_i&=n\left(\frac{N_i\sigma_i}{\sum_{k=1}^L N_k\sigma_k}\right)
+\end{aligned}
+$$
+
+Substitusi menghasilkan:
+
+$$
+\begin{aligned}
+n
+&=\frac{\left(\sum_{k=1}^L N_k\sigma_k\right)^2}{N^2D+\sum_{i=1}^L N_i\sigma_i^2}
+\end{aligned}
+$$
+
+Dapat dibandingkan hasil alokasi Neyman dengan alokasi sebelumnya:
+
+```{r}
+townrural |> 
+mutate(across(!Strata, as.numeric)) |>
+mutate(SD=c(5,15,10)) |>
+mutate(Nisigmai = N*SD^2, Nisigmaici = N*SD) |>
+summarize(sum(Nisigmai), sum(Nisigmaici), sum(N)) |>
+knitr::kable()
+```
+
+Masukkan ke rumus ukuran sampel total:
+
+```{r}
+2635^2/(310^2*(2^2/4)+27125)
+```
+
+$$
+\begin{aligned}
+n
+&=\frac{2635^2}{310^2\cdot \frac{2^2}{2}+27125}=56.34\approx 57
+\end{aligned}
+$$
+
+Selalu bulatkan ke atas. Dapat dihitung alokasi sampel tiap strata:
+
+```{r}
+townrural |> 
+mutate(across(!Strata, as.numeric)) |>
+mutate(SD=c(5,15,10)) |>
+mutate(ni = 57*(N*SD)/2635)
+```
+
+Lebih banyak sampel diambil dari daerah pedesaan. Karena awalnya mahal untuk mengambil sampel dari pedesaan, ukuran sampel yang diambil lebih kecil. Jika biaya sama, maka diambil lebih banyak sampel dari pedesaan.
+
+## Alokasi Proporsional
+
+Jika ragam dan biaya sama, 
+
+$$
+n_i=n\left(\frac{N_i}{\sum_{k=1}^L N_i}\right)=n\frac{N_i}{N}
+$$
+
+Maka dari itu, dengan melakukan substitusi:
+
+$$
+n=\frac{\sum_{i=1}^L N_i\sigma_i^2}{ND+\frac{1}{N}\sum_{i=1}^LN_i\sigma_i^2}
+$$
+
+Karena ragam sama, maka dapat diperkirakan:
+
+$$
+n=\frac{\sigma^2N}{ND+\frac{\sigma^2}{N}N}=\frac{\sigma^2N}{ND+\sigma^2}
+$$
+
+Misal ragam semua sama, yaitu 10. Maka dari itu ukuran sampel:
+
+```{r}
+(10^2*310)/(310*2^2/4+10^2)
+```
+
+Dan alokasi sampel tiap strata:
+
+```{r}
+townrural |>
+mutate(across(!Strata,as.numeric)) |>
+mutate(ni = 76*N/310)
+```
+
+:::
+
+Jika parameter yang diduga adalah proporsi, gunakan $p_iq_i$ untuk menduga ragam. Sama seperti sebelumnya, informasi tersebut diduga dari penelitian sebelumnya.
+
+## Beberapa tambahan
+
+Contoh acak berlapis belum tentu menghasilkan BoE yang lebih rendah dari contoh acak sederhana jika keragaman dalam lapisan besar. Perhatikan contoh dalam Schaeffer halaman 140. 
+
+### Post-stratification
+
+Terkadang, stratifikasi hanya dapat dilakukan setelah elemen diobservasi (data strata tidak ada di kerangka sampel). Namun, secara umum diketahui proporsi tiap strata. Lalu, ternyata proporsi tiap strata yang terkumpul di sampel tidak tepat. Dalam kasus ini, dapat dilakukan stratifikasi agar penduga merefleksikan proporsi tiap strata yang benar.
+
+Teknis dan perhitungan ragam ada di Schaeffer halaman 145.

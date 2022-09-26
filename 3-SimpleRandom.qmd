@@ -318,7 +318,7 @@ $$
 \begin{aligned}
 \hat{\tau}&=N\bar{y}=\frac{N\sum_{i=1}^n y_i}{n} & \text{(total)}\\
 \hat{V}(\hat{\tau})&=\hat{V}(N\bar{y})=N^2\left(1-\frac{n}{N}\right)\frac{s^2}{n}&\text{(ragam penduga)}\\\
-\hat{\tau}&\pm2\sqrt{\hat{V}(\tau)} & \text{(selang kepercayaan)}
+\hat{\tau}&\pm2\sqrt{\hat{V}(\hat{\tau})} & \text{(selang kepercayaan)}
 \end{aligned}
 $$
 

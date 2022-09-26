@@ -12,6 +12,8 @@ book:
     - 2-Terminologi.qmd
     - 3-SimpleRandom.qmd
     - 4-Stratified.qmd
+    - 5-Systematic.qmd
+    - 6-Cluster.qmd
 
 bibliography: references.bib
 

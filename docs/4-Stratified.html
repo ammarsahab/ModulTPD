@@ -88,6 +88,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./5-Systematic.html" rel="next">
 <link href="./3-SimpleRandom.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -176,6 +177,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./4-Stratified.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Stratified Random Sampling</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5-Systematic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systematic Sampling</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -187,8 +193,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#definisi" id="toc-definisi" class="nav-link active" data-scroll-target="#definisi"> <span class="header-section-number">4.1</span> Definisi</a></li>
   <li><a href="#mengambil-contoh-acak-berlapis" id="toc-mengambil-contoh-acak-berlapis" class="nav-link" data-scroll-target="#mengambil-contoh-acak-berlapis"> <span class="header-section-number">4.2</span> Mengambil Contoh Acak Berlapis</a></li>
-  <li><a href="#pendugaan-parameter" id="toc-pendugaan-parameter" class="nav-link" data-scroll-target="#pendugaan-parameter"> <span class="header-section-number">4.3</span> Pendugaan Parameter</a></li>
-  <li><a href="#contoh-perhitungan" id="toc-contoh-perhitungan" class="nav-link" data-scroll-target="#contoh-perhitungan"> <span class="header-section-number">4.4</span> Contoh perhitungan</a></li>
+  <li><a href="#pendugaan-parameter" id="toc-pendugaan-parameter" class="nav-link" data-scroll-target="#pendugaan-parameter"> <span class="header-section-number">4.3</span> Pendugaan Parameter</a>
+  <ul class="collapse">
+  <li><a href="#contoh-perhitungan" id="toc-contoh-perhitungan" class="nav-link" data-scroll-target="#contoh-perhitungan"> <span class="header-section-number">4.3.1</span> Contoh perhitungan</a></li>
+  </ul></li>
+  <li><a href="#alokasi-ukuran-sampel" id="toc-alokasi-ukuran-sampel" class="nav-link" data-scroll-target="#alokasi-ukuran-sampel"> <span class="header-section-number">4.4</span> Alokasi Ukuran Sampel</a>
+  <ul class="collapse">
+  <li><a href="#alokasi-ukuran-sampel-per-strata" id="toc-alokasi-ukuran-sampel-per-strata" class="nav-link" data-scroll-target="#alokasi-ukuran-sampel-per-strata"> <span class="header-section-number">4.4.1</span> Alokasi Ukuran Sampel per Strata</a></li>
+  </ul></li>
+  <li><a href="#beberapa-tambahan" id="toc-beberapa-tambahan" class="nav-link" data-scroll-target="#beberapa-tambahan"> <span class="header-section-number">4.5</span> Beberapa tambahan</a>
+  <ul class="collapse">
+  <li><a href="#post-stratification" id="toc-post-stratification" class="nav-link" data-scroll-target="#post-stratification"> <span class="header-section-number">4.5.1</span> Post-stratification</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -279,9 +295,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-</section>
-<section id="contoh-perhitungan" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="contoh-perhitungan"><span class="header-section-number">4.4</span> Contoh perhitungan</h2>
+<section id="contoh-perhitungan" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="contoh-perhitungan"><span class="header-section-number">4.3.1</span> Contoh perhitungan</h3>
 <p>Bayangkan survei yang dijelaskan di skenario sebelumnya benar dilakukan. Dalam kata lain, dilakukan pengambilan contoh acak berlapis dari 2 kota (A dan B) serta daerah pedesaan. Objek survei adalah rata-rata jam yang dihabiskan per hari untuk menonton televisi. Lalu terkumpul data:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"ocrdat1.csv"</span>) </span>
@@ -328,7 +343,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 </div>
-<p>Lakukan pendugaan rataan dan BoE! Kasus ini akan diilustrasikan menggunakan R. Pertama, untuk menduga rataan, hitung <span class="math inline">\(N_iy_i\)</span> lalu tambahkan. Buat peubah baru, yaitu <span class="math inline">\(N_iy_i\)</span>. Namun, ternyata semua peubah masih karakter:</p>
+<p>Lakukan pendugaan rataan dan BoE!</p>
+<p>Setelah mendapat data, Anda dapat mengambil <em>screenshot</em> lalu memasukkan screenshot tersebut ke aplikasi optimal character recognition (OCR). OCR dapat merubah foto menjadi data Excel, seperti di website <a href="https://easypdf.com/ocr-online">ini</a>. Data hasil OCR mungkin belum tepat; perlu koreksi sedikit. Namun, OCR jauh lebih cepat dari memasukkan data secara manual.</p>
+<p>Kasus ini akan diilustrasikan menggunakan R. Pertama, untuk menduga rataan, hitung <span class="math inline">\(N_iy_i\)</span> lalu tambahkan. Buat peubah baru, yaitu <span class="math inline">\(N_iy_i\)</span>. Namun, ternyata semua peubah masih karakter:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> <span class="fu">summary</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -438,7 +455,7 @@ Attaching package: 'dplyr'</code></pre>
 1 27.674</code></pre>
 </div>
 </div>
-<p>Bagaimana dengan ragam? Sama saja, buat kolom <span class="math inline">\(N_i^2\)</span>, kolom faktor koreksi, dan kolom <span class="math inline">\(s_i^2/n_i\)</span>. Gunakan <code>mutate</code> lagi, lalu <code>summarize</code> untuk menyimpulkan:</p>
+<p>Bagaimana dengan ragam? Sama saja, buat kolom <span class="math inline">\(N_i^2\)</span>, kolom faktor koreksi, dan kolom <span class="math inline">\(s_i^2/n_i\)</span>. Gunakan <code>mutate</code> lagi, lalu <code>summarize</code> untuk menyimpulkan; jumlahkan kuantitas hasil kali <span class="math inline">\(N_i^2\)</span>, faktor koreksi, dan <span class="math inline">\(s_i^2/n_i\)</span>, lalu bagi dengan ukuran populasi kuadrat:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">!</span>Strata, as.numeric)) <span class="sc">|&gt;</span></span>
@@ -452,8 +469,282 @@ Attaching package: 'dplyr'</code></pre>
 1                1.970491</code></pre>
 </div>
 </div>
+<p>Lalu buat BoE dengan cara yang sama:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">!</span>Strata, as.numeric)) <span class="sc">|&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Nisq =</span> N<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">FK =</span> <span class="dv">1</span><span class="sc">-</span>n<span class="sc">/</span>N,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">sisqperni =</span> SD<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>n) <span class="sc">|&gt;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">varybar =</span> Nisq<span class="sc">*</span>FK<span class="sc">*</span>sisqperni) <span class="sc">|&gt;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="fu">sum</span>(varybar)<span class="sc">/</span>(<span class="fu">sum</span>(N)<span class="sc">^</span><span class="dv">2</span>))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  2 * sqrt(sum(varybar)/(sum(N)^2))
+1                          2.807484</code></pre>
+</div>
+</div>
+<p>Total dapat dihitung dengan mengalikan rata-rata dengan ukuran populasi, dan ragam total dapat dihitung dengan mengalikan ragam rata-rata dengan ukuran populasi kuadrat.</p>
+</section>
+</section>
+<section id="alokasi-ukuran-sampel" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="alokasi-ukuran-sampel"><span class="header-section-number">4.4</span> Alokasi Ukuran Sampel</h2>
+<p>Sama seperti di contoh acak sederhana, filosofi dasar penentuan ukuran contoh adalah membatasi <span class="math inline">\(B\)</span> dengan membatasi <span class="math inline">\(V\left(\bar{y}_{st}\right)\)</span> melalui peningkatan <span class="math inline">\(n\)</span>. Rumus <span class="math inline">\(V\left(\bar{y}_{st}\right)\)</span> mirip dengan rumus penduga yang dijelaskan sebelumnya, tetapi <span class="math inline">\(s_i^2\)</span> diganti <span class="math inline">\(\sigma_i^2\)</span>. Karena:</p>
+<p><span class="math display">\[
+\begin{aligned}
+2\sqrt{V\left(\bar{y}_{st}\right)}&amp;=B\\
+V\left(\bar{y}_{st}\right)&amp;=\frac{B^2}{4}
+\end{aligned}
+\]</span></p>
+<p>Oleh karena itu, rumus ukuran sampel:</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Mean atau Total</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Proporsi</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p><span class="math display">\[
+\begin{aligned}
+n&amp;=\frac{\sum_{i=1}^L N_i^2\sigma_i^2/a_i}{N^2D+\sum_{i=1}^L N_i\sigma_i^2}
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(L\)</span> adalah jumlah strata, <span class="math inline">\(a_i\)</span> adalah proporsi observasi yang dialokasikan ke strata ke-i, <span class="math inline">\(\sigma_i^2\)</span> adalah ragam populasi untuk strata ke-i, dan:</p>
+<p><span class="math display">\[
+\begin{aligned}
+D&amp;=\frac{B^2}{4},&amp; \text{ Jika menduga }\mu;\\
+D&amp;=\frac{B^2}{4N^2},&amp; \text{ Jika menduga }\tau\\
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(\sigma_i^2\)</span> dapat diduga melalui <span class="math inline">\(s_i^2\)</span> dari penelitian sebelumnya. Atau, jika diketahui range dari data, dapat digunakan Teorema Tsbycheff dan sifat-sifat sebaran untuk memperkirakan bahwa range <span class="math inline">\(4-6\)</span> kali dari simpangan baku.</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p><span class="math display">\[
+\begin{aligned}
+n&amp;=\frac{\sum_{i=1}^L N_i^2p_iq_i/a_i}{N^2D+\sum_{i=1}^L N_ip_iq_i}
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(L\)</span> adalah jumlah strata, <span class="math inline">\(a_i\)</span> adalah proporsi observasi yang dialokasikan ke strata ke-i, <span class="math inline">\(\sigma_i^2\)</span> adalah ragam populasi untuk strata ke-i, dan:</p>
+<p><span class="math display">\[
+\begin{aligned}
+D&amp;=\frac{B^2}{4},&amp; \text{ Jika menduga }p
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+<section id="alokasi-ukuran-sampel-per-strata" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="alokasi-ukuran-sampel-per-strata"><span class="header-section-number">4.4.1</span> Alokasi Ukuran Sampel per Strata</h3>
+<p>Setelah diketahui ukuran sampel <span class="math inline">\(n\)</span>, bagaimana cara mengetahui ukuran sampel tiap strata <span class="math inline">\(n_1, n_2, \ldots, n_L\)</span>. Faktor-faktor yang perlu dipikirkan adalah:</p>
+<ol type="1">
+<li>Jumlah total elemen tiap stratum</li>
+<li>Keragaman observasi tiap stratum</li>
+<li>Biaya untuk mencari observasi di tiap stratum</li>
+</ol>
+<p>Jumlah elemen di tiap stratum mempengaruhi jumlah informasi di sample. Sampel dengan ukuran 20 akan memberikan lebih banyak informasi jika populasi tidak terlalu besar, misal 200 elemen daripada jika populasi sangat besar, misal 20,000 elemen. Ukuran sampel yang lebih besar harusnya dialokasikan kepada strata yang memiliki ukuran populasi lebih besar.</p>
+<p>Sampel yang lebih besar dibutuhkan untuk mendapat penduga yang baik dari parameter populasi saat observasi lebih beragaman.</p>
+<p>Oleh karena itu ada beberapa cara mengalokasikan ukuran sampel:</p>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Biaya dan Keragaman beda</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Alokasi Neyman: Biaya Sama</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false">Alokasi Proporsional</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p>Menentukan ukuran sampel stratum ke-i <span class="math inline">\(n_i\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+n_i&amp;=n\left(\frac{N_i\sigma_i/\sqrt{c_i}}{\sum_{k=1}^L N_k\sigma_k/\sqrt{c_k}}\right)
+\end{aligned}
+\]</span></p>
+<p>Perhatikan bahwa <span class="math inline">\(n_i/n=a_i\)</span>. Oleh karena itu dengan melakukan susbtitusi:</p>
+<p><span class="math display">\[
+\begin{aligned}
+n&amp;=\frac{\sum_{i=1}^L N_i^2\sigma_i^2\cdot\frac{\sum_{i=1}^L N_k\sigma_k/\sqrt{c_k}} {N_i\sigma_i/\sqrt{c_i}}}{N^2D+\sum_{i=1}^L N_i\sigma_i^2}\\
+&amp;=\frac{\left(\sum_{k=1}^L N_k\sigma_k/c_k\right)\left(\sum_{i=1}^L N_i\sigma_ic_i\right)}{N^2D+\sum_{i=1}^L N_i\sigma_i^2}
+\end{aligned}
+\]</span></p>
+<p>Dari kasus sebelumnya, anggap biaya melakukan observasi di kota A (strata 1) dan B (strata 2) sama, yaitu 9 dolar. Biaya melakukan observasi di daerah pedesaan (strata 3) 16 dolar. Dari penelitian sebelummya, diketahui <span class="math inline">\(\sigma_1\approx 5, \sigma_2\approx 15, \sigma_3\approx 10\)</span>.</p>
+<p>Pertama, lengkapi data yang dimiliki dengan ragam dan harga:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">Biaya=</span><span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">16</span>),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">Ragam=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">15</span>,<span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Strata      N     n  Mean Median    SD Biaya Ragam
+1  Town A 155.00 20.00 33.90  34.50  5.95     9     5
+2 Town  B  62.00  8.00 25.12  26.00 15.25     9    15
+3   Rural  93.00 12.00 19.00  17.50  9.36    16    10</code></pre>
+</div>
+</div>
+<p>Dari data tersebut, dapat dihitung <span class="math inline">\(\sum_{i=1}^L N_i\sigma_ic_i\)</span> dan <span class="math inline">\(\sum_{k=1}^L N_k\sigma_k/c_k\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">!</span>Strata, as.numeric)) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">Biaya=</span><span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">16</span>), <span class="at">SD=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">15</span>,<span class="dv">10</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">Nisigmai =</span> N<span class="sc">*</span>SD<span class="sc">^</span><span class="dv">2</span>, <span class="at">Nisigmaici =</span> N<span class="sc">*</span>SD<span class="sc">*</span><span class="fu">sqrt</span>(Biaya),</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">Nksigmak_perck =</span> N<span class="sc">*</span>SD<span class="sc">/</span><span class="fu">sqrt</span>(Biaya)) <span class="sc">|&gt;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(<span class="fu">sum</span>(Nisigmai), <span class="fu">sum</span>(Nisigmaici), <span class="fu">sum</span>(Nksigmak_perck), <span class="fu">sum</span>(N)) <span class="sc">|&gt;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: right;">sum(Nisigmai)</th>
+<th style="text-align: right;">sum(Nisigmaici)</th>
+<th style="text-align: right;">sum(Nksigmak_perck)</th>
+<th style="text-align: right;">sum(N)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">27125</td>
+<td style="text-align: right;">8835</td>
+<td style="text-align: right;">800.8333</td>
+<td style="text-align: right;">310</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Maka dapat dimasukkan:</p>
+<p><span class="math display">\[
+\begin{aligned}
+n&amp;=\frac{\left(\sum_{k=1}^L N_k\sigma_k/c_k\right)\left(\sum_{i=1}^L N_i\sigma_ic_i\right)}{N^2D+\sum_{i=1}^L N_i\sigma_i^2}\\
+&amp;=\frac{800.8333\cdot 8835}{310^2\cdot\frac{2^2}{4}+27125}
+\end{aligned}
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dv">8835</span><span class="sc">*</span><span class="fl">800.8333</span><span class="sc">/</span>(<span class="dv">310</span><span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>(<span class="dv">2</span><span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">4</span>)<span class="sc">+</span><span class="dv">27125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 57.41824</code></pre>
+</div>
+</div>
+<p>Sehingga:</p>
+<p><span class="math inline">\(n=57.418\approx 58\)</span>. Note, dalam penentuan ukuran sampel, selalu bulatkan <strong>ke atas</strong>. Dapat dihitung alokasi sampel tiap strata:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">!</span>Strata, as.numeric)) <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">Biaya=</span><span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">9</span>,<span class="dv">16</span>), <span class="at">SD=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">15</span>,<span class="dv">10</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">ni =</span> <span class="dv">58</span><span class="sc">*</span>(N<span class="sc">*</span>SD<span class="sc">/</span><span class="fu">sqrt</span>(Biaya))<span class="sc">/</span><span class="fl">800.8333</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Strata   N  n  Mean Median SD Biaya       ni
+1  Town A 155 20 33.90   34.5  5     9 18.70968
+2 Town  B  62  8 25.12   26.0 15     9 22.45161
+3   Rural  93 12 19.00   17.5 10    16 16.83871</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<p>Jika, biaya sama, maka:</p>
+<p><span class="math display">\[
+\begin{aligned}
+n_i&amp;=n\left(\frac{N_i\sigma_i}{\sum_{k=1}^L N_k\sigma_k}\right)
+\end{aligned}
+\]</span></p>
+<p>Substitusi menghasilkan:</p>
+<p><span class="math display">\[
+\begin{aligned}
+n
+&amp;=\frac{\left(\sum_{k=1}^L N_k\sigma_k\right)^2}{N^2D+\sum_{i=1}^L N_i\sigma_i^2}
+\end{aligned}
+\]</span></p>
+<p>Dapat dibandingkan hasil alokasi Neyman dengan alokasi sebelumnya:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">!</span>Strata, as.numeric)) <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">SD=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">15</span>,<span class="dv">10</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">Nisigmai =</span> N<span class="sc">*</span>SD<span class="sc">^</span><span class="dv">2</span>, <span class="at">Nisigmaici =</span> N<span class="sc">*</span>SD) <span class="sc">|&gt;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(<span class="fu">sum</span>(Nisigmai), <span class="fu">sum</span>(Nisigmaici), <span class="fu">sum</span>(N)) <span class="sc">|&gt;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: right;">sum(Nisigmai)</th>
+<th style="text-align: right;">sum(Nisigmaici)</th>
+<th style="text-align: right;">sum(N)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">27125</td>
+<td style="text-align: right;">2635</td>
+<td style="text-align: right;">310</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Masukkan ke rumus ukuran sampel total:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2635</span><span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>(<span class="dv">310</span><span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>(<span class="dv">2</span><span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">4</span>)<span class="sc">+</span><span class="dv">27125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 56.34591</code></pre>
+</div>
+</div>
+<p><span class="math display">\[
+\begin{aligned}
+n
+&amp;=\frac{2635^2}{310^2\cdot \frac{2^2}{2}+27125}=56.34\approx 57
+\end{aligned}
+\]</span></p>
+<p>Selalu bulatkan ke atas. Dapat dihitung alokasi sampel tiap strata:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">!</span>Strata, as.numeric)) <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">SD=</span><span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">15</span>,<span class="dv">10</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">ni =</span> <span class="dv">57</span><span class="sc">*</span>(N<span class="sc">*</span>SD)<span class="sc">/</span><span class="dv">2635</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Strata   N  n  Mean Median SD       ni
+1  Town A 155 20 33.90   34.5  5 16.76471
+2 Town  B  62  8 25.12   26.0 15 20.11765
+3   Rural  93 12 19.00   17.5 10 20.11765</code></pre>
+</div>
+</div>
+<p>Lebih banyak sampel diambil dari daerah pedesaan. Karena awalnya mahal untuk mengambil sampel dari pedesaan, ukuran sampel yang diambil lebih kecil. Jika biaya sama, maka diambil lebih banyak sampel dari pedesaan.</p>
+</div>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<p>Jika ragam dan biaya sama,</p>
+<p><span class="math display">\[
+n_i=n\left(\frac{N_i}{\sum_{k=1}^L N_i}\right)=n\frac{N_i}{N}
+\]</span></p>
+<p>Maka dari itu, dengan melakukan substitusi:</p>
+<p><span class="math display">\[
+n=\frac{\sum_{i=1}^L N_i\sigma_i^2}{ND+\frac{1}{N}\sum_{i=1}^LN_i\sigma_i^2}
+\]</span></p>
+<p>Karena ragam sama, maka dapat diperkirakan:</p>
+<p><span class="math display">\[
+n=\frac{\sigma^2N}{ND+\frac{\sigma^2}{N}N}=\frac{\sigma^2N}{ND+\sigma^2}
+\]</span></p>
+<p>Misal ragam semua sama, yaitu 10. Maka dari itu ukuran sampel:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">10</span><span class="sc">^</span><span class="dv">2</span><span class="sc">*</span><span class="dv">310</span>)<span class="sc">/</span>(<span class="dv">310</span><span class="sc">*</span><span class="dv">2</span><span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">4</span><span class="sc">+</span><span class="dv">10</span><span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 75.60976</code></pre>
+</div>
+</div>
+<p>Dan alokasi sampel tiap strata:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>townrural <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">!</span>Strata,as.numeric)) <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">ni =</span> <span class="dv">76</span><span class="sc">*</span>N<span class="sc">/</span><span class="dv">310</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Strata   N  n  Mean Median    SD   ni
+1  Town A 155 20 33.90   34.5  5.95 38.0
+2 Town  B  62  8 25.12   26.0 15.25 15.2
+3   Rural  93 12 19.00   17.5  9.36 22.8</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Jika parameter yang diduga adalah proporsi, gunakan <span class="math inline">\(p_iq_i\)</span> untuk menduga ragam. Sama seperti sebelumnya, informasi tersebut diduga dari penelitian sebelumnya.</p>
+</section>
+</section>
+<section id="beberapa-tambahan" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="beberapa-tambahan"><span class="header-section-number">4.5</span> Beberapa tambahan</h2>
+<p>Contoh acak berlapis belum tentu menghasilkan BoE yang lebih rendah dari contoh acak sederhana jika keragaman dalam lapisan besar. Perhatikan contoh dalam Schaeffer halaman 140.</p>
+<section id="post-stratification" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="post-stratification"><span class="header-section-number">4.5.1</span> Post-stratification</h3>
+<p>Terkadang, stratifikasi hanya dapat dilakukan setelah elemen diobservasi (data strata tidak ada di kerangka sampel). Namun, secara umum diketahui proporsi tiap strata. Lalu, ternyata proporsi tiap strata yang terkumpul di sampel tidak tepat. Dalam kasus ini, dapat dilakukan stratifikasi agar penduga merefleksikan proporsi tiap strata yang benar.</p>
+<p>Teknis dan perhitungan ragam ada di Schaeffer halaman 145.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -561,6 +852,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./5-Systematic.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Systematic Sampling</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
